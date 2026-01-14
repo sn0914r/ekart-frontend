@@ -1,0 +1,37 @@
+/* src/styles/variables.css */
+@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400&family=Inter:wght@300;400;500;600&display=swap");
+
+:root {
+  /* Monochrome Palette */
+  --color-black: #111111;
+  --color-dark-grey: #333333;
+  --color-light-grey: #f4f4f4;
+  --color-medium-grey: #e5e5e5;
+  --color-white: #ffffff;
+
+  /* Functional Colors */
+  --color-overlay: rgba(255, 255, 255, 0.98);
+  --color-border: rgba(0, 0, 0, 0.05);
+
+  /* Typography */
+  --font-serif: "Bodoni Moda", serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+/* Base Resets */
+body {
+  font-family: var(--font-sans);
+  color: var(--color-black);
+  background-color: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+.brand-font {
+  font-family: var(--font-serif);
+}

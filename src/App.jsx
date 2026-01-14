@@ -1,9 +1,9 @@
-import AppRoutes from "./routes/AppRoutes";
+// import AppRoutes from "./routes/AppRoutes";
 
 const App = () => {
-  return(
-    <h1>App</h1>
-  )
+  return (
+    <h1 >HELLO</h1>
+  );
 };
 
 export default App;
