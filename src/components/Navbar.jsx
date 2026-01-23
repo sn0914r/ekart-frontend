@@ -3,6 +3,8 @@ import styled from "@emotion/styled";
 import { Search, ShoppingBag, X } from "lucide-react";
 import { Link } from "react-router-dom";
 
+import { useCartContext } from "../context/CartContext";
+
 const Nav = styled.nav`
   position: fixed;
   top: 0;
@@ -195,7 +197,9 @@ const ActionBtn = styled.button`
   }
 `;
 
-const BagWrapper = styled.div`
+const BagWrapper = styled(Link)`
+  text-decoration: none;
+  color: inherit;
   position: relative;
   display: flex;
   align-items: center;
@@ -211,6 +215,7 @@ const BagCount = styled.span`
 `;
 
 const Navbar = () => {
+  const { totalItems } = useCartContext();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [iconSize, setIconSize] = useState(
@@ -280,13 +285,11 @@ const Navbar = () => {
               </ActionBtn>
 
               <ActionBtn isScrolled={isScrolled}>
-                <BagWrapper>
+                <BagWrapper to="/cart">
                   <ShoppingBag size={18} strokeWidth={1.5} />
-                  <BagCount>0</BagCount>
+                  <BagCount>{totalItems()}</BagCount>
                 </BagWrapper>
-                <Link className="btn-text" to="/cart">
-                  Bag
-                </Link>
+                <span className="btn-text">Bag</span>
               </ActionBtn>
             </Actions>
           </NavContent>

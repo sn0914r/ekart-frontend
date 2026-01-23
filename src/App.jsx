@@ -1,11 +1,7 @@
-// import AppRoutes from "./routes/AppRoutes";
-
-import Loader from "./components/Loader";
-import Landing from "./pages/Landing";
+import AppRoutes from "./routes/AppRoutes";
 
 const App = () => {
-  return <Landing />;
-  // return <Loader />;
+  return <AppRoutes />;
 };
 
 export default App;

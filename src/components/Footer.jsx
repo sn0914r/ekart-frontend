@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Link } from "react-router-dom";
 
 const FooterWrapper = styled.footer`
   background-color: #000000;
@@ -43,7 +44,7 @@ const QuickLinks = styled.div`
   }
 `;
 
-const FooterLink = styled.a`
+const FooterLink = styled(Link)`
   color: #ffffff;
   text-decoration: none;
   font-size: 0.8rem;
@@ -73,9 +74,9 @@ const Footer = () => {
         <FooterBrand>eKart</FooterBrand>
 
         <QuickLinks>
-          <FooterLink href="#">Collections</FooterLink>
-          <FooterLink href="#">Cart</FooterLink>
-          <FooterLink href="#">About</FooterLink>
+          <FooterLink to="/#products">Collections</FooterLink>
+          <FooterLink to="/cart">Cart</FooterLink>
+          <FooterLink to="#">About</FooterLink>
           {/* <FooterLink href="#">Shipping</FooterLink>
           <FooterLink href="#">Instagram</FooterLink> */}
         </QuickLinks>

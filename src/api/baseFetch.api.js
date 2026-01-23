@@ -1,7 +1,7 @@
 import { auth } from "../configs/firebase";
 
 // const BASE_URL = "http://localhost:3000";
-const BASE_URL = "https://jews-paths-accomplish-existed.trycloudflare.com";
+const BASE_URL = "https://aberdeen-areas-august-industrial.trycloudflare.com";
 
 const baseFetch = async (endPoint, options = {}) => {
   const url = `${BASE_URL}${endPoint}`;
