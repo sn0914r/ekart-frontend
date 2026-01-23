@@ -2,36 +2,53 @@
 @import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400&family=Inter:wght@300;400;500;600&display=swap");
 
 :root {
-  /* Monochrome Palette */
-  --color-black: #111111;
-  --color-dark-grey: #333333;
-  --color-light-grey: #f4f4f4;
-  --color-medium-grey: #e5e5e5;
-  --color-white: #ffffff;
+  /* Strict Black and White Palette */
+  --bg-primary: #ffffff;
+  --bg-secondary: #ffffff;
+  --text-primary: #000000;
+  --text-secondary: #000000;
+  --color-border: #000000;
+  --color-black: #000000;
 
-  /* Functional Colors */
-  --color-overlay: rgba(255, 255, 255, 0.98);
-  --color-border: rgba(0, 0, 0, 0.05);
+  /* Refined Lines */
+  --border-fine: 1px solid var(--color-black);
+  --border-dark: 2px solid var(--color-black);
 
   /* Typography */
   --font-serif: "Bodoni Moda", serif;
   --font-sans: "Inter", sans-serif;
+
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-loose: 0.1em;
 }
 
-/* Base Resets */
 body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   font-family: var(--font-sans);
-  color: var(--color-black);
-  background-color: var(--color-white);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
 }
 
 h1,
 h2,
 h3,
-h4,
-h5,
-.brand-font {
+.heading-serif {
   font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-loose);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+* {
+  box-sizing: border-box;
 }

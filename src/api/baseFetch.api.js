@@ -1,9 +1,10 @@
 import { auth } from "../configs/firebase";
 
-const BASE_URL = "http://localhost:3000";
+// const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://jews-paths-accomplish-existed.trycloudflare.com";
 
 const baseFetch = async (endPoint, options = {}) => {
-  const url = `${BASE_URL}/${endPoint}`;
+  const url = `${BASE_URL}${endPoint}`;
   // TODO: the token will be generated on every api call, so FIX this one in v2
   const token = auth.currentUser ? await auth.currentUser.getIdToken : null;
 
