@@ -5,7 +5,7 @@ export const paymentsApi = {
    * creates order at backend and returns order id
    */
   createPaymentIntent: (cartList) =>
-    baseFetch("/payments/create-payment", {
+    baseFetch("/payments/create", {
       method: "POST",
       body: JSON.stringify(cartList),
     }),
@@ -20,13 +20,15 @@ export const paymentsApi = {
     razorpayPaymentId,
     razorpaySignature,
   }) => {
-    return baseFetch("payments/verify-payment", {
+    return baseFetch("/payments/verify", {
       method: "POST",
       body: JSON.stringify({
         items,
-        razorpayOrderId,
-        razorpayPaymentId,
-        razorpaySignature,
+        paymentDetails: {
+          razorpayOrderId,
+          razorpayPaymentId,
+          razorpaySignature,
+        },
       }),
     });
   },

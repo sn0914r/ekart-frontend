@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { auth, db } from "../configs/firebase";
-import { signOut } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { getDoc } from "firebase/firestore";
 import { doc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
@@ -20,8 +20,10 @@ const AuthProvider = ({ children }) => {
         const userRef = doc(db, "users", currentUser.uid);
         const snap = await getDoc(userRef);
 
-        if (snap.exists()) {
-          setRole(snap.data().role || "user");
+        if (snap.exists) {
+          const token = await currentUser.getIdTokenResult();
+          console.log(token)
+          setRole(token.claims?.role || "user");
         } else {
           setRole("user");
         }
@@ -38,9 +40,9 @@ const AuthProvider = ({ children }) => {
     await signOut(auth);
   };
   return (
-    <AuthProvider.Provider value={{ user, logout, loading, role }}>
+    <AuthContext.Provider value={{ user, logout, loading, role }}>
       {children}
-    </AuthProvider.Provider>
+    </AuthContext.Provider>
   );
 };
 

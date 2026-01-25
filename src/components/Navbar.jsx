@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import styled from "@emotion/styled";
-import { Search, ShoppingBag, X } from "lucide-react";
+import { Search, ShoppingBag, User, X } from "lucide-react";
 import { Link } from "react-router-dom";
 
 import { useCartContext } from "../context/CartContext";
+import { useAuthContext } from "../context/AuthContext";
 
 const Nav = styled.nav`
   position: fixed;
@@ -216,6 +217,7 @@ const BagCount = styled.span`
 
 const Navbar = () => {
   const { totalItems } = useCartContext();
+  const { user } = useAuthContext();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [iconSize, setIconSize] = useState(
@@ -290,6 +292,31 @@ const Navbar = () => {
                   <BagCount>{totalItems()}</BagCount>
                 </BagWrapper>
                 <span className="btn-text">Bag</span>
+              </ActionBtn>
+
+              <ActionBtn isScrolled={isScrolled}>
+                {user ? (
+                  <Link
+                    style={{
+                      color: "inherit",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.5rem",
+                      textDecoration: "none",
+                    }}
+                    to="/profile"
+                  >
+                    <User size={18} strokeWidth={1.5} />
+                    <span className="btn-text">Profile</span>
+                  </Link>
+                ) : (
+                  <Link
+                    style={{ color: "inherit", textDecoration: "none" }}
+                    to="/login"
+                  >
+                    Login
+                  </Link>
+                )}
               </ActionBtn>
             </Actions>
           </NavContent>

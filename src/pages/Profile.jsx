@@ -115,6 +115,7 @@ const Profile = () => {
   const { user, logout } = useAuthContext();
   const { addToast } = useToast();
   const navigate = useNavigate();
+  const { role } = useAuthContext();
 
   const handleLogout = async () => {
     try {
@@ -129,7 +130,6 @@ const Profile = () => {
   if (!user) {
     return (
       <ProfileWrapper>
-        <Navbar isScrolled={true} />
         <ContentArea>
           <ProfileCard>
             <UserName>Guest User.</UserName>
@@ -146,7 +146,6 @@ const Profile = () => {
 
   return (
     <ProfileWrapper>
-      <Navbar isScrolled={true} />
       <ContentArea>
         <ProfileCard>
           <AvatarCircle>
@@ -161,6 +160,14 @@ const Profile = () => {
               Order history <ShoppingBag size={16} strokeWidth={1.5} />
             </ProfileLink>
           </ActionList>
+
+          {role === "admin" && (
+            <ActionList style={{ marginTop: "1rem" }}>
+              <ProfileLink to="/admin">
+                Admin Panel <User size={16} strokeWidth={1.5} />
+              </ProfileLink>
+            </ActionList>
+          )}
 
           <LogoutBtn onClick={handleLogout}>
             Logout <LogOut size={16} strokeWidth={2} />

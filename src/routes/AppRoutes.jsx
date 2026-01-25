@@ -7,6 +7,7 @@ import Admin from "../pages/Admin";
 import SignUp from "../pages/SignUp";
 import Orders from "../pages/Orders";
 import Notfound from "../pages/NotFound";
+import Profile from "../pages/Profile";
 
 const AppRoutes = () => {
   return (
@@ -19,6 +20,7 @@ const AppRoutes = () => {
 
       {/* Protected Routes (User) */}
       <Route path="/orders" element={<Orders />} />
+      <Route path="/profile" element={<Profile />} />
 
       {/* Admin Routes (Admin) */}
       <Route path="/admin" element={<Admin />} />

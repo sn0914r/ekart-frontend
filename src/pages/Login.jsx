@@ -226,7 +226,7 @@ const Login = () => {
     } catch (error) {
       console.error("Error during login:", error);
       setIsSubmitting(false);
-      const msg = error.message || "Archive access denied. Verify credentials.";
+      const msg = error.message || "Invalid credentials. Please try again.";
       setErrors({ message: msg });
       addToast("failure", msg);
     }
@@ -238,9 +238,7 @@ const Login = () => {
         <FormCard>
           <Header>
             <Title>Welcome Back.</Title>
-            <Subtitle>
-              Re-enter the archive. Access your curated selections and history.
-            </Subtitle>
+            <Subtitle>Access your selections and history.</Subtitle>
           </Header>
 
           <Form onSubmit={handleSubmit}>
@@ -289,7 +287,7 @@ const Login = () => {
             </FormGroup>
 
             <LoginBtn type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Authenticating..." : "Login to Archive"}
+              {isSubmitting ? "Authenticating..." : "Login to eKart"}
             </LoginBtn>
           </Form>
 

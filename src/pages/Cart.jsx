@@ -5,6 +5,11 @@ import Footer from "../components/Footer";
 import CartItem from "../components/CartItem";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import paymentsApi from "../api/payments.api";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useToast } from "../context/ToastContext";
+import { auth } from "../configs/firebase";
 
 const CartContainer = styled.section`
   padding: 10rem 0 6rem;
@@ -132,12 +137,73 @@ const ShopLink = styled(Link)`
 `;
 
 const Cart = () => {
+  const [isProcessing, setIsProcessing] = useState(false);
   const { cartItems, increaseQty, decreaseQty, removeFromCart, totalPrice } =
     useCartContext();
+  const { addToast } = useToast();
+  const navigate = useNavigate();
   const subtotal = totalPrice();
   const shipping = subtotal > 0 ? 500 : 0; // Fixed shipping for demo
   const total = subtotal + shipping;
 
+  const RAZORPAY_TEST_API_KEY = "rzp_test_S1HTg3qd801pNt";
+
+  const handleCheckout = async () => {
+    try {
+      // Checking authentication
+      if (!auth.currentUser) {
+        addToast("error", "Please login to proceed");
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
+        return;
+      }
+
+      setIsProcessing(true);
+      const data = cartItems.map((item) => ({
+        id: item.id,
+        quantity: item.qty,
+      }));
+
+      // Create order at backend
+      const order = await paymentsApi.createPaymentIntent(data);
+
+      // Razorpay checkout options
+      const options = {
+        key: RAZORPAY_TEST_API_KEY,
+        amount: order.amount,
+        currency: order.currency,
+        name: "eKart",
+        description: "Order Payment",
+        order_id: order.id,
+        handler: async function (response) {
+          // Verify payment in backend
+          const orderId = await paymentsApi.createOrder({
+            items: data,
+            razorpayOrderId: response.razorpay_order_id,
+            razorpayPaymentId: response.razorpay_payment_id,
+            razorpaySignature: response.razorpay_signature,
+          });
+
+          if (orderId) {
+            addToast("success", "Payment Successful");
+            navigate("/payment-success", { state: { orderId } });
+          } else {
+            addToast("error", "Payment Failed");
+          }
+          setIsProcessing(false);
+        },
+        // theme: { color: "#0d6efd" },
+        theme: { color: "red" },
+      };
+
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    } catch (error) {
+      addToast("error", error.message || "Payment Failed");
+      setIsProcessing(false);
+    }
+  };
   return (
     <>
       <CartContainer>
@@ -178,8 +244,9 @@ const Cart = () => {
                 <span>Total</span>
                 <span>₨ {total.toLocaleString()}</span>
               </SummaryRow>
-              <CheckoutBtn>
-                Checkout <ArrowRight size={16} />
+              <CheckoutBtn onClick={handleCheckout} disabled={isProcessing}>
+                {isProcessing ? "Processing..." : "Checkout"}{" "}
+                <ArrowRight size={16} />
               </CheckoutBtn>
             </Summary>
           </CartGrid>
