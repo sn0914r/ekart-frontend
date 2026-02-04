@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { Search, ShoppingBag, User, X, Menu as MenuIcon } from "lucide-react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 import {
   Nav,
   SearchOverlay,
@@ -14,7 +14,11 @@ import {
   SidebarBrand,
   SidebarLink,
 } from "./Navbar.styles";
+
 import useUpdateSearchParams from "../useUpdateSeachParams";
+
+import { Search, ShoppingBag, User, X, Menu as MenuIcon } from "lucide-react";
+import { useAuthContext } from "../../../auth/AuthContext";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -22,7 +26,7 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const searchInputRef = useRef(null);
 
-  const [_, setParams] = useSearchParams();
+  const { user } = useAuthContext();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -54,7 +58,6 @@ const Navbar = () => {
     { name: "Collections", path: "/" },
     { name: "About", path: "/about" },
     { name: "Bag", path: "/cart" },
-    { name: "Login", path: "/login" },
   ];
 
   /**
@@ -77,7 +80,7 @@ const Navbar = () => {
             ref={searchInputRef}
             placeholder="Search the archive..."
             type="text"
-            onChange={(e) => updateSearchParams({search: e.target.value})}
+            onChange={(e) => updateSearchParams({ search: e.target.value })}
           />
           <CloseBtn onClick={() => setIsSearchOpen(false)}>
             <X size={32} strokeWidth={1} />
@@ -130,10 +133,25 @@ const Navbar = () => {
                 <span>Bag</span>
               </ActionBtn>
 
-              <ActionBtn isScrolled={isScrolled ? 1 : 0} as={Link} to="/login">
-                <User size={18} strokeWidth={1.5} />
-                <span>Login</span>
-              </ActionBtn>
+              {!user ? (
+                <ActionBtn
+                  isScrolled={isScrolled ? 1 : 0}
+                  as={Link}
+                  to="/auth/login"
+                >
+                  <User size={18} strokeWidth={1.5} />
+                  <span>Login</span>
+                </ActionBtn>
+              ) : (
+                <ActionBtn
+                  isScrolled={isScrolled ? 1 : 0}
+                  as={Link}
+                  to="/user/profile"
+                >
+                  <User size={18} strokeWidth={1.5} />
+                  <span>Profile</span>
+                </ActionBtn>
+              )}
             </div>
 
             {/* Mobile Actions */}
@@ -187,6 +205,30 @@ const Navbar = () => {
             {link.name}
           </SidebarLink>
         ))}
+
+        {user ? (
+          <SidebarLink
+            to="/user/profile"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Profile
+          </SidebarLink>
+        ) : (
+          <>
+            <SidebarLink
+              to="/auth/login"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Login
+            </SidebarLink>
+            <SidebarLink
+              to="/auth/signup"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Signup
+            </SidebarLink>
+          </>
+        )}
       </Sidebar>
     </>
   );

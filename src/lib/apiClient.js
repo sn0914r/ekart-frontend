@@ -1,4 +1,4 @@
-// import { auth } from "../configs/firebase.config";
+import { auth } from "../configs/firebase.config";
 
 const BASE_URL = "http://localhost:3000";
 // const BASE_URL = "https://forge-graphs-real-aruba.trycloudflare.com";

@@ -1,13 +1,14 @@
-// import ProductCard from "../features/landing/components/ProductCard";
+import { Routes, Route } from "react-router-dom";
 import LandingPage from "../features/landing/page/LandingPage";
-// import Products from "../features/landing/Products";
-import "./app.css";
+import AuthRoutes from "../routes/AuthRoutes";
 
 const App = () => {
-  // return <div>App</div>;
-  // return <Products/>
-  // return <ProductCard />
-  return <LandingPage />;
+  return (
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/auth/*" element={<AuthRoutes />} />
+    </Routes>
+  );
 };
 
 export default App;
