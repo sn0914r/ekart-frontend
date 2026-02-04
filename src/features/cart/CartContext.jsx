@@ -37,12 +37,14 @@ const CartProvider = ({ children }) => {
 
   const decreaseQty = (id) => {
     setCartItems((prev) =>
-      prev.map((item) => {
-        if (item.id === id) {
-          return { ...item, quantity: item.quantity - 1 };
-        }
-        return item;
-      }),
+      prev
+        .map((item) => {
+          if (item.id === id) {
+            return { ...item, quantity: item.quantity - 1 };
+          }
+          return item;
+        })
+        .filter((item) => item.quantity > 0),
     );
   };
 
@@ -69,6 +71,11 @@ const CartProvider = ({ children }) => {
     }, 0);
   };
 
+  const checkItem = (id) => {
+    const item = cartItems.find((item) => item.id === id);
+    return item ? true : false;
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -79,6 +86,7 @@ const CartProvider = ({ children }) => {
         increaseQty,
         calculateTotal,
         totalCartItems,
+        checkItem,
       }}
     >
       {children}

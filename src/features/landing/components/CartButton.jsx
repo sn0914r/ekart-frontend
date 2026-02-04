@@ -4,9 +4,10 @@ import { useCartContext } from "../../cart/CartContext";
 import { Plus, Minus } from "lucide-react";
 
 const CartButton = ({ product }) => {
-  const [isAdded, setIsAdded] = useState(false);
-  const { addToCart, removeFromCart } = useCartContext();
+  const { addToCart, removeFromCart, checkItem } = useCartContext();
   const productId = product.id;
+
+  const [isAdded, setIsAdded] = useState(checkItem(productId));
 
   const handleClick = () => {
     if (isAdded) {
