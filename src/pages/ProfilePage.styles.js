@@ -105,3 +105,24 @@ export const LogoutBtn = styled.button`
     transform: translateY(-2px);
   }
 `;
+
+export const BackButton = styled(Link)`
+  display: inline-flex;
+  position: absolute;
+  top: 3rem;
+  left: 2rem;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  transition: color 0.2s ease;
+  margin-bottom: 2rem;
+
+  &:hover {
+    color: var(--text-primary);
+  }
+`;

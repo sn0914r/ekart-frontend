@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import OrderAPI from "./orders.api";
 
 const usePostOrder = () =>
@@ -7,4 +7,11 @@ const usePostOrder = () =>
       OrderAPI.createOrder({ items, shippingAddress }),
   });
 
-export default { usePostOrder };
+const useGetOrders = () => {
+  return useQuery({
+    queryKey: ["orders"],
+    queryFn: () => OrderAPI.getOrders(),
+  });
+};
+
+export default { usePostOrder, useGetOrders };

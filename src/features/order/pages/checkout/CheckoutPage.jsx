@@ -57,7 +57,7 @@ const CheckoutPage = () => {
             razorpay_order_id: razorpayOrderId,
             razorpay_signature: razorpaySignature,
           } = response;
-          await verifyPaymentMutation.mutateAsync({
+          const paymentDetais = await verifyPaymentMutation.mutateAsync({
             razorpayPaymentId,
             razorpaySignature,
             razorpayOrderId,
@@ -65,7 +65,11 @@ const CheckoutPage = () => {
 
           alert("Success");
           clearCart();
-          navigate("/cart");
+          navigate("/orders/success", {
+            state: {
+              orderDetails: paymentDetais,
+            },
+          });
         },
       });
     } catch (error) {
@@ -90,7 +94,7 @@ const CheckoutPage = () => {
                   <div className="col-12 col-md-6" key={add.id}>
                     <AddressCard
                       address={add}
-                      isSelected={selectedAddress === add.id}
+                      isSelected={selectedAddress?.id === add.id}
                       onSelect={setSelectedAddress}
                     />
                   </div>

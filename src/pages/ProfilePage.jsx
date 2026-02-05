@@ -1,9 +1,10 @@
-import { ArrowRight, LogOut, ShoppingBag, User } from "lucide-react";
+import { ArrowLeft, ArrowRight, LogOut, ShoppingBag, User } from "lucide-react";
 import { useAuthContext } from "../auth/AuthContext";
 import AuthQuery from "../auth/auth.query";
 import {
   ActionList,
   AvatarCircle,
+  BackButton,
   ContentArea,
   LogoutBtn,
   ProfileCard,
@@ -41,6 +42,9 @@ const Profile = () => {
   return (
     <ProfileWrapper>
       <ContentArea>
+        <BackButton to="/">
+          <ArrowLeft size={16} /> Back to Home
+        </BackButton>
         <ProfileCard>
           <AvatarCircle>
             <User size={40} strokeWidth={1} />
@@ -64,4 +68,4 @@ const Profile = () => {
   );
 };
 
-export default Profile
+export default Profile;

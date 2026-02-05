@@ -1,7 +1,7 @@
 import { auth } from "../configs/firebase.config";
 
 const BASE_URL = "http://localhost:3000";
-// const BASE_URL = "https://alert-headlines-unlimited-brave.trycloudflare.com";
+// const BASE_URL = "https://plants-nature-chemistry-right.trycloudflare.com";
 
 /**
  * @desc function to make api calls

@@ -6,6 +6,9 @@ const createOrder = ({ items, shippingAddress }) =>
     body: JSON.stringify({ items, shippingAddress }),
   });
 
+const getOrders = () => apiClient("/orders");
+
 export default {
   createOrder,
+  getOrders,
 };
