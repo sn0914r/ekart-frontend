@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import CheckoutPage from "../features/order/pages/checkout/CheckoutPage";
 import ShippingAddressForm from "../features/order/pages/checkout/ShippingAddressPage";
 import ShippingFormLayout from "../features/order/pages/checkout/layout/ShippingFormLayout";
+import NotFound from "../pages/NotFoundpage";
 
 const OrderRoutes = () => (
   <Routes>
@@ -14,6 +15,7 @@ const OrderRoutes = () => (
         </ShippingFormLayout>
       }
     />
+    <Route path="*" element={<NotFound />} />
   </Routes>
 );
 

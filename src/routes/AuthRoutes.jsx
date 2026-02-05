@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Login from "../auth/pages/Login";
 import AuthLayout from "../auth/Layout/AuthLayout";
 import SignUp from "../auth/pages/SignUp";
+import NotFound from "../pages/NotFoundpage";
 
 const AuthRoutes = () => {
   return (
@@ -23,6 +24,7 @@ const AuthRoutes = () => {
           </AuthLayout>
         }
       />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };

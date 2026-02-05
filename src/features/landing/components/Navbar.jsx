@@ -146,7 +146,7 @@ const Navbar = () => {
                 <ActionBtn
                   isScrolled={isScrolled ? 1 : 0}
                   as={Link}
-                  to="/user/profile"
+                  to="/profile"
                 >
                   <User size={18} strokeWidth={1.5} />
                   <span>Profile</span>
@@ -208,7 +208,7 @@ const Navbar = () => {
 
         {user ? (
           <SidebarLink
-            to="/user/profile"
+            to="/profile"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             Profile
