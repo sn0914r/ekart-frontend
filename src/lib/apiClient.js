@@ -1,7 +1,7 @@
 import { auth } from "../configs/firebase.config";
 
-// const BASE_URL = "http://localhost:3000";
-const BASE_URL = "https://usually-crucial-chen-desperate.trycloudflare.com";
+const BASE_URL = "http://localhost:3000";
+// const BASE_URL = "https://alert-headlines-unlimited-brave.trycloudflare.com";
 
 /**
  * @desc function to make api calls
@@ -34,8 +34,9 @@ const apiClient = async (endPoint, options = {}, requireToken = true) => {
   };
 
   console.table({
-    url, configs
-  })
+    url,
+    configs,
+  });
 
   const response = await fetch(url, configs);
   const data = await response.json().catch(() => null);

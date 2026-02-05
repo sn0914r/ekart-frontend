@@ -4,8 +4,8 @@ import { signUpUserSchema } from "../auth.schema";
 
 import { useNavigate } from "react-router-dom";
 
-import AuthInput from "../components/Field";
-import AuthButton from "../components/Button";
+import AuthInput from "../../shared/components/Field";
+import AuthButton from "../../shared/components/Button";
 
 import {
   Header,

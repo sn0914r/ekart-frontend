@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import CartItem from "../components/CartItem";
 import CartSummary from "../components/CartSummary";
 import { PageWrapper, PageTitle, EmptyCartMessage } from "./CartPage.styles";
 import { useCartContext } from "../CartContext";
 
-
 const CartPage = () => {
+  const navigate = useNavigate();
   const {
     increaseQty,
     decreaseQty,
@@ -31,6 +31,10 @@ const CartPage = () => {
 
   const subtotal = calculateTotal();
   const shipping = 100;
+
+  const handleCheckout = () => {
+    navigate("/orders/checkout");
+  };
 
   return (
     <PageWrapper>
@@ -68,7 +72,7 @@ const CartPage = () => {
               <CartSummary
                 subtotal={subtotal}
                 shipping={shipping}
-                handleCheckout={() => alert("checkout...")}
+                handleCheckout={handleCheckout}
               />
             </div>
           </div>

@@ -76,6 +76,22 @@ const CartProvider = ({ children }) => {
     return item ? true : false;
   };
 
+  /**
+   * @desc formats the cart list for backend request
+   */
+  const getCartList = () => {
+    return cartItems.map((item) => {
+      return {
+        id: item.id,
+        quantity: item.quantity,
+      };
+    });
+  };
+
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -87,6 +103,8 @@ const CartProvider = ({ children }) => {
         calculateTotal,
         totalCartItems,
         checkItem,
+        getCartList,
+        clearCart
       }}
     >
       {children}
