@@ -1,8 +1,7 @@
 import { auth } from "../configs/firebase.config";
 
 const BASE_URL = "http://localhost:3000";
-// const BASE_URL = "https://plants-nature-chemistry-right.trycloudflare.com";
-
+// const BASE_URL = "https://coleman-constantly-midlands-hong.trycloudflare.com";
 /**
  * @desc function to make api calls
  *
@@ -19,25 +18,24 @@ const apiClient = async (endPoint, options = {}, requireToken = true) => {
   if (requireToken) {
     token = auth.currentUser ? await auth.currentUser.getIdToken() : null;
   }
+  // detect FormData
+  const isFormData = options.body instanceof FormData;
 
-  const defaultHeaders = {
+  // auto stringify JSON body
+  if (options.body && !isFormData && typeof options.body !== "string") {
+    options.body = JSON.stringify(options.body);
+  }
+
+  const headers = {
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
-    "Content-Type": "application/json",
+    ...(isFormData ? {} : { "Content-Type": "application/json" }),
+    ...(options.headers || {}),
   };
 
   const configs = {
     ...options,
-    headers: {
-      ...defaultHeaders,
-      ...(options.headers || {}),
-    },
+    headers,
   };
-
-  console.table({
-    url,
-    configs,
-  });
-
   const response = await fetch(url, configs);
   const data = await response.json().catch(() => null);
 

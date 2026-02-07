@@ -1,6 +1,6 @@
 import { StyledButton } from "./Button.styles";
 
-const AuthButton = ({ children, disabled, ...rest }) => {
+const Button = ({ children, disabled, ...rest }) => {
   return (
     <StyledButton disabled={disabled} {...rest}>
       {children}
@@ -8,4 +8,4 @@ const AuthButton = ({ children, disabled, ...rest }) => {
   );
 };
 
-export default AuthButton;
+export default Button;

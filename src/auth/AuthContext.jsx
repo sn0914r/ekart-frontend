@@ -18,7 +18,6 @@ const AuthProvider = ({ children }) => {
         setrole(idToken.claims?.role || "");
       }
 
-      setrole(currentUser?.role || "");
       setLoading(false);
     });
 

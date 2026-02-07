@@ -15,7 +15,7 @@ import {
 } from "./ProfilePage.styles";
 
 const Profile = () => {
-  const { user } = useAuthContext();
+  const { user, role } = useAuthContext();
 
   const logoutMutation = AuthQuery.useLogout();
 
@@ -53,11 +53,21 @@ const Profile = () => {
           <UserName>{user.displayName || "Member"}</UserName>
           <UserEmail>{user.email}</UserEmail>
 
-          <ActionList>
-            <ProfileLink to="/orders">
-              Order History <ShoppingBag size={16} strokeWidth={1.5} />
-            </ProfileLink>
-          </ActionList>
+          {role !== "admin" && (
+            <ActionList>
+              <ProfileLink to="/orders">
+                Order History <ShoppingBag size={16} strokeWidth={1.5} />
+              </ProfileLink>
+            </ActionList>
+          )}
+
+          {role === "admin" && (
+            <ActionList>
+              <ProfileLink to="/admin/dashboard">
+                Admin Dashboard <ShoppingBag size={16} strokeWidth={1.5} />
+              </ProfileLink>
+            </ActionList>
+          )}
 
           <LogoutBtn onClick={handleLogout}>
             Logout <LogOut size={16} strokeWidth={2} />

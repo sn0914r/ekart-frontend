@@ -207,10 +207,7 @@ const Navbar = () => {
         ))}
 
         {user ? (
-          <SidebarLink
-            to="/profile"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
+          <SidebarLink to="/profile" onClick={() => setIsMobileMenuOpen(false)}>
             Profile
           </SidebarLink>
         ) : (

@@ -5,6 +5,7 @@ import Cart from "../features/cart/page/CartPage";
 import OrderRoutes from "../routes/OrderRoutes";
 import Profile from "../pages/ProfilePage";
 import NotFound from "../pages/NotFoundpage";
+import AdminRoutes from "../routes/AdminRoutes";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
       <Route path="/cart" element={<Cart />} />
       <Route path="/orders/*" element={<OrderRoutes />} />
       <Route path="*" element={<NotFound />} />
+      <Route path="/admin/*" element={<AdminRoutes />} />
     </Routes>
   );
 };
