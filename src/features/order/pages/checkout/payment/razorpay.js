@@ -1,5 +1,5 @@
 const initCheckout = ({ amount, razorpayOrderId, handler }) => {
-  const RAZORPAY_TEST_API_KEY = "rzp_test_S1HTg3qd801pNt";
+  const RAZORPAY_TEST_API_KEY = "rzp_test_SCUhUgcf4F5vO7";
 
   const OPTIONS = {
     key: RAZORPAY_TEST_API_KEY,

@@ -1,7 +1,7 @@
 import { auth } from "../configs/firebase.config";
 
-const BASE_URL = "http://localhost:3000";
-// const BASE_URL = "https://coleman-constantly-midlands-hong.trycloudflare.com";
+const BASE_URL = "https://ekart-backend-9y0c.onrender.com";
+
 /**
  * @desc function to make api calls
  *
