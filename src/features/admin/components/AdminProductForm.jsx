@@ -1,6 +1,9 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import Button from "../../../shared/components/Button";
 import AdminQuery from "../admin.query";
+import { productSchema, productSchemaWithImage } from "../admin.schema";
 import {
   FormContainer,
   FormTitle,
@@ -19,145 +22,103 @@ import {
   CancelButton,
   ErrorText,
 } from "./AdminProductForm.styles";
+import { toast } from "sonner";
 
-const AdminProductForm = ({ product, onClose, onSuccess }) => {
+const AdminProductForm = ({ product, onClose, onSuccess, refetchProducts }) => {
   const isEditMode = !!product;
-
-  // Form state
-  const [formData, setFormData] = useState({
-    name: "",
-    price: "",
-    stock: "",
-    isActive: true,
-  });
-
-  const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
-  const [errors, setErrors] = useState({});
 
-  // Mutations
   const createMutation = AdminQuery.usePostProductAdmin();
   const updateMutation = AdminQuery.usePatchProductAdmin();
 
-  // Initialize form with product data in edit mode
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+    watch,
+  } = useForm({
+    resolver: zodResolver(isEditMode ? productSchema : productSchemaWithImage),
+    defaultValues: {
+      name: "",
+      price: 0,
+      stock: 0,
+      isActive: true,
+    },
+  });
+
+  const imageFiles = watch("image");
+
   useEffect(() => {
     if (product) {
-      setFormData({
+      reset({
         name: product.name || "",
-        price: product.price || "",
-        stock: product.stock || "",
+        price: product.price || 0,
+        stock: product.stock || 0,
         isActive: product.isActive ?? true,
       });
       setImagePreview(product.imageUrl || null);
     }
-  }, [product]);
+  }, [product, reset]);
 
-  // Handle input changes
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-    // Clear error for this field
-    if (errors[name]) {
-      setErrors((prev) => ({ ...prev, [name]: null }));
-    }
-  };
-
-  // Handle image selection
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setImageFile(file);
+  useEffect(() => {
+    if (imageFiles && imageFiles.length > 0) {
+      const file = imageFiles[0];
       const reader = new FileReader();
       reader.onloadend = () => {
         setImagePreview(reader.result);
       };
       reader.readAsDataURL(file);
-      if (errors.image) {
-        setErrors((prev) => ({ ...prev, image: null }));
-      }
     }
-  };
+  }, [imageFiles]);
 
-  // Validate form
-  const validate = () => {
-    const newErrors = {};
-
-    if (!formData.name.trim()) {
-      newErrors.name = "Product name is required";
-    }
-
-    if (!formData.price || formData.price <= 0) {
-      newErrors.price = "Price must be greater than 0";
-    }
-
-    if (formData.stock === "" || formData.stock < 0) {
-      newErrors.stock = "Stock must be 0 or greater";
-    }
-
-    if (!isEditMode && !imageFile) {
-      newErrors.image = "Product image is required";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!validate()) {
-      return;
-    }
-
+  const onSubmit = async (data) => {
     const productData = {
-      name: formData.name.trim(),
-      price: parseFloat(formData.price),
-      stock: parseInt(formData.stock, 10),
-      isActive: formData.isActive,
+      name: data.name.trim(),
+      price: Number(data.price),
+      stock: Number(data.stock),
+      isActive: data.isActive,
     };
 
     if (isEditMode) {
-      updateMutation.mutate({ id: product._id, data: productData });
-      onSuccess();
+      await updateMutation.mutateAsync({
+        id: product._id,
+        data: productData,
+      });
     } else {
       const formDataToSend = new FormData();
 
-      if (imageFile) {
-        formDataToSend.append("file", imageFile);
+      if (data.image && data.image.length > 0) {
+        formDataToSend.append("file", data.image[0]);
       }
       formDataToSend.append("data", JSON.stringify(productData));
 
-      createMutation.mutate(formDataToSend);
-
-      onSuccess();
+      await createMutation.mutateAsync(formDataToSend);
     }
+    onSuccess();
+    refetchProducts();
   };
 
-  const isLoading = createMutation.isPending || updateMutation.isPending;
+  const isLoading =
+    createMutation.isPending || updateMutation.isPending || isSubmitting;
 
   return (
     <FormContainer>
       <FormTitle>{isEditMode ? "Edit Product" : "Add New Product"}</FormTitle>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         {/* Product Name */}
         <FormField>
           <Label htmlFor="name">Product Name *</Label>
           <Input
             id="name"
-            name="name"
             type="text"
-            value={formData.name}
-            onChange={handleChange}
+            {...register("name")}
             placeholder="Enter product name"
             hasError={!!errors.name}
             disabled={isLoading}
           />
-          {errors.name && <ErrorText>{errors.name}</ErrorText>}
+          {errors.name && <ErrorText>{errors.name.message}</ErrorText>}
         </FormField>
 
         {/* Price */}
@@ -165,17 +126,15 @@ const AdminProductForm = ({ product, onClose, onSuccess }) => {
           <Label htmlFor="price">Price (₹) *</Label>
           <Input
             id="price"
-            name="price"
             type="number"
             step="0.01"
             min="0"
-            value={formData.price}
-            onChange={handleChange}
+            {...register("price", { valueAsNumber: true })}
             placeholder="Enter price"
             hasError={!!errors.price}
             disabled={isLoading}
           />
-          {errors.price && <ErrorText>{errors.price}</ErrorText>}
+          {errors.price && <ErrorText>{errors.price.message}</ErrorText>}
         </FormField>
 
         {/* Stock */}
@@ -183,16 +142,14 @@ const AdminProductForm = ({ product, onClose, onSuccess }) => {
           <Label htmlFor="stock">Stock Quantity *</Label>
           <Input
             id="stock"
-            name="stock"
             type="number"
             min="0"
-            value={formData.stock}
-            onChange={handleChange}
+            {...register("stock", { valueAsNumber: true })}
             placeholder="Enter stock quantity"
             hasError={!!errors.stock}
             disabled={isLoading}
           />
-          {errors.stock && <ErrorText>{errors.stock}</ErrorText>}
+          {errors.stock && <ErrorText>{errors.stock.message}</ErrorText>}
         </FormField>
 
         {/* Active Status */}
@@ -201,10 +158,8 @@ const AdminProductForm = ({ product, onClose, onSuccess }) => {
           <CheckboxWrapper>
             <Checkbox
               id="isActive"
-              name="isActive"
               type="checkbox"
-              checked={formData.isActive}
-              onChange={handleChange}
+              {...register("isActive")}
               disabled={isLoading}
             />
             <CheckboxLabel htmlFor="isActive">
@@ -221,18 +176,18 @@ const AdminProductForm = ({ product, onClose, onSuccess }) => {
               id="image"
               type="file"
               accept="image/*"
-              onChange={handleImageChange}
+              {...register("image")}
               disabled={isLoading}
             />
             <FileInputLabel htmlFor="image">
-              {imageFile
-                ? imageFile.name
+              {imageFiles && imageFiles.length > 0
+                ? imageFiles[0].name
                 : isEditMode
                   ? "Click to change image"
                   : "Click to upload image"}
             </FileInputLabel>
           </FileInputWrapper>
-          {errors.image && <ErrorText>{errors.image}</ErrorText>}
+          {errors.image && <ErrorText>{errors.image.message}</ErrorText>}
 
           {imagePreview && (
             <ImagePreviewContainer>

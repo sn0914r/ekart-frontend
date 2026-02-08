@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import Loader from "../../../shared/components/Loader";
-import productQuery from "../../product/product.query";
+import productQuery from "../landing.query";
 import ProductCard from "../components/ProductCard";
 import Error from "../../../shared/components/Error";
 import Filter from "../components/Filter";

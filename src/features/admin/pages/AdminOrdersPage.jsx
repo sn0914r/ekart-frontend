@@ -22,7 +22,6 @@ const AdminOrdersPage = () => {
   const navigate = useNavigate();
 
   const handleViewOrder = (order) => {
-    console.log("======= handleViewOrder", order);
     navigate(`/admin/orders/${order._id}`, { state: order });
   };
 

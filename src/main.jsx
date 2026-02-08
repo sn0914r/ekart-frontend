@@ -9,9 +9,12 @@ import { queryClient } from "./lib/reactQuery";
 import { CartProvider } from "./features/cart/CartContext";
 import { AuthProvider } from "./auth/AuthContext";
 
+import { Toaster } from "sonner";
+
 createRoot(document.getElementById("root")).render(
   <QueryClientProvider client={queryClient}>
     <BrowserRouter>
+      <Toaster richColors duration={5000} closeButton position="top-right" />
       <AuthProvider>
         <CartProvider>
           <App />

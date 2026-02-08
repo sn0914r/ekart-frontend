@@ -24,10 +24,6 @@ const AuthProvider = ({ children }) => {
     return () => unsub();
   });
 
-  useEffect(() => {
-    console.log("user changed", user, role);
-  }, [user]);
-
   return (
     <AuthContext.Provider value={{ user, role, loading }}>
       {children}

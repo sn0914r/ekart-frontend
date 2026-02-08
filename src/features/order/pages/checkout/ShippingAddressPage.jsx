@@ -10,6 +10,7 @@ import { shippingAddressSchema } from "../../order.schema";
 import { FormTitle, FormCard } from "./ShippingAddressPage.styles";
 import { useAddress } from "./useAddress";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const ShippingAddressPage = () => {
   const {
@@ -24,7 +25,7 @@ const ShippingAddressPage = () => {
 
   const onSubmit = (data) => {
     setAddress(data);
-    alert("Address saved successfully!");
+    toast.success("Address saved successfully!");
     navigate("/orders/checkout");
   };
 

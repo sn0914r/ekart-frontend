@@ -25,7 +25,7 @@ const getAllAdmin = () => apiClient("/admin/products");
  * @returns {Promise<object>}
  */
 const post = (formData) => {
-  apiClient("/admin/products", {
+  return apiClient("/admin/products", {
     method: "POST",
     body: formData,
   });

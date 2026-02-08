@@ -32,13 +32,12 @@ const Login = () => {
   const navigate = useNavigate();
 
   const loginMutation = AuthQuery.useLogin();
+
   const onSubmit = async (data) => {
-    alert("logging in");
     await loginMutation.mutateAsync({
       email: data.email,
       password: data.password,
     });
-    alert("logged in successfully");
     navigate("/");
   };
 

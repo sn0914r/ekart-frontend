@@ -10,7 +10,6 @@ const getAll = () => apiClient("/products", {}, false);
 
 const queryProducts = (options = {}, endPoint = "/products") => {
   const url = `${endPoint}?${new URLSearchParams(options).toString()}`;
-  console.log("final Url", url)
   return apiClient(url, {}, false);
 };
 

@@ -20,6 +20,7 @@ const AdminProductPage = () => {
     error,
     isLoading,
     isError,
+    refetch: refetchProducts,
   } = AdminQuery.useGetAllProductsAdmin();
 
   // Form state management
@@ -32,6 +33,7 @@ const AdminProductPage = () => {
   };
 
   const handleAddProduct = () => {
+    refetchProducts();
     setSelectedProduct(null);
     setShowForm(true);
   };
@@ -41,10 +43,7 @@ const AdminProductPage = () => {
     setSelectedProduct(null);
   };
 
-  const handleFormSuccess = () => {
-    alert("Operation successfull");
-    handleCloseForm();
-  };
+  const handleFormSuccess = () => handleCloseForm();
 
   if (isError) {
     return <Error message={error?.message} />;
@@ -72,7 +71,7 @@ const AdminProductPage = () => {
         ) : (
           <div className="row g-4">
             {products.map((product) => (
-              <div key={product.id} className="col-6 col-md-3 col-lg-2">
+              <div key={product._id} className="col-6 col-md-3 col-lg-2">
                 <AdminProductCard
                   product={product}
                   editHandler={handleEditProduct}
@@ -111,6 +110,7 @@ const AdminProductPage = () => {
               product={selectedProduct}
               onClose={handleCloseForm}
               onSuccess={handleFormSuccess}
+              refetchProducts={refetchProducts}
             />
           </div>
         </div>

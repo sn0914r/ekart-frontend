@@ -9,7 +9,6 @@ const CartProvider = ({ children }) => {
 
   useEffect(() => {
     setCart(cartItems);
-    console.log(cartItems);
   }, [cartItems]);
 
   /**

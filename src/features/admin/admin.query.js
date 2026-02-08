@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import adminApi from "./admin.api";
+import { toast } from "sonner";
 
 // Product
 const useGetAllProductsAdmin = () => {
@@ -13,13 +14,18 @@ const usePostProductAdmin = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (formData) => adminApi.post(formData),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["products"] });
-      alert("Product added successfully");
+    mutationFn: (formData) => {
+      toast.loading("Adding product...");
+      return adminApi.post(formData);
     },
-    onError: () => {
-      alert("Something went wrong");
+    onSuccess: () => {
+      toast.dismiss();
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+      toast.success("Product added successfully");
+    },
+    onError: (error) => {
+      toast.dismiss();
+      toast.error(error.message || "Failed to add product");
     },
   });
 };
@@ -28,13 +34,18 @@ const usePatchProductAdmin = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ id, data }) => adminApi.patch(id, data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["products"] });
-      alert("Product updated successfully");
+    mutationFn: ({ id, data }) => {
+      toast.loading("Updating product...");
+      return adminApi.patch(id, data);
     },
-    onError: () => {
-      alert("Failed to update product");
+    onSuccess: () => {
+      toast.dismiss();
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+      toast.success("Product updated successfully");
+    },
+    onError: (error) => {
+      toast.dismiss();
+      toast.error(error.message || "Failed to update product");
     },
   });
 };
@@ -50,13 +61,18 @@ const useGetAllOrdersAdmin = () => {
 const usePatchShippingStatusAdmin = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ id, data }) => adminApi.patchShippingStatusAdmin(id, data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["orders"] });
-      alert("Shipping status updated successfully");
+    mutationFn: ({ id, data }) => {
+      toast.loading("Updating shipping status...");
+      return adminApi.patchShippingStatusAdmin(id, data);
     },
-    onError: () => {
-      alert("Failed to update shipping status");
+    onSuccess: () => {
+      toast.dismiss();
+      queryClient.invalidateQueries({ queryKey: ["orders"] });
+      toast.success("Shipping status updated successfully");
+    },
+    onError: (error) => {
+      toast.dismiss();
+      toast.error(error.message || "Failed to update shipping status");
     },
   });
 };

@@ -2,6 +2,7 @@ import { CartStrip, ActionText, IconBox } from "./CartButton.styles";
 import { useState } from "react";
 import { useCartContext } from "../../cart/CartContext";
 import { Plus, Minus } from "lucide-react";
+import { toast } from "sonner";
 
 const CartButton = ({ product }) => {
   const { addToCart, removeFromCart, checkItem } = useCartContext();
@@ -12,8 +13,10 @@ const CartButton = ({ product }) => {
   const handleClick = () => {
     if (isAdded) {
       removeFromCart(productId);
+      toast.info("Item removed from cart")
     } else {
       addToCart(product);
+      toast.info("Item added to cart")
     }
     setIsAdded(!isAdded);
   };

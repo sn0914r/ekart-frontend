@@ -4,19 +4,22 @@ import { queryClient } from "../lib/reactQuery";
 import authAPI from "./auth.api";
 import { signInWithCustomToken } from "firebase/auth";
 import { auth } from "../configs/firebase.config";
+import { toast } from "sonner";
 
 const useLogin = () => {
   return useMutation({
-    mutationFn: ({ email, password }) => authAPI.loginUser({ email, password }),
+    mutationFn: ({ email, password }) => {
+      toast.info("Logging in...");
+      authAPI.loginUser({ email, password });
+    },
 
     onSuccess: () => {
-      alert("Logged in successfully");
+      toast.success("Logged in successfully");
       queryClient.invalidateQueries(["orders", "products"]);
     },
 
     onError: (error) => {
-      console.log(error.message);
-      alert(error.message);
+      toast.error(error.message || "Failed to login");
     },
   });
 };
@@ -24,17 +27,17 @@ const useLogin = () => {
 const useSignUp = () => {
   return useMutation({
     mutationFn: async ({ name, email, password }) => {
+      toast.info("Creating account...");
       const token = await authAPI.signUpUser({ name, email, password });
       await signInWithCustomToken(auth, token);
     },
     onSuccess: () => {
-      alert("SignUp successfull");
+      toast.success("Signed up successfully");
       queryClient.invalidateQueries(["orders", "products"]);
     },
 
     onError: (error) => {
-      console.log(error.message);
-      alert(error.message);
+      toast.error(error.message || "Failed to sign up");
     },
   });
 };
@@ -44,6 +47,10 @@ const useLogout = () => {
     mutationFn: () => authAPI.logoutUser(),
     onSuccess: () => {
       queryClient.invalidateQueries(["orders", "products"]);
+      toast.success("Logged out successfully");
+    },
+    onError: (error) => {
+      toast.error(error.message || "Failed to logout");
     },
   });
 };

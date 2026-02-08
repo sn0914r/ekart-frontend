@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import OrderQuery from "../../order.query";
 import PaymentQuery from "./payment/payments.query";
 import initCheckout from "./payment/razorpay";
+import { toast } from "sonner";
 
 const CheckoutPage = () => {
   const { getAddresses } = useAddress();
@@ -31,10 +32,7 @@ const CheckoutPage = () => {
 
     setIsProcessing(true);
     const items = getCartList();
-    console.log("selected Address", selectedAddress);
     const { id, ...address } = selectedAddress;
-
-    console.log("address", address);
 
     try {
       const { orderId } = await PostOrderMutation.mutateAsync({
@@ -42,7 +40,6 @@ const CheckoutPage = () => {
         shippingAddress: address,
       });
 
-      console.log("orderId", orderId);
       const { razorpayOrderId, amount } =
         await createPaymentMutation.mutateAsync({
           orderId,
@@ -63,7 +60,6 @@ const CheckoutPage = () => {
             razorpayOrderId,
           });
 
-          alert("Success");
           clearCart();
           navigate("/orders/success", {
             state: {
@@ -73,8 +69,7 @@ const CheckoutPage = () => {
         },
       });
     } catch (error) {
-      alert(error.message);
-      console.log(error);
+      toast.error(error.message);
     }
 
     setIsProcessing(false);

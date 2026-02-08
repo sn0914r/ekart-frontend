@@ -8,8 +8,6 @@ import { PageWrapper, PageTitle, EmptyState } from "./OrdersListPage.styles";
 const OrdersPage = () => {
   const { data, isLoading, error, isError } = OrdersQuery.useGetOrders();
 
-  console.log(data);
-
   if (isLoading) {
     return (
       <PageWrapper>

@@ -34,13 +34,11 @@ const SignUp = () => {
   const signUpMutation = AuthQuery.useSignUp();
 
   const onSubmit = async (data) => {
-    alert("Signing up");
     await signUpMutation.mutateAsync({
       name: data.name,
       email: data.email,
       password: data.password,
     });
-    alert("Signed up successfully");
     navigate("/");
   };
 
