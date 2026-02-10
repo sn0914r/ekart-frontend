@@ -6,12 +6,14 @@ import OrderRoutes from "../routes/OrderRoutes";
 import Profile from "../pages/ProfilePage";
 import NotFound from "../pages/NotFoundpage";
 import AdminRoutes from "../routes/AdminRoutes";
+import AboutPage from "../pages/AboutPage";
 
 const App = () => {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/about" element={<AboutPage />} />
       <Route path="/auth/*" element={<AuthRoutes />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/orders/*" element={<OrderRoutes />} />
