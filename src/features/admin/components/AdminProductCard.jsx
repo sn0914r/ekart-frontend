@@ -10,13 +10,18 @@ import {
   StockBadge,
   StatusBadge,
   EditButton,
+  DeleteButton,
 } from "./AdminProductCard.styles";
 
-const AdminProductCard = ({ product, editHandler }) => {
-  const { imageUrl, isActive, name, price, stock, id } = product;
+const AdminProductCard = ({ product, editHandler, deleteHandler }) => {
+  const { imageUrl, isActive, name, price, stock, _id: id } = product;
 
   return (
     <CardContainer>
+      <DeleteButton onClick={() => deleteHandler(id)} title="Delete Product">
+        ×
+      </DeleteButton>
+
       <ImageWrapper>
         <ProductImage src={imageUrl} alt={name} />
         {!isActive && (

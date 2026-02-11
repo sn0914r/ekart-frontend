@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Error from "../../../shared/components/Error";
 import Loader from "../../../shared/components/Loader";
+import ConfirmModal from "../../../shared/components/ConfirmModal";
 import AdminQuery from "../admin.query";
 import AdminProductCard from "../components/AdminProductCard";
 import {
@@ -27,6 +28,12 @@ const AdminProductPage = () => {
   const [showForm, setShowForm] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
+  // Confirm modal state
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [productToDelete, setProductToDelete] = useState(null);
+
+  const deleteProductMutation = AdminQuery.useDeleteProduct();
+
   const handleEditProduct = (product) => {
     setSelectedProduct(product);
     setShowForm(true);
@@ -36,6 +43,24 @@ const AdminProductPage = () => {
     refetchProducts();
     setSelectedProduct(null);
     setShowForm(true);
+  };
+
+  const handleDeleteProduct = (productId) => {
+    setProductToDelete(productId);
+    setShowConfirmModal(true);
+  };
+
+  const handleConfirmDelete = () => {
+    if (productToDelete) {
+      deleteProductMutation.mutate(productToDelete);
+    }
+    setShowConfirmModal(false);
+    setProductToDelete(null);
+  };
+
+  const handleCancelDelete = () => {
+    setShowConfirmModal(false);
+    setProductToDelete(null);
   };
 
   const handleCloseForm = () => {
@@ -75,6 +100,7 @@ const AdminProductPage = () => {
                 <AdminProductCard
                   product={product}
                   editHandler={handleEditProduct}
+                  deleteHandler={handleDeleteProduct}
                 />
               </div>
             ))}
@@ -115,6 +141,15 @@ const AdminProductPage = () => {
           </div>
         </div>
       )}
+
+      {/* Confirm Delete Modal */}
+      <ConfirmModal
+        isOpen={showConfirmModal}
+        title="Delete Product"
+        message="Are you sure you want to delete this product? This action cannot be undone."
+        onConfirm={handleConfirmDelete}
+        onCancel={handleCancelDelete}
+      />
     </PageWrapper>
   );
 };

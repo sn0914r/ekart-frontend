@@ -50,6 +50,28 @@ const usePatchProductAdmin = () => {
   });
 };
 
+const useDeleteProduct = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (id) => {
+      toast.loading("Deleting Product....");
+      return adminApi.deleteProduct(id);
+    },
+
+    onSuccess: () => {
+      toast.dismiss();
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+      toast.success("Product deleted successfully");
+    },
+
+    onError: (error) => {
+      toast.dismiss();
+      toast.error(error.message || "Failed to delete product");
+    },
+  });
+};
+
 // Orders
 const useGetAllOrdersAdmin = () => {
   return useQuery({
@@ -83,4 +105,5 @@ export default {
   usePatchProductAdmin,
   useGetAllOrdersAdmin,
   usePatchShippingStatusAdmin,
+  useDeleteProduct,
 };

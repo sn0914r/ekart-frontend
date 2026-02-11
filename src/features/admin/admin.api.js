@@ -49,6 +49,12 @@ const patch = (id, payload) => {
   });
 };
 
+const deleteProduct = (id) => {
+  return apiClient(`/admin/products/${id}`, {
+    method: "DELETE",
+  });
+};
+
 /* ========================================================================================
 ORDERS APIs
 ======================================================================================== */
@@ -81,4 +87,5 @@ export default {
   patch,
   getOrdersAdmin,
   patchShippingStatusAdmin,
+  deleteProduct,
 };
