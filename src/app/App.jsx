@@ -7,8 +7,22 @@ import Profile from "../pages/ProfilePage";
 import NotFound from "../pages/NotFoundpage";
 import AdminRoutes from "../routes/AdminRoutes";
 import AboutPage from "../pages/AboutPage";
+import { useAuthContext } from "../auth/AuthContext";
+import InitialLoadingPage from "../pages/InitialLoadingPage";
+
+import useBackendHealth from "../shared/hooks/useBackendHealth";
 
 const App = () => {
+  const { loading: authLoading } = useAuthContext();
+  const { isBackendReady, healthStatus } = useBackendHealth();
+
+  if (authLoading || !isBackendReady) {
+    return (
+      <InitialLoadingPage
+        status={isBackendReady ? "Authenticating..." : healthStatus}
+      />
+    );
+  }
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
