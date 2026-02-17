@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import { CheckCircle } from "lucide-react";
 import Button from "../../../shared/components/Button";
 import {
   SuccessWrapper,
@@ -22,7 +21,6 @@ const OrderSuccessPage = () => {
   const orderDetails = location.state?.orderDetails;
 
   useEffect(() => {
-    // Redirect to cart if no order details in state
     if (!orderDetails) {
       navigate("/cart", { replace: true });
     }
@@ -64,11 +62,11 @@ const OrderSuccessPage = () => {
               <OrderDetails>
                 <DetailRow>
                   <DetailLabel>Order ID</DetailLabel>
-                  <DetailValue>{orderDetails.orderId}</DetailValue>
+                  <DetailValue>{orderDetails.orderId || "N/A"}</DetailValue>
                 </DetailRow>
                 <DetailRow>
                   <DetailLabel>Payment ID</DetailLabel>
-                  <DetailValue>{orderDetails.razorpayPaymentId}</DetailValue>
+                  <DetailValue>{orderDetails.razorpayPaymentId || "N/A"}</DetailValue>
                 </DetailRow>
               </OrderDetails>
 

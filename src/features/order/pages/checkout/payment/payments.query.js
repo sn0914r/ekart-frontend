@@ -18,7 +18,7 @@ const useVerifyPayment = () => {
   return useMutation({
     mutationFn: ({ razorpayPaymentId, razorpaySignature, razorpayOrderId }) => {
       toast.info("Verifying payment...");
-      PaymentAPI.verifyPaymentAndConfirmOrder({
+      return PaymentAPI.verifyPaymentAndConfirmOrder({
         razorpayPaymentId,
         razorpaySignature,
         razorpayOrderId,
