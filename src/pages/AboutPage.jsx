@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 import Button from "../shared/components/Button";
 import {
   PageWrapper,
@@ -17,9 +19,11 @@ import {
   LinkSection,
   DropdownButton,
   CollapsibleContent,
+  BackLink,
 } from "./AboutPage.styles";
 
 const AboutPage = () => {
+  const navigate = useNavigate();
   const [showFrontendDeps, setShowFrontendDeps] = useState(false);
   const [showBackendDeps, setShowBackendDeps] = useState(false);
 
@@ -47,12 +51,15 @@ const AboutPage = () => {
     "razorpay",
     "multer",
     "dotenv",
-    "nodemailer"
+    "nodemailer",
   ];
 
   return (
     <PageWrapper>
       <ContentContainer>
+        <BackLink onClick={() => navigate(-1)}>
+          <ArrowLeft size={14} /> Back
+        </BackLink>
         <PageTitle>About eKart</PageTitle>
 
         <Section>

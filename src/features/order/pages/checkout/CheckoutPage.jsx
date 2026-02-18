@@ -3,7 +3,8 @@ import { useAddress } from "./useAddress";
 import { useState } from "react";
 import AddressCard from "./components/AddressCard";
 import Button from "../../../../shared/components/Button";
-import { PageWrapper, SectionTitle } from "./CheckoutPage.styles";
+import { PageWrapper, SectionTitle, BackLink } from "./CheckoutPage.styles";
+import { ArrowLeft } from "lucide-react";
 import OrderSummaryCard from "./components/OrderSummaryCard";
 import { useNavigate } from "react-router-dom";
 import OrderQuery from "../../order.query";
@@ -78,6 +79,9 @@ const CheckoutPage = () => {
   return (
     <PageWrapper>
       <div className="container">
+        <BackLink onClick={() => navigate(-1)}>
+          <ArrowLeft size={14} /> Back
+        </BackLink>
         <div className="row g-5">
           {/* Left Column: Address Selection */}
           <div className="col-12 col-lg-8">

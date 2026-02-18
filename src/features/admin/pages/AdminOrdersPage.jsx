@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 import Error from "../../../shared/components/Error";
 import Loader from "../../../shared/components/Loader";
 import AdminQuery from "../admin.query";
@@ -9,6 +10,7 @@ import {
   PageTitle,
   EmptyState,
   EmptyStateText,
+  BackLink,
 } from "./AdminOrdersPage.styles";
 
 const AdminOrdersPage = () => {
@@ -36,6 +38,9 @@ const AdminOrdersPage = () => {
   return (
     <PageWrapper>
       <div className="container">
+        <BackLink onClick={() => navigate(-1)}>
+          <ArrowLeft size={14} /> Back
+        </BackLink>
         <PageHeader>
           <PageTitle>Orders</PageTitle>
         </PageHeader>

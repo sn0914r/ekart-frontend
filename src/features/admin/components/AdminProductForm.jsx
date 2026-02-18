@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Button from "../../../shared/components/Button";
 import AdminQuery from "../admin.query";
 import { productSchema, productSchemaWithImage } from "../admin.schema";
+import { X } from "lucide-react";
 import {
   FormContainer,
   FormTitle,
@@ -21,6 +22,7 @@ import {
   ButtonGroup,
   CancelButton,
   ErrorText,
+  CloseButton,
 } from "./AdminProductForm.styles";
 import { toast } from "sonner";
 
@@ -104,6 +106,9 @@ const AdminProductForm = ({ product, onClose, onSuccess, refetchProducts }) => {
 
   return (
     <FormContainer>
+      <CloseButton onClick={onClose} type="button">
+        <X size={20} />
+      </CloseButton>
       <FormTitle>{isEditMode ? "Edit Product" : "Add New Product"}</FormTitle>
 
       <form onSubmit={handleSubmit(onSubmit)}>

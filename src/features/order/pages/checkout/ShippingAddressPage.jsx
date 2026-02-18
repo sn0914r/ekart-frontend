@@ -1,13 +1,20 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { User, Phone, MapPin, Building, Map as MapIcon } from "lucide-react";
+import {
+  User,
+  Phone,
+  MapPin,
+  Building,
+  Map as MapIcon,
+  ArrowLeft,
+} from "lucide-react";
 
 import AuthInput from "../../../../shared/components/Field";
 import Button from "../../../../shared/components/Button";
 
 import { shippingAddressSchema } from "../../order.schema";
 
-import { FormTitle, FormCard } from "./ShippingAddressPage.styles";
+import { FormTitle, FormCard, BackLink } from "./ShippingAddressPage.styles";
 import { useAddress } from "./useAddress";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -31,6 +38,9 @@ const ShippingAddressPage = () => {
 
   return (
     <FormCard>
+      <BackLink onClick={() => navigate(-1)}>
+        <ArrowLeft size={14} /> Back
+      </BackLink>
       <FormTitle>Add Shipping Address</FormTitle>
       <form
         onSubmit={handleSubmit(onSubmit)}

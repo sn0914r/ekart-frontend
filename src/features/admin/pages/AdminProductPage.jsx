@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 import Error from "../../../shared/components/Error";
 import Loader from "../../../shared/components/Loader";
 import ConfirmModal from "../../../shared/components/ConfirmModal";
@@ -11,11 +13,13 @@ import {
   AddButton,
   EmptyState,
   EmptyStateText,
+  BackLink,
 } from "./AdminProductPage.styles";
 
 import AdminProductForm from "../components/AdminProductForm";
 
 const AdminProductPage = () => {
+  const navigate = useNavigate();
   const {
     data: products,
     error,
@@ -81,6 +85,9 @@ const AdminProductPage = () => {
   return (
     <PageWrapper>
       <div className="container">
+        <BackLink onClick={() => navigate(-1)}>
+          <ArrowLeft size={14} /> Back
+        </BackLink>
         <PageHeader>
           <PageTitle>Products</PageTitle>
           <AddButton onClick={handleAddProduct}>+ Add Product</AddButton>

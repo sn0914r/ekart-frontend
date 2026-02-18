@@ -5,6 +5,7 @@ export const FormContainer = styled.div`
   padding: 2rem;
   max-width: 600px;
   width: 100%;
+  position: relative;
 `;
 
 export const FormTitle = styled.h2`
@@ -147,4 +148,20 @@ export const ErrorText = styled.span`
   color: #ff4d4d;
   display: block;
   margin-top: 0.5rem;
+`;
+
+export const CloseButton = styled.button`
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  cursor: pointer;
+  color: var(--text-secondary, #666666);
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #000000;
+  }
 `;

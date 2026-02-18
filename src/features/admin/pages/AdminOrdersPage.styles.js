@@ -44,3 +44,22 @@ export const EmptyStateText = styled.p`
   color: var(--text-secondary);
   margin: 0;
 `;
+
+export const BackLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary, #666666);
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  margin-bottom: 1.5rem;
+
+  &:hover {
+    color: #000000;
+  }
+`;
