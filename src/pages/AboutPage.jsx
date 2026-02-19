@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import Button from "../shared/components/Button";
@@ -11,48 +10,12 @@ import {
   Description,
   FeatureList,
   FeatureItem,
-  TechStack,
-  TechCategory,
-  TechTitle,
-  TechList,
-  TechItem,
   LinkSection,
-  DropdownButton,
-  CollapsibleContent,
   BackLink,
 } from "./AboutPage.styles";
 
 const AboutPage = () => {
   const navigate = useNavigate();
-  const [showFrontendDeps, setShowFrontendDeps] = useState(false);
-  const [showBackendDeps, setShowBackendDeps] = useState(false);
-
-  const frontendDependencies = [
-    "@emotion/react",
-    "@emotion/styled",
-    "firebase",
-    "react-query",
-    "react-hook-form",
-    "zod",
-    "sonner",
-    "lucide-react",
-    "razorpay",
-  ];
-
-  const backendDependencies = [
-    "joi",
-    "express",
-    "cors",
-    "helmet",
-    "express-rate-limit",
-    "cloudinary",
-    "mongoose",
-    "firebase-admin",
-    "razorpay",
-    "multer",
-    "dotenv",
-    "nodemailer",
-  ];
 
   return (
     <PageWrapper>
@@ -64,91 +27,41 @@ const AboutPage = () => {
 
         <Section>
           <Description>
-            This is a full-stack e-commerce application built to demonstrate a
-            complete order workflow including authentication, cart management,
-            checkout, payment integration and admin product management.
+            A full-stack single-vendor e-commerce application with secure
+            authentication, payment integration, and order lifecycle management.
           </Description>
         </Section>
 
         <Section>
-          <SectionTitle>Features</SectionTitle>
+          <SectionTitle>Highlights</SectionTitle>
           <FeatureList>
-            <FeatureItem>User authentication and authorization</FeatureItem>
-            <FeatureItem>Product management</FeatureItem>
-            <FeatureItem>Cart and Checkout</FeatureItem>
-            <FeatureItem>Razorpay payment integration</FeatureItem>
-            <FeatureItem>Order History</FeatureItem>
             <FeatureItem>
-              Admin Panel for product and order management
+              Built backend using Node.js, Express, and MongoDB with REST API
+              architecture
+            </FeatureItem>
+            <FeatureItem>
+              Implemented authentication, role-based access control, and
+              backend-only pricing logic
+            </FeatureItem>
+            <FeatureItem>
+              Integrated Razorpay payments with signature verification and
+              idempotency handling
+            </FeatureItem>
+            <FeatureItem>
+              Designed order lifecycle management with stock handling and status
+              validation
+            </FeatureItem>
+            <FeatureItem>
+              Developed a React frontend and deployed live on Cloudflare Pages
             </FeatureItem>
           </FeatureList>
         </Section>
 
         <Section>
           <SectionTitle>Tech Stack</SectionTitle>
-          <TechStack>
-            <TechCategory>
-              <TechTitle>Frontend</TechTitle>
-              <Description style={{ marginBottom: "0.5rem" }}>
-                React, Bootstrap, React Router
-              </Description>
-              <DropdownButton
-                onClick={() => setShowFrontendDeps(!showFrontendDeps)}
-              >
-                {showFrontendDeps ? "Hide" : "Show all dependencies"}
-              </DropdownButton>
-              {showFrontendDeps && (
-                <CollapsibleContent>
-                  <TechList>
-                    {frontendDependencies.map((dep) => (
-                      <TechItem key={dep}>{dep}</TechItem>
-                    ))}
-                  </TechList>
-                </CollapsibleContent>
-              )}
-            </TechCategory>
-
-            <TechCategory>
-              <TechTitle>Backend</TechTitle>
-              <Description style={{ marginBottom: "0.5rem" }}>
-                Node.js, Express, MongoDB (Mongoose)
-              </Description>
-              <DropdownButton
-                onClick={() => setShowBackendDeps(!showBackendDeps)}
-              >
-                {showBackendDeps ? "Hide" : "Show all dependencies"}
-              </DropdownButton>
-              {showBackendDeps && (
-                <CollapsibleContent>
-                  <TechList>
-                    {backendDependencies.map((dep) => (
-                      <TechItem key={dep}>{dep}</TechItem>
-                    ))}
-                  </TechList>
-                </CollapsibleContent>
-              )}
-            </TechCategory>
-          </TechStack>
-
-          <FeatureList>
-            <FeatureItem>
-              <strong>Payment Integration:</strong> Razorpay
-            </FeatureItem>
-            <FeatureItem>
-              <strong>Authentication:</strong> Firebase Authentication
-            </FeatureItem>
-            <FeatureItem>
-              <strong>Authorization:</strong> Role-based access control
-            </FeatureItem>
-          </FeatureList>
-        </Section>
-
-        <Section>
-          <SectionTitle>About This Project</SectionTitle>
           <Description>
-            I mainly built this project to learn about the complete order
-            workflow, backend + frontend integration, payment integration,
-            real-world architecture and best practices.
+            Node.js, Express.js, MongoDB, React, Firebase Auth, Razorpay,
+            Cloudinary
           </Description>
         </Section>
 
