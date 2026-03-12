@@ -2,17 +2,17 @@ import styled from "@emotion/styled";
 
 export const OrderCard = styled.div`
   display: block;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--color-subtle-border);
   border-radius: 8px;
   padding: 1.5rem;
-  background: #fff;
+  background: var(--bg-primary);
   transition: all 0.2s ease;
   text-decoration: none;
   color: inherit;
 
   &:hover {
-    border-color: #000;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-color: var(--color-black);
+    box-shadow: 0 4px 12px var(--color-shadow-soft);
     transform: translateY(-2px);
   }
 `;
@@ -25,7 +25,7 @@ export const OrderHeader = styled.div`
   flex-wrap: wrap;
   margin-bottom: 1rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--color-divider);
 `;
 
 export const OrderId = styled.div`
@@ -72,7 +72,7 @@ export const OrderFooter = styled.div`
   justify-content: space-between;
   align-items: center;
   padding-top: 1rem;
-  border-top: 1px solid #f0f0f0;
+  border-top: 1px solid var(--color-divider);
 `;
 
 export const TotalLabel = styled.span`

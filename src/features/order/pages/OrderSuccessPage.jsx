@@ -18,16 +18,15 @@ import {
 const OrderSuccessPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const orderDetails = location.state?.orderDetails;
+  const { orderId, razorpayPaymentId } = location.state || {};
 
   useEffect(() => {
-    if (!orderDetails) {
+    if (!orderId || !razorpayPaymentId) {
       navigate("/cart", { replace: true });
     }
-  }, [orderDetails, navigate]);
+  }, [orderId, razorpayPaymentId, navigate]);
 
-  // Don't render anything if redirecting
-  if (!orderDetails) {
+  if (!orderId || !razorpayPaymentId) {
     return null;
   }
 
@@ -62,11 +61,13 @@ const OrderSuccessPage = () => {
               <OrderDetails>
                 <DetailRow>
                   <DetailLabel>Order ID</DetailLabel>
-                  <DetailValue>{orderDetails.orderId || "N/A"}</DetailValue>
+                  <DetailValue>{orderId}</DetailValue>
                 </DetailRow>
                 <DetailRow>
                   <DetailLabel>Payment ID</DetailLabel>
-                  <DetailValue>{orderDetails.razorpayPaymentId || "N/A"}</DetailValue>
+                  <DetailValue>
+                    {razorpayPaymentId}
+                  </DetailValue>
                 </DetailRow>
               </OrderDetails>
 
@@ -78,8 +79,8 @@ const OrderSuccessPage = () => {
                   <Button
                     style={{
                       width: "100%",
-                      background: "#f5f5f5",
-                      color: "#000",
+                      background: "var(--color-subtle-bg)",
+                      color: "var(--color-black)",
                     }}
                   >
                     Continue Shopping

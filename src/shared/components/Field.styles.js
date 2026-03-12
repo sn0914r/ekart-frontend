@@ -25,7 +25,8 @@ export const InputWrapper = styled.div`
 export const InputIcon = styled.div`
   position: absolute;
   left: 0;
-  color: ${(props) => (props.hasError ? "#ff4d4d" : "#cccccc")};
+  color: ${(props) =>
+    props.hasError ? "var(--color-error)" : "var(--color-muted)"};
   transition: color 0.3s ease;
   display: flex;
   align-items: center;
@@ -35,7 +36,8 @@ export const StyledInput = styled.input`
   width: 100%;
   border: none;
   border-bottom: 1px solid
-    ${(props) => (props.hasError ? "#ff4d4d" : "#eeeeee")};
+    ${(props) =>
+      props.hasError ? "var(--color-error)" : "var(--color-border-light)"};
   padding: 0.75rem 0 0.75rem 2.5rem;
   font-family: var(--font-sans);
   font-size: 1rem;
@@ -45,11 +47,11 @@ export const StyledInput = styled.input`
   color: var(--text-primary);
 
   &:focus {
-    border-bottom-color: #000000;
+    border-bottom-color: var(--color-black);
   }
 
   &::placeholder {
-    color: #cccccc;
+    color: var(--color-muted);
   }
 
   /* Remove autocomplete background color issues */
@@ -65,7 +67,7 @@ export const StyledInput = styled.input`
 
 export const ErrorMessage = styled.div`
   font-size: 0.75rem;
-  color: #ff4d4d;
+  color: var(--color-error);
   display: flex;
   align-items: center;
   gap: 0.5rem;

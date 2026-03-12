@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import Button from "../shared/components/Button";
+import Button from "../../shared/components/Button";
 import {
   PageWrapper,
   ContentContainer,

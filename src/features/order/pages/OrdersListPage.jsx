@@ -7,6 +7,7 @@ import { PageWrapper, PageTitle, EmptyState } from "./OrdersListPage.styles";
 
 const OrdersPage = () => {
   const { data, isLoading, error, isError } = OrdersQuery.useGetOrders();
+  const orders = data?.data;
 
   if (isLoading) {
     return (
@@ -30,7 +31,7 @@ const OrdersPage = () => {
     );
   }
 
-  if (!data || data.length === 0) {
+  if (!orders || orders.length === 0) {
     return (
       <PageWrapper>
         <div className="container">
@@ -57,8 +58,8 @@ const OrdersPage = () => {
         </div>
         <PageTitle>My Orders</PageTitle>
         <div className="row g-4">
-          {data.map((order) => (
-            <div className="col-12 col-md-6 col-lg-4" key={order.orderId}>
+          {orders.map((order) => (
+            <div className="col-12 col-md-6 col-lg-4" key={order._id}>
               <OrderListItem
                 orderId={order._id}
                 createdAt={order.createdAt}

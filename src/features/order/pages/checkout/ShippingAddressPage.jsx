@@ -1,5 +1,3 @@
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import {
   User,
   Phone,
@@ -11,30 +9,13 @@ import {
 
 import AuthInput from "../../../../shared/components/Field";
 import Button from "../../../../shared/components/Button";
-
-import { shippingAddressSchema } from "../../order.schema";
-
 import { FormTitle, FormCard, BackLink } from "./ShippingAddressPage.styles";
-import { useAddress } from "./useAddress";
+import { useShippingAddressForm } from "../../useShippingAddressForm";
 import { useNavigate } from "react-router-dom";
-import { toast } from "sonner";
 
 const ShippingAddressPage = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: zodResolver(shippingAddressSchema),
-  });
-  const { setAddress } = useAddress();
   const navigate = useNavigate();
-
-  const onSubmit = (data) => {
-    setAddress(data);
-    toast.success("Address saved successfully!");
-    navigate("/orders/checkout");
-  };
+  const { register, errors, onSubmit } = useShippingAddressForm();
 
   return (
     <FormCard>
@@ -42,10 +23,7 @@ const ShippingAddressPage = () => {
         <ArrowLeft size={14} /> Back
       </BackLink>
       <FormTitle>Add Shipping Address</FormTitle>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="d-flex flex-column gap-3"
-      >
+      <form onSubmit={onSubmit} className="d-flex flex-column gap-3">
         <AuthInput
           label="Full Name"
           placeholder="Enter recipient's name"

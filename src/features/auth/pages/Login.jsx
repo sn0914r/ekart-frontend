@@ -1,13 +1,7 @@
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { loginUserSchema } from "../auth.schema";
+import { useLoginForm } from "../useAuthForm";
 
-import AuthQuery from "../auth.query";
-
-import AuthInput from "../../shared/components/Field"
-import AuthButton from "../../shared/components/Button";
-
-import { useNavigate } from "react-router-dom";
+import AuthInput from "../../../shared/components/Field";
+import AuthButton from "../../../shared/components/Button";
 
 import {
   Header,
@@ -21,25 +15,7 @@ import {
 import { ArrowLeft, Mail, Lock } from "lucide-react";
 
 const Login = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm({
-    resolver: zodResolver(loginUserSchema),
-  });
-
-  const navigate = useNavigate();
-
-  const loginMutation = AuthQuery.useLogin();
-
-  const onSubmit = async (data) => {
-    await loginMutation.mutateAsync({
-      email: data.email,
-      password: data.password,
-    });
-    navigate("/");
-  };
+  const { register, errors, isSubmitting, onSubmit } = useLoginForm();
 
   return (
     <>
@@ -48,7 +24,7 @@ const Login = () => {
         <Subtitle>Access your selections and history.</Subtitle>
       </Header>
 
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form onSubmit={onSubmit}>
         <AuthInput
           label="Email Address"
           placeholder="Enter your email"
@@ -59,6 +35,7 @@ const Login = () => {
 
         <AuthInput
           label="Password"
+          type="password"
           placeholder="Enter your password"
           icon={Lock}
           error={errors.password}
@@ -66,7 +43,9 @@ const Login = () => {
         />
 
         {errors.root && (
-          <div className="text-danger text-sm mt-2">{errors.root.message}</div>
+          <div style={{ color: "var(--color-error)", fontSize: "0.85rem" }}>
+            {errors.root.message}
+          </div>
         )}
 
         <AuthButton type="submit" disabled={isSubmitting}>

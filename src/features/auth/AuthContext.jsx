@@ -1,12 +1,12 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { createContext, useContext, useState, useEffect } from "react";
-import { auth } from "../configs/firebase.config";
+import { auth } from "../../configs/firebase.config";
 
 const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(AuthContext);
-  const [role, setrole] = useState("");
+  const [user, setUser] = useState(null);
+  const [role, setRole] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -15,14 +15,16 @@ const AuthProvider = ({ children }) => {
 
       if (currentUser) {
         const idToken = await currentUser.getIdTokenResult();
-        setrole(idToken.claims?.role || "");
+        setRole(idToken.claims?.role || "");
+      } else {
+        setRole("");
       }
 
       setLoading(false);
     });
 
     return () => unsub();
-  });
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, role, loading }}>

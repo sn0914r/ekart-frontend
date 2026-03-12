@@ -5,9 +5,9 @@ import App from "./app/App";
 import { BrowserRouter } from "react-router-dom";
 
 import { QueryClientProvider } from "@tanstack/react-query";
-import { queryClient } from "./lib/reactQuery";
+import { queryClient } from "./configs/reactQuery";
 import { CartProvider } from "./features/cart/CartContext";
-import { AuthProvider } from "./auth/AuthContext";
+import { AuthProvider } from "./features/auth/AuthContext";
 
 import { Toaster } from "sonner";
 

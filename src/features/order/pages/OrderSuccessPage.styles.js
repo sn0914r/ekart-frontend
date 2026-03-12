@@ -42,7 +42,7 @@ export const SuccessWrapper = styled.div`
   align-items: center;
   justify-content: center;
   padding: 2rem 0;
-  background-color: #ffffff;
+  background-color: var(--bg-primary);
 
   @media (min-width: 768px) {
     padding: 4rem 0;
@@ -56,7 +56,7 @@ export const SuccessCard = styled.div`
   text-align: center;
   padding: 2rem 1.5rem;
   border-radius: 8px;
-  background: #fff;
+  background: var(--bg-primary);
   animation: ${fadeInUp} 0.6s ease-out;
 
   @media (min-width: 768px) {
@@ -70,11 +70,11 @@ export const IconWrapper = styled.div`
   height: 80px;
   margin: 0 auto 2rem;
   border-radius: 50%;
-  background-color: #d1fae5;
+  background-color: var(--color-success-bg);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #065f46;
+  color: var(--color-success-text);
   animation:
     ${scaleIn} 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) both,
     ${bounce} 2s ease-in-out 0.6s infinite;
@@ -101,7 +101,7 @@ export const SuccessMessage = styled.p`
 `;
 
 export const OrderDetails = styled.div`
-  background-color: #f9f9f9;
+  background-color: var(--color-subtle-bg);
   padding: 1rem;
   border-radius: 4px;
   margin-bottom: 2rem;
@@ -118,7 +118,7 @@ export const DetailRow = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0.75rem 0;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--color-subtle-border);
 
   &:last-child {
     border-bottom: none;

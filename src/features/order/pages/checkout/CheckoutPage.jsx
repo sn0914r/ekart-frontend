@@ -1,80 +1,21 @@
-import { useCartContext } from "../../../cart/CartContext";
-import { useAddress } from "./useAddress";
-import { useState } from "react";
+import { useCheckoutFlow } from "../../useCheckoutFlow";
 import AddressCard from "./components/AddressCard";
 import Button from "../../../../shared/components/Button";
 import { PageWrapper, SectionTitle, BackLink } from "./CheckoutPage.styles";
 import { ArrowLeft } from "lucide-react";
 import OrderSummaryCard from "./components/OrderSummaryCard";
 import { useNavigate } from "react-router-dom";
-import OrderQuery from "../../order.query";
-import PaymentQuery from "./payment/payments.query";
-import initCheckout from "./payment/razorpay";
-import { toast } from "sonner";
 
 const CheckoutPage = () => {
-  const { getAddresses } = useAddress();
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [selectedAddress, setSelectedAddress] = useState(null);
-
-  const { getCartList, clearCart } = useCartContext();
-
   const navigate = useNavigate();
-  const navigateToAddressForm = () => navigate("/orders/new-address");
-
-  const addresses = getAddresses();
-
-  const PostOrderMutation = OrderQuery.usePostOrder();
-  const createPaymentMutation = PaymentQuery.useCreatePayment();
-  const verifyPaymentMutation = PaymentQuery.useVerifyPayment();
-
-  const handlePayment = async () => {
-    if (!selectedAddress) return;
-
-    setIsProcessing(true);
-    const items = getCartList();
-    const { id, ...address } = selectedAddress;
-
-    try {
-      const { orderId } = await PostOrderMutation.mutateAsync({
-        items,
-        shippingAddress: address,
-      });
-
-      const { razorpayOrderId, amount } =
-        await createPaymentMutation.mutateAsync({
-          orderId,
-        });
-
-      initCheckout({
-        amount,
-        razorpayOrderId,
-        handler: async (response) => {
-          const {
-            razorpay_payment_id: razorpayPaymentId,
-            razorpay_order_id: razorpayOrderId,
-            razorpay_signature: razorpaySignature,
-          } = response;
-          const paymentDetais = await verifyPaymentMutation.mutateAsync({
-            razorpayPaymentId,
-            razorpaySignature,
-            razorpayOrderId,
-          });
-
-          clearCart();
-          navigate("/orders/success", {
-            state: {
-              orderDetails: paymentDetais,
-            },
-          });
-        },
-      });
-    } catch (error) {
-      toast.error(error.message);
-    }
-
-    setIsProcessing(false);
-  };
+  const {
+    addresses,
+    selectedAddress,
+    setSelectedAddress,
+    isProcessing,
+    handlePayment,
+    navigateToAddressForm,
+  } = useCheckoutFlow();
 
   return (
     <PageWrapper>

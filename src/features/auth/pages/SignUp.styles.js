@@ -30,7 +30,9 @@ export const Form = styled.form`
 
 export const BottomLinks = styled.div`
   display: flex;
-  justify-content: space-between;
+  gap: 1rem;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   margin-top: 3rem;
   width: 100%;
@@ -49,6 +51,6 @@ export const StyledLink = styled(Link)`
   transition: color 0.3s ease;
 
   &:hover {
-    color: #000000;
+    color: var(--color-black);
   }
 `;

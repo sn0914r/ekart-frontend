@@ -1,6 +1,6 @@
 export const PRICE_CONSTRAINTS = {
   MIN: 0,
-  MAX: 10000,
+  MAX: 3000,
   STEP: 100,
 };
 

@@ -21,18 +21,17 @@ import AdminProductForm from "../components/AdminProductForm";
 const AdminProductPage = () => {
   const navigate = useNavigate();
   const {
-    data: products,
+    data,
     error,
     isLoading,
     isError,
     refetch: refetchProducts,
   } = AdminQuery.useGetAllProductsAdmin();
+  const products = data?.data;
 
-  // Form state management
   const [showForm, setShowForm] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  // Confirm modal state
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [productToDelete, setProductToDelete] = useState(null);
 

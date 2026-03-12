@@ -9,6 +9,36 @@
   --color-border: #000000;
   --color-black: #000000;
 
+  /* Extended Palette */
+  --color-error: #ff4d4d;
+  --color-muted: #cccccc;
+  --color-border-light: #eeeeee;
+  --color-black-hover: #222222;
+  --color-overlay: rgba(0, 0, 0, 0.1);
+  --bg-white: #ffffff;
+  --color-success-bg: #d1fae5;
+  --color-success-text: #065f46;
+  --color-success-border: #a7f3d0;
+  --color-subtle-bg: #f9f9f9;
+  --color-subtle-border: #e0e0e0;
+  --color-divider: #f0f0f0;
+  --color-shadow-soft: rgba(0, 0, 0, 0.05);
+
+  /* Navigation & Overlays */
+  --color-navbar-bg: rgba(255, 255, 255, 0.95);
+  --color-white-overlay: rgba(255, 255, 255, 0.8);
+  --color-dark-overlay-light: rgba(0, 0, 0, 0.2);
+  --color-dark-overlay-heavy: rgba(0, 0, 0, 0.4);
+
+  /* Input States */
+  --color-input-focus-bg: rgba(0, 0, 0, 0.02);
+  --color-input-placeholder: rgba(0, 0, 0, 0.3);
+
+  /* Dark Mode Components */
+  --bg-dark: #000000;
+  --bg-dark-hover: #1a1a1a;
+  --text-on-dark: #ffffff;
+
   /* Refined Lines */
   --border-fine: 1px solid var(--color-black);
   --border-dark: 2px solid var(--color-black);

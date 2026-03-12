@@ -21,11 +21,13 @@ const Products = () => {
   });
 
   const {
-    data: products,
+    data: response,
     isLoading,
     refetch,
     error,
   } = productQuery.useGetProducts(filters || {});
+
+  const products = response?.data ? response.data : null;
 
   let searchQueries = params.get("search") || "";
 
@@ -42,10 +44,6 @@ const Products = () => {
       search: searchQueries,
     }));
   }, [searchQueries]);
-
-  useEffect(() => {
-    refetch();
-  }, [filters, refetch]);
 
   if (error) {
     return <Error message={error.message} onRetry={refetch} />;

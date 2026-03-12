@@ -15,10 +15,10 @@ import {
   SidebarLink,
 } from "./Navbar.styles";
 
-import useUpdateSearchParams from "../useUpdateSeachParams";
+import useUpdateSearchParams from "../../../shared/hooks/useUpdateSearchParams";
 
 import { Search, ShoppingBag, User, X, Menu as MenuIcon } from "lucide-react";
-import { useAuthContext } from "../../../auth/AuthContext";
+import { useAuthContext } from "../../auth/AuthContext";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -162,7 +162,9 @@ const Navbar = () => {
                 style={{
                   background: "none",
                   border: "none",
-                  color: isScrolled ? "var(--text-primary)" : "#ffffff",
+                  color: isScrolled
+                    ? "var(--text-primary)"
+                    : "var(--text-on-dark)",
                   mixBlendMode: isScrolled ? "normal" : "difference",
                   padding: 0,
                 }}
@@ -174,7 +176,9 @@ const Navbar = () => {
                 style={{
                   background: "none",
                   border: "none",
-                  color: isScrolled ? "var(--text-primary)" : "#ffffff",
+                  color: isScrolled
+                    ? "var(--text-primary)"
+                    : "var(--text-on-dark)",
                   mixBlendMode: isScrolled ? "normal" : "difference",
                   padding: 0,
                 }}

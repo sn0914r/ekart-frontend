@@ -14,12 +14,8 @@ import {
 } from "./AdminOrdersPage.styles";
 
 const AdminOrdersPage = () => {
-  const {
-    data: orders,
-    isLoading,
-    error,
-    isError,
-  } = AdminQuery.useGetAllOrdersAdmin();
+  const { data, isLoading, error, isError } = AdminQuery.useGetAllOrdersAdmin();
+  const orders = data?.data;
 
   const navigate = useNavigate();
 

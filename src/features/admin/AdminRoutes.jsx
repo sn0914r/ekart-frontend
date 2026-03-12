@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
-import AdminProductPage from "../features/admin/pages/AdminProductPage";
-import AdminOrdersPage from "../features/admin/pages/AdminOrdersPage";
-import AdminOrderDetailsPage from "../features/admin/pages/AdminOrderDetailsPage";
-import AdminDashboardPage from "../features/admin/pages/AdminDashboardPage";
+import AdminProductPage from "./pages/AdminProductPage";
+import AdminOrdersPage from "./pages/AdminOrdersPage";
+import AdminOrderDetailsPage from "./pages/AdminOrderDetailsPage";
+import AdminDashboardPage from "./pages/AdminDashboardPage";
 
 const AdminRoutes = () => {
   return (

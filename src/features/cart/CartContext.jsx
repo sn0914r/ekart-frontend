@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect, useContext } from "react";
 import useCart from "./useCart";
+import { toast } from "sonner";
 
 const CartContext = createContext(null);
 
@@ -26,12 +27,14 @@ const CartProvider = ({ children }) => {
           return item;
         });
       }
+      toast.success("Item added to cart");
       return [...prev, { ...product, quantity: qty }];
     });
   };
 
   const removeFromCart = (id) => {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
+    toast.info("Item removed from cart");
   };
 
   const decreaseQty = (id) => {
@@ -103,7 +106,7 @@ const CartProvider = ({ children }) => {
         totalCartItems,
         checkItem,
         getCartList,
-        clearCart
+        clearCart,
       }}
     >
       {children}

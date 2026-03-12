@@ -1,6 +1,6 @@
 import { ArrowLeft, ArrowRight, LogOut, ShoppingBag, User } from "lucide-react";
-import { useAuthContext } from "../auth/AuthContext";
-import AuthQuery from "../auth/auth.query";
+import { useAuthContext } from "../../features/auth/AuthContext";
+import AuthQuery from "../../features/auth/auth.query";
 import {
   ActionList,
   AvatarCircle,
@@ -17,7 +17,7 @@ import {
 const Profile = () => {
   const { user, role } = useAuthContext();
 
-  const logoutMutation = AuthQuery.useLogout();
+  const logoutMutation = AuthQuery.useLogoutMutation();
 
   const handleLogout = () => {
     logoutMutation.mutate();

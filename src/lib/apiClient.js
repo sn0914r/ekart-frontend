@@ -1,6 +1,7 @@
 import { auth } from "../configs/firebase.config";
 
 const BASE_URL = "https://ekart-backend-9y0c.onrender.com";
+// const BASE_URL = "http://localhost:3000";
 
 /**
  * @desc function to make api calls
@@ -40,9 +41,17 @@ const apiClient = async (endPoint, options = {}, requireToken = true) => {
   const data = await response.json().catch(() => null);
 
   if (!response.ok) {
-    throw new Error(data?.message || "Something went wrong");
+    const normalizedError = {
+      message: data?.message || "Something went wrong",
+      code: data?.errorCode || "UNKNOWN_ERROR",
+      validationErrors: data?.errors || null,
+      status: response.status,
+    };
+    
+    const err = new Error(normalizedError.message);
+    Object.assign(err, normalizedError);
+    throw err;
   }
-
   return data;
 };
 

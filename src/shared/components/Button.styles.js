@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 
 export const StyledButton = styled.button`
-  background-color: #000000;
-  color: #ffffff;
+  background-color: var(--color-black);
+  color: var(--bg-white);
   border: none;
   padding: 1.25rem;
   width: 100%;
@@ -18,12 +18,12 @@ export const StyledButton = styled.button`
   justify-content: center;
 
   &:hover {
-    background-color: #222222;
+    background-color: var(--color-black-hover);
     transform: translateY(-2px);
   }
 
   &:disabled {
-    background-color: #cccccc;
+    background-color: var(--color-muted);
     cursor: not-allowed;
     transform: none;
   }

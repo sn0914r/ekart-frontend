@@ -1,11 +1,7 @@
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { signUpUserSchema } from "../auth.schema";
+import { useSignUpForm } from "../useAuthForm";
 
-import { useNavigate } from "react-router-dom";
-
-import AuthInput from "../../shared/components/Field";
-import AuthButton from "../../shared/components/Button";
+import AuthInput from "../../../shared/components/Field";
+import AuthButton from "../../../shared/components/Button";
 
 import {
   Header,
@@ -16,31 +12,10 @@ import {
   StyledLink,
 } from "./SignUp.styles";
 
-import AuthQuery from "../auth.query";
-
 import { User, Mail, Lock, LockKeyhole, ArrowLeft } from "lucide-react";
 
 const SignUp = () => {
-  const navigate = useNavigate();
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm({
-    resolver: zodResolver(signUpUserSchema),
-  });
-
-  const signUpMutation = AuthQuery.useSignUp();
-
-  const onSubmit = async (data) => {
-    await signUpMutation.mutateAsync({
-      name: data.name,
-      email: data.email,
-      password: data.password,
-    });
-    navigate("/");
-  };
+  const { register, errors, isSubmitting, onSubmit } = useSignUpForm();
 
   return (
     <>
@@ -49,7 +24,7 @@ const SignUp = () => {
         <Subtitle>Create an account to unlock exclusive benefits.</Subtitle>
       </Header>
 
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form onSubmit={onSubmit}>
         <AuthInput
           label="Full Name"
           placeholder="Enter your name"
@@ -85,7 +60,9 @@ const SignUp = () => {
         />
 
         {errors.root && (
-          <div className="text-danger text-sm mt-2">{errors.root.message}</div>
+          <div style={{ color: "var(--color-error)", fontSize: "0.85rem" }}>
+            {errors.root.message}
+          </div>
         )}
 
         <AuthButton type="submit" disabled={isSubmitting}>

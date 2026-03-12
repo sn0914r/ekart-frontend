@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const Summary = styled.div`
-  background-color: #fcfcfc;
+  background-color: var(--color-subtle-bg);
   padding: 3rem;
   height: fit-content;
   position: sticky;
@@ -21,7 +21,7 @@ export const SummaryTitle = styled.h2`
   font-weight: 700;
   margin-bottom: 2.5rem;
   padding-bottom: 1rem;
-  border-bottom: 2px solid #000;
+  border-bottom: 2px solid var(--color-black);
 `;
 
 export const SummaryRow = styled.div`
@@ -32,15 +32,16 @@ export const SummaryRow = styled.div`
   color: ${(props) =>
     props.bold ? "var(--text-primary)" : "var(--text-secondary)"};
   font-weight: ${(props) => (props.bold ? "700" : "400")};
-  border-top: ${(props) => (props.total ? "1px solid #eeeeee" : "none")};
+  border-top: ${(props) =>
+    props.total ? "1px solid var(--color-border-light)" : "none"};
   padding-top: ${(props) => (props.total ? "1.5rem" : "0")};
   margin-top: ${(props) => (props.total ? "1.5rem" : "0")};
 `;
 
 export const CheckoutBtn = styled.button`
   width: 100%;
-  background-color: #000;
-  color: #fff;
+  background-color: var(--color-black);
+  color: var(--bg-white);
   border: none;
   padding: 1.2rem;
   font-size: 0.75rem;
@@ -56,7 +57,7 @@ export const CheckoutBtn = styled.button`
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: #222;
+    background-color: var(--color-black-hover);
     transform: translateY(-2px);
   }
 `;

@@ -3,8 +3,8 @@ import styled from "@emotion/styled";
 export const ItemWrapper = styled.div`
   display: flex;
   padding: 1.5rem 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  background: white;
+  border-bottom: 1px solid var(--color-overlay);
+  background: var(--bg-primary);
   gap: 1.5rem;
 
   &:last-child {
@@ -20,7 +20,7 @@ export const ItemImage = styled.div`
   width: 100px;
   height: 120px;
   flex-shrink: 0;
-  background-color: #f5f5f5;
+  background-color: var(--color-subtle-bg);
 
   img {
     width: 100%;
@@ -78,7 +78,7 @@ export const Controls = styled.div`
 export const QtyBox = styled.div`
   display: flex;
   align-items: center;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--color-overlay);
 `;
 
 export const QtyBtn = styled.button`
@@ -94,7 +94,7 @@ export const QtyBtn = styled.button`
   transition: background 0.2s;
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: var(--color-shadow-soft);
   }
 `;
 
@@ -108,12 +108,12 @@ export const QtyValue = styled.span`
 export const RemoveBtn = styled.button`
   background: none;
   border: none;
-  color: #999;
+  color: var(--color-muted);
   cursor: pointer;
   transition: color 0.2s;
   padding: 0.5rem;
 
   &:hover {
-    color: #ff4d4d;
+    color: var(--color-error);
   }
 `;

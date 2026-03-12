@@ -16,5 +16,6 @@ export const Subtitle = styled.p`
   letter-spacing: 0.3em;
   font-weight: 600;
   margin-bottom: 2rem;
-  color: ${(props) => (props.isWhite ? "#ffffff" : "var(--text-primary)")};
+  color: ${(props) =>
+    props.isWhite ? "var(--text-on-dark)" : "var(--text-primary)"};
 `;

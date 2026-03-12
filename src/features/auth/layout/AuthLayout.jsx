@@ -1,4 +1,5 @@
-import Image from "../../assets/auth-layout.png";
+import Image from "../../../assets/auth-layout.png";
+
 import {
   FullHeightContainer,
   RowWrapper,

@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 export const PageWrapper = styled.div`
   padding: 4rem 0;
   min-height: 80vh;
-  background-color: #ffffff;
+  background-color: var(--bg-primary);
 `;
 
 export const PageTitle = styled.h1`
@@ -36,7 +36,7 @@ export const EmptyState = styled.div`
   }
 
   a {
-    color: #000000;
+    color: var(--color-black);
     text-decoration: underline;
     text-transform: uppercase;
     font-size: 0.8rem;

@@ -27,7 +27,7 @@ export const Hero = styled.section`
     background: radial-gradient(
       circle at center,
       transparent 0%,
-      rgba(0, 0, 0, 0.4) 100%
+      var(--color-dark-overlay-heavy) 100%
     );
     pointer-events: none;
   }
