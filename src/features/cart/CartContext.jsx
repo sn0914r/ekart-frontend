@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect, useContext } from "react";
 import useCart from "./useCart";
+import CartHooks from "./cart.hooks";
 import { toast } from "sonner";
 
 const CartContext = createContext(null);
@@ -7,10 +8,31 @@ const CartContext = createContext(null);
 const CartProvider = ({ children }) => {
   const { getCart, setCart } = useCart();
   const [cartItems, setCartItems] = useState(getCart());
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  const { data: serverCart, isSuccess } = CartHooks.useGetCart();
+  const { mutate: updateCart } = CartHooks.useUpdateCart();
+
+  useEffect(() => {
+    if (isSuccess && !isInitialized && serverCart) {
+      const items = Array.isArray(serverCart) ? serverCart : (serverCart.items || []);
+      if (items.length > 0) {
+        setCartItems(items);
+      }
+      setIsInitialized(true);
+    }
+  }, [serverCart, isSuccess, isInitialized]);
 
   useEffect(() => {
     setCart(cartItems);
-  }, [cartItems]);
+    if (isInitialized) {
+      const formattedItems = cartItems.map((item) => ({
+        productId: item.id,
+        quantity: item.quantity,
+      }));
+      updateCart({ items: formattedItems });
+    }
+  }, [cartItems, isInitialized, setCart, updateCart]);
 
   /**
    * takes product and adds it to the cart
@@ -84,7 +106,7 @@ const CartProvider = ({ children }) => {
   const getCartList = () => {
     return cartItems.map((item) => {
       return {
-        id: item.id,
+        productId: item.id,
         quantity: item.quantity,
       };
     });
