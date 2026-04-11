@@ -1,27 +1,21 @@
-import { Routes, Route } from "react-router-dom";
+import { useAuthContext } from "@features/auth/AuthContext";
+import useBackendHealth from "@shared/hooks/useBackendHealth";
 
-import LandingPage from "../features/landing/page/LandingPage";
-import AuthRoutes from "../features/auth/AuthRoutes";
-import Cart from "../features/cart/page/CartPage";
-import OrderRoutes from "../features/order/OrderRoutes";
-import Profile from "./pages/ProfilePage";
-import NotFound from "./pages/NotFoundpage";
-import AdminRoutes from "../features/admin/AdminRoutes";
-import AboutPage from "./pages/AboutPage";
+import InitialLoadingPage from "./pages/InitialLoadingPage/InitialLoadingPage";
 
-const AppRouter = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/profile" element={<Profile />} />
-      <Route path="/about" element={<AboutPage />} />
-      <Route path="/auth/*" element={<AuthRoutes />} />
-      <Route path="/cart" element={<Cart />} />
-      <Route path="/orders/*" element={<OrderRoutes />} />
-      <Route path="*" element={<NotFound />} />
-      <Route path="/admin/*" element={<AdminRoutes />} />
-    </Routes>
-  );
-};
+import Router from "./Router";
 
-export default AppRouter;
+export default function AppRouter() {
+  const { loading: authLoading } = useAuthContext();
+  const { isBackendReady, healthStatus } = useBackendHealth();
+
+  if (authLoading || !isBackendReady) {
+    return (
+      <InitialLoadingPage
+        status={isBackendReady ? "Authenticating..." : healthStatus}
+      />
+    );
+  }
+
+  return <Router />;
+}

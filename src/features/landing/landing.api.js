@@ -1,4 +1,4 @@
-import apiClient from "../../lib/apiClient";
+import apiClient from "@lib/apiClient";
 
 /**
  * @desc gets only active products

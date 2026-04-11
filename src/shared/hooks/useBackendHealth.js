@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import apiClient from "../../lib/apiClient";
+import apiClient from "@lib/apiClient";
 
 const useBackendHealth = () => {
   const [status, setStatus] = useState("Checking server...");

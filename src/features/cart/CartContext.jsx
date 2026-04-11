@@ -1,7 +1,8 @@
 import { createContext, useState, useEffect, useContext } from "react";
-import useCart from "./useCart";
+
+import useCart from "./hooks/useCart";
 import CartHooks from "./cart.hooks";
-import { toast } from "sonner";
+import useCartActions from "./hooks/useCartActions";
 
 const CartContext = createContext(null);
 
@@ -25,96 +26,19 @@ const CartProvider = ({ children }) => {
 
   useEffect(() => {
     setCart(cartItems);
-    if (isInitialized) {
-      const formattedItems = cartItems.map((item) => ({
-        productId: item.id,
-        quantity: item.quantity,
-      }));
-      updateCart({ items: formattedItems });
-    }
-  }, [cartItems, isInitialized, setCart, updateCart]);
+  }, [cartItems, setCart]);
 
-  /**
-   * takes product and adds it to the cart
-   * if it already exists, it updates the quantity
-   */
-  const addToCart = (product, qty = 1) => {
-    setCartItems((prev) => {
-      const found = prev.find((item) => item.id === product.id);
-      if (found) {
-        return prev.map((item) => {
-          if (item.id === product.id) {
-            return { ...item, quantity: item.quantity + qty };
-          }
-          return item;
-        });
-      }
-      toast.success("Item added to cart");
-      return [...prev, { ...product, quantity: qty }];
-    });
-  };
-
-  const removeFromCart = (id) => {
-    setCartItems((prev) => prev.filter((item) => item.id !== id));
-    toast.info("Item removed from cart");
-  };
-
-  const decreaseQty = (id) => {
-    setCartItems((prev) =>
-      prev
-        .map((item) => {
-          if (item.id === id) {
-            return { ...item, quantity: item.quantity - 1 };
-          }
-          return item;
-        })
-        .filter((item) => item.quantity > 0),
-    );
-  };
-
-  const increaseQty = (id) => {
-    setCartItems((prev) =>
-      prev.map((item) => {
-        if (item.id === id) {
-          return { ...item, quantity: item.quantity + 1 };
-        }
-        return item;
-      }),
-    );
-  };
-
-  const calculateTotal = () => {
-    return cartItems.reduce((total, item) => {
-      return total + item.price * item.quantity;
-    }, 0);
-  };
-
-  const totalCartItems = () => {
-    return cartItems.reduce((total, item) => {
-      return total + item.quantity;
-    }, 0);
-  };
-
-  const checkItem = (id) => {
-    const item = cartItems.find((item) => item.id === id);
-    return item ? true : false;
-  };
-
-  /**
-   * @desc formats the cart list for backend request
-   */
-  const getCartList = () => {
-    return cartItems.map((item) => {
-      return {
-        productId: item.id,
-        quantity: item.quantity,
-      };
-    });
-  };
-
-  const clearCart = () => {
-    setCartItems([]);
-  };
+  const {
+    addToCart,
+    removeFromCart,
+    decreaseQty,
+    increaseQty,
+    calculateTotal,
+    totalCartItems,
+    checkItem,
+    getCartList,
+    clearCart,
+  } = useCartActions(cartItems, setCartItems, updateCart);
 
   return (
     <CartContext.Provider

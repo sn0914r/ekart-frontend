@@ -1,10 +1,10 @@
-import apiClient from "../../lib/apiClient";
-import { auth } from "../../configs/firebase.config";
+import apiClient from "@lib/apiClient";
+import { auth } from "@lib/firebase.config";
+
 import {
   signInWithEmailAndPassword,
   signInWithCustomToken,
 } from "firebase/auth";
-
 
 const signUpUser = async (payload) => {
   const data = await apiClient(
@@ -18,7 +18,6 @@ const signUpUser = async (payload) => {
 
   await signInWithCustomToken(auth, data.data);
 };
-
 
 const loginUser = async (payload) => {
   await signInWithEmailAndPassword(auth, payload.email, payload.password);

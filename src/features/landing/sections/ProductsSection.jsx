@@ -1,15 +1,17 @@
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import Loader from "../../../shared/components/Loader";
+import Loader from "@shared/components/Loader/Loader";
+import Error from "@shared/components/Error/Error";
+
 import productQuery from "../landing.query";
-import ProductCard from "../components/ProductCard";
-import Error from "../../../shared/components/Error";
-import Filter from "../components/Filter";
+import Filter from "../components/Filters/Filter";
+import ProductCard from "../components/ProductCard/ProductCard";
+
 import {
   PRICE_CONSTRAINTS,
   SORT_CONSTRAINTS,
-} from "../../../constraints/product.constraints";
+} from "@constants/productFilters";
 
 const Products = () => {
   const [params] = useSearchParams();

@@ -1,7 +1,8 @@
-import Footer from "../components/Footer";
-import HeroSection from "../sections/HeroSection";
-import Navbar from "../components/Navbar";
+import Footer from "../components/Footer/Footer";
+import Navbar from "../components/Navbar/Navbar";
+import HeroSection from "../sections/HeroSection/HeroSection";
 import ProductsSection from "../sections/ProductsSection";
+
 import { Catalog, CatalogHeader, Subtitle } from "./LandingPage.styles";
 
 const LandingPage = () => {

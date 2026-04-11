@@ -1,8 +1,8 @@
-import { Route, Routes } from "react-router-dom";
-import AdminProductPage from "./pages/AdminProductPage";
-import AdminOrdersPage from "./pages/AdminOrdersPage";
-import AdminOrderDetailsPage from "./pages/AdminOrderDetailsPage";
-import AdminDashboardPage from "./pages/AdminDashboardPage";
+import { Routes, Route } from "react-router-dom";
+import AdminProductPage from "./pages/AdminProductsPage/AdminProductPage";
+import AdminOrdersPage from "./pages/AdminOrdersPage/AdminOrdersPage";
+import AdminOrderDetailsPage from "./pages/AdminOrderDetailsPage/AdminOrderDetailsPage";
+import AdminDashboardPage from "./pages/AdminDashboardPage/AdminDashboardPage";
 
 const AdminRoutes = () => {
   return (

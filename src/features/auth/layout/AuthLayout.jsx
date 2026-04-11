@@ -1,4 +1,6 @@
-import Image from "../../../assets/auth-layout.png";
+import { Outlet } from "react-router-dom";
+
+import Image from "@assets/auth-layout.png";
 
 import {
   FullHeightContainer,
@@ -8,7 +10,7 @@ import {
   FormContent,
 } from "./AuthLayout.styles";
 
-const AuthLayout = ({ children }) => {
+const AuthLayout = () => {
   return (
     <FullHeightContainer className="container-fluid p-0">
       <RowWrapper className="row g-0">
@@ -21,7 +23,9 @@ const AuthLayout = ({ children }) => {
         {/* Form Section */}
         <div className="col-12 col-lg-6">
           <FormSection>
-            <FormContent>{children}</FormContent>
+            <FormContent>
+              <Outlet />
+            </FormContent>
           </FormSection>
         </div>
       </RowWrapper>

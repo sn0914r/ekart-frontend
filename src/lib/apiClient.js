@@ -1,7 +1,6 @@
-import { auth } from "../configs/firebase.config";
+import { auth } from "./firebase.config";
 
-const BASE_URL = "https://ekart-backend-9y0c.onrender.com";
-// const BASE_URL = "http://localhost:3000";
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 /**
  * @desc function to make api calls
@@ -47,7 +46,7 @@ const apiClient = async (endPoint, options = {}, requireToken = true) => {
       validationErrors: data?.errors || null,
       status: response.status,
     };
-    
+
     const err = new Error(normalizedError.message);
     Object.assign(err, normalizedError);
     throw err;

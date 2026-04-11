@@ -1,7 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import CartItem from "../components/CartItem";
-import CartSummary from "../components/CartSummary";
+
+import CartItem from "../components/CartItem/CartItem";
+import CartSummary from "../components/CartSummary/CartSummary";
 import { PageWrapper, PageTitle, EmptyCartMessage } from "./CartPage.styles";
 import { useCartContext } from "../CartContext";
 
@@ -33,7 +34,7 @@ const CartPage = () => {
   const shipping = 100;
 
   const handleCheckout = () => {
-    navigate("/orders/checkout");
+    navigate("/checkout");
   };
 
   return (

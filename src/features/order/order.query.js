@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import OrderAPI from "./orders.api";
+import OrderAPI from "./order.api";
 
 const usePostOrder = () =>
   useMutation({

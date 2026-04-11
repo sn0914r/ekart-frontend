@@ -1,28 +1,16 @@
 import { Routes, Route } from "react-router-dom";
-import Login from "./pages/Login";
+
+import LoginPage from "./pages/LoginPage/LoginPage";
 import AuthLayout from "./layout/AuthLayout";
-import SignUp from "./pages/SignUp";
+import RegisterPage from "./pages/RegisterPage/RegisterPage";
 
 const AuthRoutes = () => {
   return (
     <Routes>
-      <Route
-        path="login"
-        element={
-          <AuthLayout>
-            <Login />
-          </AuthLayout>
-        }
-      />
-
-      <Route
-        path="signup"
-        element={
-          <AuthLayout>
-            <SignUp />
-          </AuthLayout>
-        }
-      />
+      <Route element={<AuthLayout />}>
+        <Route path="login" element={<LoginPage />} />
+        <Route path="signup" element={<RegisterPage />} />
+      </Route>
     </Routes>
   );
 };
