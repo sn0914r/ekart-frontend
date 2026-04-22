@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import OrderStatusBadge from "../OrderStatusBadge/OrderStatusBadge";
 
 import {
@@ -20,6 +21,8 @@ const OrderListItem = ({
   subTotal,
   orderId,
 }) => {
+  const navigate = useNavigate();
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString("en-IN", {
@@ -36,7 +39,7 @@ const OrderListItem = ({
   };
 
   return (
-    <OrderCard>
+    <OrderCard onClick={() => navigate(`/orders/${orderId}`)}>
       <OrderHeader>
         <OrderId>Order #{truncateOrderId(orderId)}</OrderId>
         <OrderDate>{formatDate(createdAt)}</OrderDate>

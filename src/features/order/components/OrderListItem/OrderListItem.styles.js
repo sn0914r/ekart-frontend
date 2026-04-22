@@ -9,6 +9,7 @@ export const OrderCard = styled.div`
   transition: all 0.2s ease;
   text-decoration: none;
   color: inherit;
+  cursor: pointer;
 
   &:hover {
     border-color: var(--color-black);

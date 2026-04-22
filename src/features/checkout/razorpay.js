@@ -8,6 +8,9 @@ const initCheckout = ({ amount, razorpayOrderId, handler }) => {
     name: "eKart",
     image: "https://ekart.s3.ap-south-1.amazonaws.com/ekart-logo.png",
     order_id: razorpayOrderId,
+    method: {
+      upi: true,
+    },
     handler,
   };
 

@@ -17,6 +17,7 @@ const apiClient = async (endPoint, options = {}, requireToken = true) => {
 
   if (requireToken) {
     token = auth.currentUser ? await auth.currentUser.getIdToken() : null;
+    console.log(token);
   }
   // detect FormData
   const isFormData = options.body instanceof FormData;
@@ -51,6 +52,8 @@ const apiClient = async (endPoint, options = {}, requireToken = true) => {
     Object.assign(err, normalizedError);
     throw err;
   }
+
+  console.log(data);
   return data;
 };
 
