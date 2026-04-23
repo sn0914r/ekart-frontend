@@ -69,7 +69,7 @@ const Products = () => {
               name={product.name}
               price={product.price}
               stock={product.stock}
-              imageUrl={product.imageUrl}
+              imageUrl={product.images[0]}
               id={product._id}
               className="col-6 col-md-4 col-lg-3"
             />

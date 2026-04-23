@@ -33,8 +33,6 @@ const useCheckoutFlow = () => {
     const { id, ...address } = selectedAddress;
 
     try {
-      console.log(address, items);
-
       toast.loading("Creating order...");
       const {
         data: { orderId },

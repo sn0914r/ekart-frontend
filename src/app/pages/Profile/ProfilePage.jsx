@@ -63,13 +63,13 @@ export default function Profile() {
             </ActionList>
           )}
 
-          {role === "admin" && (
+          {/* {role === "admin" && (
             <ActionList>
               <ProfileLink to="/admin/dashboard">
                 Admin Dashboard <ShoppingBag size={16} strokeWidth={1.5} />
               </ProfileLink>
             </ActionList>
-          )}
+          )} */}
 
           <LogoutBtn onClick={handleLogout}>
             Logout <LogOut size={16} strokeWidth={2} />

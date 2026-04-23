@@ -1,3 +1,4 @@
+import { logger } from "@utils/logger";
 import { auth } from "./firebase.config";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
@@ -17,7 +18,7 @@ const apiClient = async (endPoint, options = {}, requireToken = true) => {
 
   if (requireToken) {
     token = auth.currentUser ? await auth.currentUser.getIdToken() : null;
-    console.log(token);
+    logger.info("token", token);
   }
   // detect FormData
   const isFormData = options.body instanceof FormData;
@@ -53,7 +54,7 @@ const apiClient = async (endPoint, options = {}, requireToken = true) => {
     throw err;
   }
 
-  console.log(data);
+  logger.info("data from api", data);
   return data;
 };
 
