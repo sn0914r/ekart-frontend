@@ -7,22 +7,36 @@ import {
   ProductName,
   Price,
   StockInfo,
+  ViewProductLink,
 } from "./ProductCard.styles";
 
-import CartButton from "../CartButton/CartButton";
+import { Link } from "react-router-dom";
+
 
 const ProductCard = (props) => {
-  const { name, price, stock, imageUrl, id, className } = props;
+  const { id, imageUrl, name, price, stock, className } = props;
   return (
     <CardWrapper data-id={id} className={className}>
       <ImageContainer>
-        <ProductImage src={imageUrl} alt={name} />
-        {stock <= 0 && (
-          <SoldOutOverlay>
-            <SoldOutText>Sold Out</SoldOutText>
-          </SoldOutOverlay>
-        )}
-        <CartButton product={{ ...props }} />
+        <Link
+          to={`/product/${id}`}
+          style={{
+            display: "block",
+            height: "100%",
+            width: "100%",
+            textDecoration: "none",
+          }}
+        >
+          <ProductImage src={imageUrl} alt={name} />
+          {stock <= 0 && (
+            <SoldOutOverlay>
+              <SoldOutText>Sold Out</SoldOutText>
+            </SoldOutOverlay>
+          )}
+        </Link>
+        <ViewProductLink to={`/product/${id}`} className="view-product-btn">
+          VIEW PRODUCT
+        </ViewProductLink>
       </ImageContainer>
 
       {/* Content using Bootstrap Utilities */}

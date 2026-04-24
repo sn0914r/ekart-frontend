@@ -1,4 +1,4 @@
-import { useCartContext } from "@features/cart/CartContext";
+import CartHooks from "@features/cart/cart.hooks";
 
 import {
   OrderSummaryCardWrapper,
@@ -7,7 +7,7 @@ import {
 } from "./OrderSummaryCard.styles";
 
 const OrderSummaryCard = () => {
-  const { calculateTotal, totalCartItems } = useCartContext();
+  const { calculateTotal, totalCartItems } = CartHooks.useCartData();
   const SHIPPING_FEE = 100;
 
   const subtotal = calculateTotal();

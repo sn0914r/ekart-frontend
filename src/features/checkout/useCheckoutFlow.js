@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 import OrderQuery from "@features/order/order.query";
-import { useCartContext } from "@features/cart/CartContext";
+import CartHooks from "@features/cart/cart.hooks";
 
 import PaymentQuery from "./checkout.query";
 import initCheckout from "./razorpay";
@@ -12,7 +12,8 @@ import { useAddress } from "./pages/ShippingAddressPage/useAddressStorage";
 const useCheckoutFlow = () => {
   const navigate = useNavigate();
   const { getAddresses } = useAddress();
-  const { getCartList, clearCart } = useCartContext();
+  const { cartItems } = CartHooks.useCartData();
+  const { mutate: clearCart } = CartHooks.useClearCart();
 
   const [isProcessing, setIsProcessing] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState(null);
@@ -29,7 +30,10 @@ const useCheckoutFlow = () => {
     if (!selectedAddress) return;
 
     setIsProcessing(true);
-    const items = getCartList();
+    const items = cartItems.map((item) => ({
+      productId: item.productId,
+      quantity: item.quantity,
+    }));
     const { id, ...address } = selectedAddress;
 
     try {

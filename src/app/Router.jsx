@@ -5,7 +5,7 @@ import CartPage from "@features/cart/page/CartPage";
 import CheckoutRoutes from "@features/checkout/CheckoutRoutes";
 import OrderRoutes from "@features/order/OrderRoutes";
 import AuthRoutes from "@features/auth/AuthRoutes";
-// import AdminRoutes from "@features/admin/AdminRoutes";
+import ProductRoutes from "@features/product/ProductRoutes";
 
 import Profile from "./pages/Profile/ProfilePage";
 import AboutPage from "./pages/About/AboutPage";
@@ -19,7 +19,7 @@ export default function Router() {
       <Route path="/checkout/*" element={<CheckoutRoutes />} />
       <Route path="/orders/*" element={<OrderRoutes />} />
       <Route path="/auth/*" element={<AuthRoutes />} />
-      {/* <Route path="/admin/*" element={<AdminRoutes />} /> */}
+      <Route path="/product/*" element={<ProductRoutes />} />
 
       <Route path="/profile" element={<Profile />} />
       <Route path="/about" element={<AboutPage />} />

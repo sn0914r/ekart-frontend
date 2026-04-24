@@ -1,17 +1,43 @@
 import styled from "@emotion/styled";
-import { CartStrip } from "../CartButton/CartButton.styles";
+import { Link } from "react-router-dom";
 
 export const CardWrapper = styled.div`
-  /* width: 100%; */
-  /* max-width: 400px; */
   background-color: var(--bg-primary);
   /* Hover state for child image */
   &:hover img {
     transform: scale(1.05);
   }
-  &:hover ${CartStrip} {
+  &:hover .view-product-btn {
     transform: translateY(0);
     opacity: 1;
+  }
+`;
+
+export const ViewProductLink = styled(Link)`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3.5rem;
+  background-color: #000;
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  cursor: pointer;
+  transform: translateY(100%);
+  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+  z-index: 10;
+  padding-bottom: 0.5rem; /* Optical balance */
+
+  &:hover {
+    background-color: #1a1a1a;
+    color: #fff;
   }
 `;
 
