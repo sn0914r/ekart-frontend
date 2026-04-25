@@ -1,11 +1,11 @@
-import { useAuthContext } from "@features/auth/AuthContext";
+import useAuthStore from "@store/authStore";
 import InitialLoadingPage from "./pages/InitialLoadingPage/InitialLoadingPage";
 import Router from "./Router";
 
 export default function AppRouter() {
-  const { loading: authLoading } = useAuthContext();
+  const isHydrated = useAuthStore((state) => state.isHydrated);
 
-  if (authLoading) {
+  if (!isHydrated) {
     return <InitialLoadingPage status={"Authenticating..."} />;
   }
 

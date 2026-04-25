@@ -18,7 +18,7 @@ import {
 import { Search, ShoppingBag, User, X, Menu as MenuIcon } from "lucide-react";
 
 import useUpdateSearchParams from "@shared/hooks/useUpdateSearchParams";
-import { useAuthContext } from "@features/auth/AuthContext";
+import useAuthStore from "@store/authStore";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -26,7 +26,7 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const searchInputRef = useRef(null);
 
-  const { user } = useAuthContext();
+  const user = useAuthStore((state) => state.user);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);

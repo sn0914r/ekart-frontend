@@ -1,6 +1,6 @@
 import { ArrowLeft, ArrowRight, LogOut, ShoppingBag, User } from "lucide-react";
 
-import { useAuthContext } from "@features/auth/AuthContext";
+import useAuthStore from "@store/authStore";
 import AuthQuery from "@features/auth/auth.query";
 
 import {
@@ -17,7 +17,7 @@ import {
 } from "./ProfilePage.styles";
 
 export default function Profile() {
-  const { user, role } = useAuthContext();
+  const { user, role } = useAuthStore();
 
   const logoutMutation = AuthQuery.useLogoutMutation();
 
@@ -52,7 +52,7 @@ export default function Profile() {
             <User size={40} strokeWidth={1} />
           </AvatarCircle>
 
-          <UserName>{user.displayName || "Member"}</UserName>
+          <UserName>{user.name || "Member"}</UserName>
           <UserEmail>{user.email}</UserEmail>
 
           {role !== "admin" && (

@@ -1,29 +1,24 @@
 import apiClient from "@lib/apiClient";
-import { auth } from "@lib/firebase.config";
-
-import {
-  signInWithEmailAndPassword,
-  signInWithCustomToken,
-} from "firebase/auth";
 
 const signUpUser = async (payload) => {
-  const data = await apiClient(
-    "/auth/register",
-    {
-      method: "POST",
-      body: JSON.stringify(payload),
-    },
-    false,
-  );
-
-  await signInWithCustomToken(auth, data.data);
+  return await apiClient("/auth/register", {
+    method: "POST",
+    body: payload,
+  });
 };
 
 const loginUser = async (payload) => {
-  await signInWithEmailAndPassword(auth, payload.email, payload.password);
+  return await apiClient("/auth/login", {
+    method: "POST",
+    body: payload,
+  });
 };
 
-const logoutUser = () => auth.signOut();
+const logoutUser = async () => {
+  return await apiClient("/auth/logout", {
+    method: "POST",
+  });
+};
 
 export default {
   signUpUser,

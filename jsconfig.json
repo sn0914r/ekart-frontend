@@ -7,7 +7,8 @@
       "@lib/*": ["lib/*"],
       "@assets/*": ["assets/*"],
       "@utils/*": ["utils/*"],
-      "@constants/*": ["constants/*"]
+      "@constants/*": ["constants/*"],
+      "@store/*": ["store/*"]
     }
   }
 }

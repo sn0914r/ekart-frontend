@@ -4,7 +4,7 @@ import { Lock, ShoppingBag, Check } from "lucide-react";
 import { toast } from "sonner";
 
 import CartHooks from "@features/cart/cart.hooks";
-import { useAuthContext } from "@features/auth/AuthContext";
+import useAuthStore from "@store/authStore";
 import Button from "@shared/components/Button/Button";
 
 import {
@@ -34,7 +34,7 @@ const COLOR_MAP = {
 
 const ProductActions = ({ product, colors = [] }) => {
   const navigate = useNavigate();
-  const { user } = useAuthContext();
+  const user = useAuthStore((state) => state.user);
   const { checkItem } = CartHooks.useCartData();
   const { mutate: addToCartMutation } = CartHooks.useAddToCart();
 
