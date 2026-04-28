@@ -15,7 +15,7 @@ import {
   SidebarLink,
 } from "./Navbar.styles";
 
-import { Search, ShoppingBag, User, X, Menu as MenuIcon } from "lucide-react";
+import { Search, ShoppingBag, User, X, Menu as MenuIcon, Heart } from "lucide-react";
 
 import useUpdateSearchParams from "@shared/hooks/useUpdateSearchParams";
 import useAuthStore from "@store/authStore";
@@ -58,6 +58,7 @@ const Navbar = () => {
     { name: "Collections", path: "/" },
     { name: "About", path: "/about" },
     { name: "Bag", path: "/cart" },
+    { name: "Wishlist", path: "/wishlist" },
   ];
 
   /**
@@ -113,6 +114,11 @@ const Navbar = () => {
               >
                 <Search size={18} strokeWidth={1.5} />
                 <span>Search</span>
+              </ActionBtn>
+
+              <ActionBtn isScrolled={isScrolled ? 1 : 0} as={Link} to="/wishlist">
+                <Heart size={18} strokeWidth={1.5} />
+                <span>Wishlist</span>
               </ActionBtn>
 
               <ActionBtn isScrolled={isScrolled ? 1 : 0} as={Link} to="/cart">

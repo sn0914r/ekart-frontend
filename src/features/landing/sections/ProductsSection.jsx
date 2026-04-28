@@ -1,5 +1,8 @@
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import useAuthStore from "@store/authStore";
+import wishlistHooks from "@features/wishlist/wishlist.hooks";
 
 import Loader from "@shared/components/Loader/Loader";
 import Error from "@shared/components/Error/Error";
@@ -15,6 +18,8 @@ import {
 
 const Products = () => {
   const [params] = useSearchParams();
+  const navigate = useNavigate();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const [filters, setFilters] = useState({
     minPrice: PRICE_CONSTRAINTS.MIN,
     maxPrice: PRICE_CONSTRAINTS.MAX,
@@ -30,6 +35,24 @@ const Products = () => {
   } = productQuery.useGetProducts(filters || {});
 
   const products = response?.data ? response.data : null;
+
+  const { checkItem } = wishlistHooks.useWishlistData();
+  const { mutate: addToWishlist } = wishlistHooks.useAddToWishlist();
+  const { mutate: removeWishlistProduct } = wishlistHooks.useRemoveWishlistProduct();
+
+  const handleToggleWishlist = (productId) => {
+    if (!isAuthenticated) {
+      toast.info("Please login to add to your wishlist", {
+        action: { label: "Login", onClick: () => navigate("/auth/login") }
+      });
+      return;
+    }
+    if (checkItem(productId)) {
+      removeWishlistProduct(productId);
+    } else {
+      addToWishlist(productId);
+    }
+  };
 
   let searchQueries = params.get("search") || "";
 
@@ -72,6 +95,8 @@ const Products = () => {
               imageUrl={product.images[0]}
               id={product._id}
               className="col-6 col-md-4 col-lg-3"
+              isInWishlist={checkItem(product._id)}
+              onToggleWishlist={handleToggleWishlist}
             />
           );
         })}

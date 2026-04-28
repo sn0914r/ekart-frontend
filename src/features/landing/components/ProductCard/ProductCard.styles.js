@@ -101,3 +101,26 @@ export const StockInfo = styled.div`
   color: var(--text-primary);
   opacity: 0.6;
 `;
+
+export const WishlistButtonWrapper = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 15;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  color: ${(props) => (props.$active ? "var(--color-error)" : "var(--text-primary)")};
+  transition: transform 0.2s, color 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+`;

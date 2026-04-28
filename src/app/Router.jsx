@@ -6,6 +6,7 @@ import CheckoutRoutes from "@features/checkout/CheckoutRoutes";
 import OrderRoutes from "@features/order/OrderRoutes";
 import AuthRoutes from "@features/auth/AuthRoutes";
 import ProductRoutes from "@features/product/ProductRoutes";
+import WishlistRoutes from "@features/wishlist/WishlistRoutes";
 
 import Profile from "./pages/Profile/ProfilePage";
 import AboutPage from "./pages/About/AboutPage";
@@ -20,6 +21,7 @@ export default function Router() {
       <Route path="/orders/*" element={<OrderRoutes />} />
       <Route path="/auth/*" element={<AuthRoutes />} />
       <Route path="/product/*" element={<ProductRoutes />} />
+      <Route path="/wishlist/*" element={<WishlistRoutes />} />
 
       <Route path="/profile" element={<Profile />} />
       <Route path="/about" element={<AboutPage />} />
