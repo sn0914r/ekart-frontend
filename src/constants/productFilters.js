@@ -5,7 +5,14 @@ export const PRICE_CONSTRAINTS = {
 };
 
 export const SORT_CONSTRAINTS = {
-  LATEST: "latest",
+  LATEST: "newest",
   PRICE_ASC: "price_asc",
   PRICE_DESC: "price_desc",
 };
+
+export const CATEGORY_OPTIONS = [
+  { value: "", label: "All Categories" },
+  { value: "shirts", label: "Shirts" },
+  { value: "pants", label: "Pants" },
+  { value: "shoes", label: "Shoes" },
+];

@@ -3,13 +3,11 @@ import styled from "@emotion/styled";
 export const ItemWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding: 1rem;
   background: var(--bg-primary);
   height: 100%;
 
   @media (max-width: 575px) {
-    padding: 0.75rem;
+    // padding: 0.75rem;
     gap: 0.75rem;
   }
 `;
@@ -61,9 +59,13 @@ export const ItemDetails = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   flex: 1;
 
   @media (max-width: 575px) {
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
     gap: 0.25rem;
   }
 `;

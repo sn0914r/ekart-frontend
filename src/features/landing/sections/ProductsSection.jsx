@@ -1,5 +1,5 @@
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { toast } from "sonner";
 import useAuthStore from "@store/authStore";
 import wishlistHooks from "@features/wishlist/wishlist.hooks";
@@ -10,6 +10,7 @@ import Error from "@shared/components/Error/Error";
 import productQuery from "../landing.query";
 import Filter from "../components/Filters/Filter";
 import ProductCard from "../components/ProductCard/ProductCard";
+import Pagination from "../components/Pagination/Pagination";
 
 import {
   PRICE_CONSTRAINTS,
@@ -25,6 +26,9 @@ const Products = () => {
     maxPrice: PRICE_CONSTRAINTS.MAX,
     sort: SORT_CONSTRAINTS.LATEST,
     search: "",
+    category: "",
+    page: 1,
+    limit: 8,
   });
 
   const {
@@ -34,7 +38,9 @@ const Products = () => {
     error,
   } = productQuery.useGetProducts(filters || {});
 
-  const products = response?.data ? response.data : null;
+  const products = response?.data?.products || [];
+  const totalPages = response?.data?.totalPages || 1;
+  const currentPage = response?.data?.page || 1;
 
   const { checkItem } = wishlistHooks.useWishlistData();
   const { mutate: addToWishlist } = wishlistHooks.useAddToWishlist();
@@ -60,7 +66,18 @@ const Products = () => {
     setFilters((prev) => ({
       ...prev,
       ...filter,
+      page: 1,
     }));
+  };
+
+  const containerRef = useRef(null);
+
+  const handlePageChange = (newPage) => {
+    setFilters((prev) => ({ ...prev, page: newPage }));
+    if (containerRef.current) {
+      const top = containerRef.current.offsetTop - 100;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
   };
 
   useEffect(() => {
@@ -78,11 +95,11 @@ const Products = () => {
     return <Loader />;
   }
 
-  if (!products) {
+  if (!products || products.length === 0) {
     return <h1 className="text-center">No products found</h1>;
   }
   return (
-    <div className="container">
+    <div className="container" ref={containerRef}>
       <Filter updateFilters={updateFilters} filters={filters} />
       <div className="row row-gap-5">
         {products.map((product) => {
@@ -101,6 +118,11 @@ const Products = () => {
           );
         })}
       </div>
+      <Pagination 
+        currentPage={currentPage} 
+        totalPages={totalPages} 
+        onPageChange={handlePageChange} 
+      />
     </div>
   );
 };

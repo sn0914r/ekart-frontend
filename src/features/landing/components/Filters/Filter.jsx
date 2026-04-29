@@ -19,6 +19,7 @@ import {
 import {
   PRICE_CONSTRAINTS,
   SORT_CONSTRAINTS,
+  CATEGORY_OPTIONS,
 } from "@constants/productFilters";
 
 const Filter = ({ updateFilters, filters = {} }) => {
@@ -28,7 +29,7 @@ const Filter = ({ updateFilters, filters = {} }) => {
   const ABS_MAX = PRICE_CONSTRAINTS.MAX;
   const MIN_GAP = PRICE_CONSTRAINTS.STEP;
 
-  const { minPrice = "", maxPrice = "", sort = "latest" } = filters;
+  const { minPrice = "", maxPrice = "", sort = "latest", category = "" } = filters;
 
   const sortOptions = [
     { value: SORT_CONSTRAINTS.LATEST, label: "Latest Arrivals" },
@@ -45,6 +46,10 @@ const Filter = ({ updateFilters, filters = {} }) => {
 
   const handleSortChange = (e) => {
     updateFilters({ sort: e.target.value });
+  };
+
+  const handleCategoryChange = (e) => {
+    updateFilters({ category: e.target.value });
   };
 
   const handleMinChange = (e) => {
@@ -83,9 +88,9 @@ const Filter = ({ updateFilters, filters = {} }) => {
         </FilterHeader>
 
         <CollapsibleContent isOpen={isOpen}>
-          <div className="row align-items-end g-5">
+          <div className="row align-items-end g-4">
             {/* Price Range */}
-            <div className="col-12 col-md-6">
+            <div className="col-12 col-md-5">
               <div className="mb-4">
                 <Label>Price Range</Label>
                 {/* Slider UI */}
@@ -139,8 +144,22 @@ const Filter = ({ updateFilters, filters = {} }) => {
               </div>
             </div>
 
+            {/* Category */}
+            <div className="col-12 col-md-4">
+              <FilterGroup>
+                <Label>Category</Label>
+                <StyledSelect value={category} onChange={handleCategoryChange}>
+                  {CATEGORY_OPTIONS.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </StyledSelect>
+              </FilterGroup>
+            </div>
+
             {/* Sort By */}
-            <div className="col-12 col-md-4 offset-md-2">
+            <div className="col-12 col-md-3">
               <FilterGroup>
                 <Label>Sort By</Label>
                 <StyledSelect value={sort} onChange={handleSortChange}>
