@@ -1,18 +1,13 @@
-import {
-  LoadingContainer,
-  BrandShimmerContainer,
-  ShimmerText,
-  SubText,
-} from "./initialLoadingPage.styles";
+import * as S from "./initialLoadingPage.styles";
 
 const InitialLoadingPage = ({ status }) => {
   return (
-    <LoadingContainer>
-      <BrandShimmerContainer>
-        <ShimmerText>EKART</ShimmerText>
-        <SubText>{status || "LOADING YOUR COLLECTION..."}</SubText>
-      </BrandShimmerContainer>
-    </LoadingContainer>
+    <S.LoadingContainer>
+      <S.BrandShimmerContainer>
+        <S.ShimmerText>EKART</S.ShimmerText>
+        <S.SubText>{status || "LOADING YOUR COLLECTION..."}</S.SubText>
+      </S.BrandShimmerContainer>
+    </S.LoadingContainer>
   );
 };
 

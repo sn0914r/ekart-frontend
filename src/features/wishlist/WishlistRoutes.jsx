@@ -4,7 +4,7 @@ import WishlistPage from "./pages/WishlistPage";
 export default function WishlistRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<WishlistPage />} />
+      <Route index element={<WishlistPage />} />
     </Routes>
   );
 }

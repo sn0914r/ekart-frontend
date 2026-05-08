@@ -1,73 +1,62 @@
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import Button from "@shared/components/Button/Button"
-import {
-  PageWrapper,
-  ContentContainer,
-  PageTitle,
-  Section,
-  SectionTitle,
-  Description,
-  FeatureList,
-  FeatureItem,
-  LinkSection,
-  BackLink,
-} from "./AboutPage.styles";
+import Button from "@shared/components/Button/Button";
+import * as S from "./AboutPage.styles";
 
 const AboutPage = () => {
   const navigate = useNavigate();
 
   return (
-    <PageWrapper>
-      <ContentContainer>
-        <BackLink onClick={() => navigate(-1)}>
+    <S.PageWrapper>
+      <S.ContentContainer>
+        <S.BackLink onClick={() => navigate(-1)}>
           <ArrowLeft size={14} /> Back
-        </BackLink>
-        <PageTitle>About eKart</PageTitle>
+        </S.BackLink>
+        <S.PageTitle>About eKart</S.PageTitle>
 
-        <Section>
-          <Description>
+        <S.Section>
+          <S.Description>
             A full-stack single-vendor e-commerce application with secure
             authentication, payment integration, and order lifecycle management.
-          </Description>
-        </Section>
+          </S.Description>
+        </S.Section>
 
-        <Section>
-          <SectionTitle>Highlights</SectionTitle>
-          <FeatureList>
-            <FeatureItem>
+        <S.Section>
+          <S.SectionTitle>Highlights</S.SectionTitle>
+          <S.FeatureList>
+            <S.FeatureItem>
               Built backend using Node.js, Express, and MongoDB with REST API
               architecture
-            </FeatureItem>
-            <FeatureItem>
+            </S.FeatureItem>
+            <S.FeatureItem>
               Implemented authentication, role-based access control, and
               backend-only pricing logic
-            </FeatureItem>
-            <FeatureItem>
+            </S.FeatureItem>
+            <S.FeatureItem>
               Integrated Razorpay payments with signature verification and
               idempotency handling
-            </FeatureItem>
-            <FeatureItem>
+            </S.FeatureItem>
+            <S.FeatureItem>
               Designed order lifecycle management with stock handling and status
               validation
-            </FeatureItem>
-            <FeatureItem>
+            </S.FeatureItem>
+            <S.FeatureItem>
               Developed a React frontend and deployed live on Cloudflare Pages
-            </FeatureItem>
-          </FeatureList>
-        </Section>
+            </S.FeatureItem>
+          </S.FeatureList>
+        </S.Section>
 
-        <Section>
-          <SectionTitle>Tech Stack</SectionTitle>
-          <Description>
+        <S.Section>
+          <S.SectionTitle>Tech Stack</S.SectionTitle>
+          <S.Description>
             Node.js, Express.js, MongoDB, React, Firebase Auth, Razorpay,
             Cloudinary
-          </Description>
-        </Section>
+          </S.Description>
+        </S.Section>
 
-        <Section>
-          <SectionTitle>Source Code</SectionTitle>
-          <LinkSection>
+        <S.Section>
+          <S.SectionTitle>Source Code</S.SectionTitle>
+          <S.LinkSection>
             <Button
               as="a"
               href="https://github.com/sn0914r/ekart-frontend"
@@ -84,10 +73,10 @@ const AboutPage = () => {
             >
               Backend Repository
             </Button>
-          </LinkSection>
-        </Section>
-      </ContentContainer>
-    </PageWrapper>
+          </S.LinkSection>
+        </S.Section>
+      </S.ContentContainer>
+    </S.PageWrapper>
   );
 };
 

@@ -1,23 +1,10 @@
 import { Minus, Plus, Trash2 } from "lucide-react";
-
-import {
-  ItemWrapper,
-  ItemImage,
-  ItemInfo,
-  ItemHeader,
-  ItemName,
-  ItemPrice,
-  Controls,
-  QtyBox,
-  QtyBtn,
-  QtyValue,
-  RemoveBtn,
-} from "./CartItem.styles";
+import * as S from "./CartItem.styles";
 
 const CartItem = ({ item, increaseQty, decreaseQty, removeFromCart }) => {
   return (
-    <ItemWrapper>
-      <ItemImage>
+    <S.ItemWrapper>
+      <S.ItemImage>
         <img
           src={
             item.thumbnail ||
@@ -25,11 +12,11 @@ const CartItem = ({ item, increaseQty, decreaseQty, removeFromCart }) => {
           }
           alt={item.name}
         />
-      </ItemImage>
-      <ItemInfo>
-        <ItemHeader>
+      </S.ItemImage>
+      <S.ItemInfo>
+        <S.ItemHeader>
           <div>
-            <ItemName>{item.name}</ItemName>
+            <S.ItemName>{item.name}</S.ItemName>
             {item.size && (
               <span
                 style={{
@@ -43,28 +30,28 @@ const CartItem = ({ item, increaseQty, decreaseQty, removeFromCart }) => {
               </span>
             )}
           </div>
-          <ItemPrice>₨ {item.price?.toLocaleString()}</ItemPrice>
-        </ItemHeader>
+          <S.ItemPrice>₨ {item.price?.toLocaleString()}</S.ItemPrice>
+        </S.ItemHeader>
 
-        <Controls>
-          <QtyBox>
-            <QtyBtn onClick={() => decreaseQty(item.productId)}>
+        <S.Controls>
+          <S.QtyBox>
+            <S.QtyBtn onClick={() => decreaseQty(item.productId)}>
               <Minus size={14} />
-            </QtyBtn>
-            <QtyValue>{item.quantity}</QtyValue>
-            <QtyBtn onClick={() => increaseQty(item.productId)}>
+            </S.QtyBtn>
+            <S.QtyValue>{item.quantity}</S.QtyValue>
+            <S.QtyBtn onClick={() => increaseQty(item.productId)}>
               <Plus size={14} />
-            </QtyBtn>
-          </QtyBox>
-          <RemoveBtn
+            </S.QtyBtn>
+          </S.QtyBox>
+          <S.RemoveBtn
             onClick={() => removeFromCart(item.productId)}
             aria-label="Remove item"
           >
             <Trash2 size={18} strokeWidth={1.5} />
-          </RemoveBtn>
-        </Controls>
-      </ItemInfo>
-    </ItemWrapper>
+          </S.RemoveBtn>
+        </S.Controls>
+      </S.ItemInfo>
+    </S.ItemWrapper>
   );
 };
 

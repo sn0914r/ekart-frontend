@@ -1,4 +1,4 @@
-import useAuthStore from "@store/authStore";
+import useAuthStore from "./store/authStore";
 import InitialLoadingPage from "./pages/InitialLoadingPage/InitialLoadingPage";
 import Router from "./Router";
 

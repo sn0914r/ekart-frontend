@@ -8,7 +8,6 @@
       "@assets/*": ["assets/*"],
       "@utils/*": ["utils/*"],
       "@constants/*": ["constants/*"],
-      "@store/*": ["store/*"]
     }
   }
 }

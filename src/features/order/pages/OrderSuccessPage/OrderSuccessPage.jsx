@@ -1,7 +1,7 @@
-import { useEffect } from "react";
-import { useLocation, useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Button from "@shared/components/Button/Button";
+import { useOrderSuccessPage } from "./OrderSuccessPage.hooks";
 
 import {
   SuccessWrapper,
@@ -18,15 +18,7 @@ import {
 } from "./OrderSuccessPage.styles";
 
 const OrderSuccessPage = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const { orderId, razorpayPaymentId } = location.state || {};
-
-  useEffect(() => {
-    if (!orderId || !razorpayPaymentId) {
-      navigate("/cart", { replace: true });
-    }
-  }, [orderId, razorpayPaymentId, navigate]);
+  const { orderId, razorpayPaymentId } = useOrderSuccessPage();
 
   if (!orderId || !razorpayPaymentId) {
     return null;

@@ -6,8 +6,6 @@ export const PageWrapper = styled.div`
   background-color: var(--bg-primary, #ffffff);
 `;
 
-
-
 export const InfoColumn = styled.div`
   display: flex;
   flex-direction: column;

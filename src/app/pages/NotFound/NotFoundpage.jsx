@@ -1,28 +1,22 @@
 import { ArrowLeft } from "lucide-react";
-import {
-  NotFoundWrapper,
-  ErrorCode,
-  Content,
-  Message,
-  Description,
-  BackBtn,
-} from "./NotFoundPage.styles";
+import { ROUTES } from "@constants/routes";
+import * as S from "./NotFoundPage.styles";
 
 const NotFound = () => {
   return (
-    <NotFoundWrapper>
-      <ErrorCode>404</ErrorCode>
-      <Content>
-        <Message>Page Not Found.</Message>
-        <Description>
+    <S.NotFoundWrapper>
+      <S.ErrorCode>404</S.ErrorCode>
+      <S.Content>
+        <S.Message>Page Not Found.</S.Message>
+        <S.Description>
           The piece you are looking for has been archived or removed from the
           current collection.
-        </Description>
-        <BackBtn to="/">
+        </S.Description>
+        <S.BackBtn to={ROUTES.HOME}>
           <ArrowLeft size={16} /> Back to the Shop
-        </BackBtn>
-      </Content>
-    </NotFoundWrapper>
+        </S.BackBtn>
+      </S.Content>
+    </S.NotFoundWrapper>
   );
 };
 

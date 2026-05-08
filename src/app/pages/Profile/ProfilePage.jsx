@@ -1,25 +1,17 @@
-import { ArrowLeft, ArrowRight, LogOut, ShoppingBag, User } from "lucide-react";
+import useAuthStore from "../../store/authStore";
+import { useLogoutMutation } from "@features/auth/hooks/api/useLogoutMutation";
 
-import useAuthStore from "@store/authStore";
-import AuthQuery from "@features/auth/auth.query";
+import GuestProfile from "./components/GuestProfile/GuestProfile";
+import UserInfo from "./components/UserInfo/UserInfo";
+import ProfileActions from "./components/ProfileActions/ProfileActions";
 
-import {
-  ActionList,
-  AvatarCircle,
-  BackButton,
-  ContentArea,
-  LogoutBtn,
-  ProfileCard,
-  ProfileLink,
-  ProfileWrapper,
-  UserEmail,
-  UserName,
-} from "./ProfilePage.styles";
+import { ROUTES } from "@constants/routes";
+import { ArrowLeft } from "lucide-react";
+import * as S from "./ProfilePage.styles";
 
 export default function Profile() {
-  const { user, role } = useAuthStore();
-
-  const logoutMutation = AuthQuery.useLogoutMutation();
+  const { user } = useAuthStore();
+  const logoutMutation = useLogoutMutation();
 
   const handleLogout = () => {
     logoutMutation.mutate();
@@ -27,55 +19,25 @@ export default function Profile() {
 
   if (!user) {
     return (
-      <ProfileWrapper>
-        <ContentArea>
-          <ProfileCard>
-            <UserName>Guest User</UserName>
-            <UserEmail>Please Login to view your profile</UserEmail>
-            <ProfileLink to="/auth/login">
-              Login <ArrowRight size={16} />
-            </ProfileLink>
-          </ProfileCard>
-        </ContentArea>
-      </ProfileWrapper>
+      <S.ProfileWrapper>
+        <S.ContentArea>
+          <GuestProfile />
+        </S.ContentArea>
+      </S.ProfileWrapper>
     );
   }
 
   return (
-    <ProfileWrapper>
-      <ContentArea>
-        <BackButton to="/">
+    <S.ProfileWrapper>
+      <S.ContentArea>
+        <S.BackButton to={ROUTES.HOME}>
           <ArrowLeft size={16} /> Back to Home
-        </BackButton>
-        <ProfileCard>
-          <AvatarCircle>
-            <User size={40} strokeWidth={1} />
-          </AvatarCircle>
-
-          <UserName>{user.name || "Member"}</UserName>
-          <UserEmail>{user.email}</UserEmail>
-
-          {role !== "admin" && (
-            <ActionList>
-              <ProfileLink to="/orders">
-                Order History <ShoppingBag size={16} strokeWidth={1.5} />
-              </ProfileLink>
-            </ActionList>
-          )}
-
-          {/* {role === "admin" && (
-            <ActionList>
-              <ProfileLink to="/admin/dashboard">
-                Admin Dashboard <ShoppingBag size={16} strokeWidth={1.5} />
-              </ProfileLink>
-            </ActionList>
-          )} */}
-
-          <LogoutBtn onClick={handleLogout}>
-            Logout <LogOut size={16} strokeWidth={2} />
-          </LogoutBtn>
-        </ProfileCard>
-      </ContentArea>
-    </ProfileWrapper>
+        </S.BackButton>
+        <S.ProfileCard>
+          <UserInfo user={user} />
+          <ProfileActions onLogout={handleLogout} />
+        </S.ProfileCard>
+      </S.ContentArea>
+    </S.ProfileWrapper>
   );
 }

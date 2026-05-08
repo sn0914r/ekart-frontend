@@ -1,106 +1,60 @@
 import { logger } from "@utils/logger";
-import useAuthStore from "@store/authStore";
+import useAuthStore from "@app/store/authStore";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
-// ==========================================
-// Token Refresh State (Handles concurrent calls)
-// ==========================================
+// ----------------------------------- REFRESH TOKEN STATE -----------------------------------
+
 let isRefreshing = false;
-let refreshSubscribers = [];
+let failedQueue = [];
 
-const subscribeTokenRefresh = (callback) => refreshSubscribers.push(callback);
-
-const onTokenRefreshed = (newToken) => {
-  refreshSubscribers.forEach((callback) => callback(newToken));
-  refreshSubscribers = [];
+const processQueue = (error, token = null) => {
+  failedQueue.forEach((promise) => {
+    if (error) promise.reject(error);
+    else promise.resolve(token);
+  });
+  failedQueue = [];
 };
 
-const apiClient = async (endpoint, options = {}) => {
-  const url = `${BASE_URL}${endpoint}`;
-  const { accessToken } = useAuthStore.getState();
 
+
+// ----------------------------------- PRIVATE HELPERS -----------------------------------
+
+function prepareConfig(accessToken, options) {
   const isFormData = options.body instanceof FormData;
+  
   const headers = {
     ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
     ...(!isFormData && { "Content-Type": "application/json" }),
     ...(options.headers || {}),
   };
 
-  const config = {
+  return {
     ...options,
     headers,
     credentials: "include",
-    body:
-      options.body && !isFormData && typeof options.body !== "string"
-        ? JSON.stringify(options.body)
-        : options.body,
+    body: formatRequestBody(options.body, isFormData),
   };
-
-  try {
-    const response = await fetch(url, config);
-    const data = await response.json().catch(() => null);
-    logger.info("API Response", data);
-
-    // Handle Token Expiry (401)
-    if (response.status === 401 && data?.errorCode === "INVALID_TOKEN") {
-      return handleRefreshFlow(endpoint, options);
-    }
-
-    // Handle API Errors
-    if (!response.ok || (data && data.success === false)) {
-      throw normalizeError(response, data);
-    }
-
-    logger.info(`[API Success] ${endpoint}`, data);
-    return data;
-  } catch (error) {
-    if (error.name === "TypeError") logger.error("Network Error", error);
-    throw error;
-  }
-};
-
-/**
- * Logic to handle token refresh and retry original request
- */
-async function handleRefreshFlow(endpoint, options) {
-  const { clearAuth, updateAccessToken } = useAuthStore.getState();
-
-  if (!isRefreshing) {
-    isRefreshing = true;
-    try {
-      const resp = await fetch(`${BASE_URL}/auth/refresh`, {
-        method: "POST",
-        credentials: "include",
-      });
-      const data = await resp.json();
-
-      if (resp.ok && data.accessToken) {
-        updateAccessToken(data.accessToken);
-        isRefreshing = false;
-        onTokenRefreshed(data.accessToken);
-      } else {
-        throw new Error("Refresh failed");
-      }
-    } catch (err) {
-      isRefreshing = false;
-      clearAuth();
-      window.location.href = "/auth/login";
-      throw err;
-    }
-  }
-
-  // Queue this request until the refresh is done
-  return new Promise((resolve) => {
-    subscribeTokenRefresh((newToken) => {
-      resolve(apiClient(endpoint, options));
-    });
-  });
 }
 
-/**
- * Converts response data into a standard Error object
- */
+function formatRequestBody(body, isFormData) {
+  if (!body || isFormData || typeof body === "string") return body;
+  return JSON.stringify(body);
+}
+
+async function parseJSON(response) {
+  const data = await response.json().catch(() => null);
+  return data;
+}
+
+function isTokenExpired(response, data) {
+  return response.status === 401 && data?.errorCode === "INVALID_TOKEN";
+}
+
+function isErrorResponse(response, data) {
+  return !response.ok || (data && data.success === false);
+}
+
 function normalizeError(response, data) {
   const error = new Error(data?.message || "Something went wrong");
   Object.assign(error, {
@@ -111,5 +65,86 @@ function normalizeError(response, data) {
   });
   return error;
 }
+
+async function handleRefreshFlow(endpoint, options) {
+  const { clearAuth, setAuth } = useAuthStore.getState();
+
+  // If already refreshing, wait in line
+  if (isRefreshing) {
+    return new Promise((resolve, reject) => {
+      failedQueue.push({ 
+        resolve: () => resolve(apiClient(endpoint, options)), 
+        reject 
+      });
+    });
+  }
+
+  isRefreshing = true;
+
+  try {
+    logger.info("Attempting to refresh session...");
+    const resp = await fetch(`${BASE_URL}/auth/refresh`, {
+      method: "POST",
+      credentials: "include",
+    });
+
+    const data = await resp.json();
+
+    if (resp.ok && data.accessToken) {
+      logger.info("Session refreshed successfully");
+      setAuth(data.accessToken);
+      
+      isRefreshing = false;
+      processQueue(null, data.accessToken);
+
+      return apiClient(endpoint, options);
+    } else {
+      throw new Error(data?.message || "Refresh failed");
+    }
+  } catch (err) {
+    logger.error("Session refresh failed", err);
+    isRefreshing = false;
+    processQueue(err);
+    clearAuth();
+    
+    if (window.location.pathname !== "/auth/login") {
+      window.location.href = "/auth/login";
+    }
+    throw err;
+  }
+}
+
+
+// ----------------------------------- MAIN CLIENT -----------------------------------
+
+const apiClient = async (endpoint, options = {}) => {
+  const { accessToken } = useAuthStore.getState();
+  const url = `${BASE_URL}${endpoint}`;
+  
+  // 1. Prepare Request Configuration
+  const config = prepareConfig(accessToken, options);
+
+  try {
+    // 2. Execute Request
+    const response = await fetch(url, config);
+    const data = await parseJSON(response);
+
+    // 3. Intercept: Token Expired (401)
+    if (isTokenExpired(response, data)) {
+      return handleRefreshFlow(endpoint, options);
+    }
+
+    // 4. Intercept: Application Errors
+    if (isErrorResponse(response, data)) {
+      throw normalizeError(response, data);
+    }
+
+    logger.info(`[Success] ${endpoint}`, data);
+    return data;
+  } catch (error) {
+    if (error.name === "TypeError") logger.error("Network Error", error);
+    throw error;
+  }
+};
 
 export default apiClient;

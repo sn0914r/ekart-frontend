@@ -1,33 +1,27 @@
 import { ArrowRight } from "lucide-react";
-
-import {
-  Summary,
-  SummaryTitle,
-  SummaryRow,
-  CheckoutBtn,
-} from "./CartSummary.styles";
+import * as S from "./CartSummary.styles";
 
 const CartSummary = ({ subtotal, shipping, isProcessing, handleCheckout }) => {
   const total = subtotal + shipping;
   return (
-    <Summary>
-      <SummaryTitle>Order Summary</SummaryTitle>
-      <SummaryRow>
+    <S.Summary>
+      <S.SummaryTitle>Order Summary</S.SummaryTitle>
+      <S.SummaryRow>
         <span>Subtotal</span>
         <span>Rs {subtotal.toLocaleString()}</span>
-      </SummaryRow>
-      <SummaryRow>
+      </S.SummaryRow>
+      <S.SummaryRow>
         <span>Shipping</span>
         <span>Rs {shipping.toLocaleString()}</span>
-      </SummaryRow>
-      <SummaryRow bold total totalValue={total}>
+      </S.SummaryRow>
+      <S.SummaryRow total totalValue={total}>
         <span>Total</span>
         <span>Rs {total.toLocaleString()}</span>
-      </SummaryRow>
-      <CheckoutBtn onClick={handleCheckout} disabled={isProcessing}>
+      </S.SummaryRow>
+      <S.CheckoutBtn onClick={handleCheckout} disabled={isProcessing}>
         {isProcessing ? "Processing..." : "Checkout"} <ArrowRight size={16} />
-      </CheckoutBtn>
-    </Summary>
+      </S.CheckoutBtn>
+    </S.Summary>
   );
 };
 

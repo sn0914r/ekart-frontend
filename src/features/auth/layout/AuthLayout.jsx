@@ -1,35 +1,26 @@
 import { Outlet } from "react-router-dom";
-
 import Image from "@assets/auth-layout.png";
-
-import {
-  FullHeightContainer,
-  RowWrapper,
-  ImageWrapper,
-  FormSection,
-  FormContent,
-} from "./AuthLayout.styles";
+import * as S from "./AuthLayout.styles";
 
 const AuthLayout = () => {
   return (
-    <FullHeightContainer className="container-fluid p-0">
-      <RowWrapper className="row g-0">
-        {/* Image Section */}
+    <S.FullHeightContainer className="container-fluid p-0">
+      <S.RowWrapper className="row g-0">
         <div className="col-12 col-lg-6 d-none d-lg-block">
-          <ImageWrapper>
-            <img src={Image} alt="Auth" />
-          </ImageWrapper>
+          <S.ImageWrapper>
+            <img src={Image} alt="Auth Image" />
+          </S.ImageWrapper>
         </div>
-        {/* Form Section */}
+
         <div className="col-12 col-lg-6">
-          <FormSection>
-            <FormContent>
+          <S.FormSection>
+            <S.FormContent>
               <Outlet />
-            </FormContent>
-          </FormSection>
+            </S.FormContent>
+          </S.FormSection>
         </div>
-      </RowWrapper>
-    </FullHeightContainer>
+      </S.RowWrapper>
+    </S.FullHeightContainer>
   );
 };
 

@@ -1,54 +1,29 @@
-import { Link, useNavigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
-import { toast } from "sonner";
-
-import CartHooks from "../cart.hooks";
-import CartItem from "../components/CartItem/CartItem";
+import { useNavigate } from "react-router-dom";
+import { useCart } from "../hooks/ui/useCart";
+import CartHeader from "../components/CartHeader/CartHeader";
+import CartItemList from "../components/CartItemList/CartItemList";
 import CartSummary from "../components/CartSummary/CartSummary";
-import { PageWrapper, PageTitle, EmptyCartMessage } from "./CartPage.styles";
+import CartLoading from "../components/CartLoading/CartLoading";
+import CartEmpty from "../components/CartEmpty/CartEmpty";
+import * as S from "./CartPage.styles";
 
 const CartPage = () => {
   const navigate = useNavigate();
-  const { cartItems, isLoading, calculateTotal } = CartHooks.useCartData();
-
-  const { mutate: increaseQty } = CartHooks.useIncreaseQty();
-  const { mutate: decreaseQty } = CartHooks.useDecreaseQty();
-  const { mutate: removeItem } = CartHooks.useRemoveItem();
-
-  const handleIncrease = (productId) => increaseQty({ productId });
-  const handleDecrease = (productId) => decreaseQty({ productId });
-  const handleRemove = (productId) =>
-    removeItem(
-      { productId },
-      {
-        onSuccess: () => toast.info("Item removed from cart"),
-        onError: (err) => toast.error(err.message || "Failed to remove item"),
-      },
-    );
+  const { cartItems, isLoading, calculateTotal } = useCart();
 
   if (isLoading) {
     return (
-      <PageWrapper>
-        <div className="container">
-          <EmptyCartMessage>
-            <p>Loading your bag...</p>
-          </EmptyCartMessage>
-        </div>
-      </PageWrapper>
+      <S.PageWrapper>
+        <CartLoading />
+      </S.PageWrapper>
     );
   }
 
   if (!cartItems || cartItems.length === 0) {
     return (
-      <PageWrapper>
-        <div className="container">
-          <EmptyCartMessage>
-            <h2>Your Bag is Empty</h2>
-            <p>Looks like you haven't added any items yet.</p>
-            <Link to="/">Start Shopping</Link>
-          </EmptyCartMessage>
-        </div>
-      </PageWrapper>
+      <S.PageWrapper>
+        <CartEmpty />
+      </S.PageWrapper>
     );
   }
 
@@ -60,36 +35,17 @@ const CartPage = () => {
   };
 
   return (
-    <PageWrapper>
+    <S.PageWrapper>
       <div className="container">
-        <div className="d-flex align-items-center mb-4">
-          <Link
-            to="/"
-            className="text-decoration-none text-muted d-flex align-items-center gap-2 small text-uppercase"
-          >
-            <ArrowLeft size={16} /> Continue Shopping
-          </Link>
-        </div>
+        <CartHeader />
 
-        <PageTitle>Shopping Bag ({cartItems.length})</PageTitle>
+        <S.PageTitle>Shopping Bag ({cartItems.length})</S.PageTitle>
 
         <div className="row g-5">
-          {/* Cart Items List */}
           <div className="col-12 col-lg-8">
-            <div className="d-flex flex-column gap-3">
-              {cartItems.map((item) => (
-                <CartItem
-                  key={item.productId}
-                  item={item}
-                  increaseQty={handleIncrease}
-                  decreaseQty={handleDecrease}
-                  removeFromCart={handleRemove}
-                />
-              ))}
-            </div>
+            <CartItemList items={cartItems} />
           </div>
 
-          {/* Cart Summary Sidebar */}
           <div className="col-12 col-lg-4">
             <div className="sticky-top" style={{ top: "2rem", zIndex: 1 }}>
               <CartSummary
@@ -101,7 +57,7 @@ const CartPage = () => {
           </div>
         </div>
       </div>
-    </PageWrapper>
+    </S.PageWrapper>
   );
 };
 

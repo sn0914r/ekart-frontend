@@ -1,72 +1,45 @@
-import { useNavigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { useCheckoutFlow } from "../../hooks/api/useCheckoutFlow";
+import { useCheckoutAddress } from "../../hooks/ui/useCheckoutAddress";
 
-import Button from "@shared/components/Button/Button";
-
-import { useCheckoutFlow } from "../../useCheckoutFlow";
-import AddressCard from "../../components/AddressCard/AddressCard";
-import OrderSummaryCard from "../../components/OrderSummaryCard/OrderSummaryCard"
-
-import { PageWrapper, SectionTitle, BackLink } from "./CheckoutPage.styles";
+import CheckoutHeader from "./components/CheckoutHeader";
+import CheckoutSidebar from "./components/CheckoutSidebar";
+import AddressSelection from "../ShippingAddressPage/components/AddressSelection";
+import * as S from "./CheckoutPage.styles";
 
 const CheckoutPage = () => {
-  const navigate = useNavigate();
+  const { isProcessing, handleStartPayment } = useCheckoutFlow();
   const {
     addresses,
     selectedAddress,
     setSelectedAddress,
-    isProcessing,
-    handlePayment,
     navigateToAddressForm,
-  } = useCheckoutFlow();
+  } = useCheckoutAddress();
 
   return (
-    <PageWrapper>
+    <S.PageWrapper>
       <div className="container">
-        <BackLink onClick={() => navigate(-1)}>
-          <ArrowLeft size={14} /> Back
-        </BackLink>
-        <div className="row g-5">
-          {/* Left Column: Address Selection */}
-          <div className="col-12 col-lg-8">
-            <SectionTitle>Select Delivery Address</SectionTitle>
+        <CheckoutHeader />
 
-            {addresses.length > 0 ? (
-              <div className="row g-3">
-                {addresses.map((add) => (
-                  <div className="col-12 col-md-6" key={add.id}>
-                    <AddressCard
-                      address={add}
-                      isSelected={selectedAddress?.id === add.id}
-                      onSelect={setSelectedAddress}
-                    />
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="alert alert-warning">
-                No addresses found. Please add a shipping address to proceed.
-              </div>
-            )}
-            <Button onClick={navigateToAddressForm}>Add Address</Button>
+        <div className="row g-5">
+          <div className="col-12 col-lg-8">
+            <AddressSelection
+              addresses={addresses}
+              selectedAddress={selectedAddress}
+              onSelectAddress={setSelectedAddress}
+              onAddAddress={navigateToAddressForm}
+            />
           </div>
 
-          {/* Right Column: Order Summary */}
           <div className="col-12 col-lg-4">
-            <div className="sticky-top" style={{ top: "2rem" }}>
-              <OrderSummaryCard />
-              <Button
-                disabled={isProcessing || !selectedAddress}
-                onClick={handlePayment}
-                style={{ marginTop: "1.5rem" }}
-              >
-                {isProcessing ? "Processing..." : "Place Order"}
-              </Button>
-            </div>
+            <CheckoutSidebar
+              isProcessing={isProcessing}
+              canPlaceOrder={!!selectedAddress}
+              onPlaceOrder={() => handleStartPayment(selectedAddress)}
+            />
           </div>
         </div>
       </div>
-    </PageWrapper>
+    </S.PageWrapper>
   );
 };
 

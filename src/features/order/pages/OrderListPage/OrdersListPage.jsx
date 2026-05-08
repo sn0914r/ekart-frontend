@@ -3,14 +3,13 @@ import { ArrowLeft } from "lucide-react";
 
 import Loader from "@shared/components/Loader/Loader";
 
-import OrdersQuery from "../../order.query";
-import OrderListItem from "../../components/OrderListItem/OrderListItem";
+import OrderListItem from "./components/OrderListItem";
+import { useOrdersListPage } from "./OrdersListPage.hooks";
 
 import { PageWrapper, PageTitle, EmptyState } from "./OrdersListPage.styles";
 
 const OrdersPage = () => {
-  const { data, isLoading, error, isError } = OrdersQuery.useGetOrders();
-  const orders = data?.data;
+  const { orders, isLoading, error, isError } = useOrdersListPage();
 
   if (isLoading) {
     return (

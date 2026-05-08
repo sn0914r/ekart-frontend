@@ -17,6 +17,7 @@
     "bootstrap": "^5.3.8",
     "firebase": "^12.7.0",
     "lucide-react": "^0.562.0",
+    "nanoid": "^5.1.11",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.71.1",

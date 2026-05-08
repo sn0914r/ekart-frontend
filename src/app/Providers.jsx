@@ -8,7 +8,13 @@ export default function Providers({ children }) {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <Toaster richColors duration={5000} closeButton position="bottom-right" />
+        <Toaster
+          richColors
+          duration={5000}
+          closeButton
+          position="bottom-right"
+          visibleToasts={1}
+        />
         {children}
       </BrowserRouter>
     </QueryClientProvider>
