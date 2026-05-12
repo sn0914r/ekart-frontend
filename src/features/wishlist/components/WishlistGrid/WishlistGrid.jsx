@@ -1,4 +1,4 @@
-import ProductCard from "@features/product/pages/landing/components/ProductCard/ProductCard";
+import ProductCard from "@features/product/pages/Landing/components/ProductCard";
 
 const WishlistGrid = ({ items, onRemove }) => {
   return (

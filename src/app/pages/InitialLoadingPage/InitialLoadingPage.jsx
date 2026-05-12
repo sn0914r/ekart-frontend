@@ -1,4 +1,4 @@
-import * as S from "./initialLoadingPage.styles";
+import * as S from "./InitialLoadingPage.styles";
 
 const InitialLoadingPage = ({ status }) => {
   return (

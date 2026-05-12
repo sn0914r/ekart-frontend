@@ -9,6 +9,8 @@ import {
   StockInfo,
   ViewProductLink,
   WishlistButtonWrapper,
+  ProductContent,
+  TitleRow,
 } from "./ProductCard.styles";
 
 import { Link } from "react-router-dom";
@@ -52,14 +54,14 @@ const ProductCard = (props) => {
         </ViewProductLink>
       </ImageContainer>
 
-      {/* Content using Bootstrap Utilities */}
-      <div className="d-flex flex-column pt-3 gap-1">
-        <div className="d-flex justify-content-between align-items-baseline gap-3">
+      {/* Content using Styled Components */}
+      <ProductContent>
+        <TitleRow>
           <ProductName title={name}>{name}</ProductName>
           <Price>₹{price}</Price>
-        </div>
+        </TitleRow>
         <StockInfo>{stock} Stock</StockInfo>
-      </div>
+      </ProductContent>
     </CardWrapper>
   );
 };

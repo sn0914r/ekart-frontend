@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { ROUTES } from "@constants/routes";
 
-import LandingPage from "@features/product/pages/landing/page/LandingPage";
+import LandingPage from "@features/product/pages/Landing/page/LandingPage";
 import CartPage from "@features/cart/page/CartPage";
 import CheckoutRoutes from "@features/checkout/CheckoutRoutes";
 import OrderRoutes from "@features/order/OrderRoutes";
@@ -11,7 +11,7 @@ import WishlistRoutes from "@features/wishlist/WishlistRoutes";
 
 import Profile from "./pages/Profile/ProfilePage";
 import AboutPage from "./pages/About/AboutPage";
-import NotFound from "./pages/NotFound/NotFoundpage";
+import NotFound from "./pages/NotFound/NotFoundPage";
 
 export default function Router() {
   return (

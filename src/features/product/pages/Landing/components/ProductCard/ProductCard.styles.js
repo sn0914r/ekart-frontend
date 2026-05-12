@@ -19,8 +19,8 @@ export const ViewProductLink = styled(Link)`
   left: 0;
   width: 100%;
   height: 3.5rem;
-  background-color: #000;
-  color: #fff;
+  background-color: var(--bg-dark);
+  color: var(--text-on-dark);
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -36,8 +36,8 @@ export const ViewProductLink = styled(Link)`
   padding-bottom: 0.5rem; /* Optical balance */
 
   &:hover {
-    background-color: #1a1a1a;
-    color: #fff;
+    background-color: var(--bg-dark-hover);
+    color: var(--text-on-dark);
   }
 `;
 
@@ -46,7 +46,7 @@ export const ImageContainer = styled.div`
   aspect-ratio: 3/4;
   width: 100%;
   overflow: hidden;
-  background-color: #f5f5f5;
+  background-color: var(--color-subtle-bg);
 `;
 
 export const ProductImage = styled.img`
@@ -62,7 +62,7 @@ export const SoldOutOverlay = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: var(--color-white-overlay);
   backdrop-filter: blur(2px);
 `;
 
@@ -107,7 +107,7 @@ export const WishlistButtonWrapper = styled.button`
   top: 10px;
   right: 10px;
   z-index: 15;
-  background: white;
+  background: var(--bg-white);
   border: none;
   border-radius: 50%;
   width: 36px;
@@ -116,7 +116,7 @@ export const WishlistButtonWrapper = styled.button`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px var(--color-shadow-soft);
   color: ${(props) => (props.$active ? "var(--color-error)" : "var(--text-primary)")};
   transition: transform 0.2s, color 0.2s;
 
@@ -124,3 +124,18 @@ export const WishlistButtonWrapper = styled.button`
     transform: scale(1.1);
   }
 `;
+
+export const ProductContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.75rem;
+  gap: 0.25rem;
+`;
+
+export const TitleRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+`;
+
