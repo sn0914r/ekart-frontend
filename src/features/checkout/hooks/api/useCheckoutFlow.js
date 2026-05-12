@@ -17,7 +17,6 @@ export const useCheckoutFlow = () => {
   const { mutate: createPayment } = useCreatePaymentMutation();
   const { mutate: mutatePayment } = usePaymentSuccessMutation();
   const { mutate: mutateCart } = useClearCartMutation();
-  const { data: serverCart } = useCartQuery();
 
   const handleStartPayment = async (selectedAddress) => {
     if (!selectedAddress) {
@@ -28,29 +27,26 @@ export const useCheckoutFlow = () => {
     const { id, ...shippingAddress } = selectedAddress;
     setIsProcessing(true);
 
-    const cart = serverCart?.cart?.items ?? [];
-    const cartMap = cart.map((item) => ({
-      productId: item.productId,
-      quantity: item.quantity,
-    }));
-
-    toast.loading("Creating order....");
+    const toastId = toast.loading("Creating order....");
 
     createOrder(
-      { shippingAddress, items: cartMap },
+      { shippingAddress },
       {
         onSuccess: (orderDetails) => {
           const orderId = orderDetails?.data?.orderId || orderDetails?.orderId;
           if (!orderId) {
-            toast.error("Order Id not found");
+            toast.error("Order Id not found", { id: toastId });
             return;
           }
 
           createPayment(orderId, {
             onError: (err) =>
-              toast.error(err.message || "Failed to create payment"),
+              toast.error(err.message || "Failed to create payment", {
+                id: toastId,
+              }),
 
             onSuccess: ({ data }) => {
+              toast.dismiss(toastId);
               const { amount, razorpayOrderId } = data;
               openRazorpayCheckout(amount, razorpayOrderId, {
                 navigate,
@@ -61,7 +57,8 @@ export const useCheckoutFlow = () => {
           });
         },
 
-        onError: (err) => toast.error(err.message || "Failed to create Order"),
+        onError: (err) =>
+          toast.error(err.message || "Failed to create Order", { id: toastId }),
         onSettled: () => setIsProcessing(false),
       },
     );

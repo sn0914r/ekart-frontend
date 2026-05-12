@@ -12,8 +12,8 @@ const CartItemList = ({ items }) => {
   const { mutate: decreaseQty } = useDecrementQuantityMutation();
   const { mutate: removeItem } = useRemoveFromCartMutation();
 
-  const handleIncrease = (productId) => increaseQty({ productId });
-  const handleDecrease = (productId) => decreaseQty({ productId });
+  const handleIncrease = (productId) => increaseQty(productId);
+  const handleDecrease = (productId) => decreaseQty(productId);
   const handleRemove = (productId) => {
     removeItem(
       { productId },

@@ -15,6 +15,7 @@ import { Nav, Brand, NavbarAnchor, ActionBtn } from "./Navbar.styles";
 // Sub-components
 import NavSearch from "./NavSearch";
 import NavSidebar from "./NavSidebar";
+import { useCart } from "@features/cart/hooks/ui/useCart";
 
 // Navigation Links Configuration
 const NAV_LINKS = [
@@ -30,8 +31,10 @@ const Navbar = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // 2. Auth State
+  // 2. Auth & Cart State
   const user = useAuthStore((state) => state.user);
+  const { totalCartItemsCount } = useCart();
+  const cartCount = totalCartItemsCount();
 
   // 3. Scroll Effect: Change navbar background when scrolled
   useEffect(() => {
@@ -64,7 +67,15 @@ const Navbar = () => {
           <div className="d-flex align-items-center gap-5">
             {/* Desktop Menu */}
             <div className="d-none d-lg-flex gap-5">
-              <NavbarAnchor to="/" isScrolled={isScrolledFlag}>
+              <NavbarAnchor 
+                to="/#products" 
+                isScrolled={isScrolledFlag}
+                onClick={() => {
+                  if (window.location.hash === "#products") {
+                    document.getElementById("products")?.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+              >
                 Collections
               </NavbarAnchor>
               <NavbarAnchor to="/about" isScrolled={isScrolledFlag}>
@@ -87,17 +98,28 @@ const Navbar = () => {
               <ActionBtn isScrolled={isScrolledFlag} as={Link} to="/cart">
                 <div style={{ position: "relative", display: "flex" }}>
                   <ShoppingBag size={18} strokeWidth={1.5} />
-                  <span
-                    style={{
-                      position: "absolute",
-                      top: "-6px",
-                      right: "-6px",
-                      fontSize: "10px",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    0
-                  </span>
+                   {cartCount > 0 && (
+                    <span
+                      style={{
+                        position: "absolute",
+                        top: "-8px",
+                        right: "-8px",
+                        fontSize: "9px",
+                        fontWeight: "700",
+                        backgroundColor: isScrolled ? "var(--text-primary)" : "#ffffff",
+                        color: isScrolled ? "#ffffff" : "var(--text-primary)",
+                        borderRadius: "50%",
+                        width: "16px",
+                        height: "16px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        transition: "all 0.3s ease",
+                      }}
+                    >
+                      {cartCount}
+                    </span>
+                  )}
                 </div>
                 <span>Bag</span>
               </ActionBtn>

@@ -14,7 +14,16 @@ const Footer = () => {
 
         {/* Quick Links */}
         <div className="d-flex flex-column flex-md-row justify-content-center gap-4 gap-md-5 py-4 border-top border-bottom border-white border-opacity-10 mb-5">
-          <FooterLink to="/#products">Collections</FooterLink>
+          <FooterLink
+            to="/#products"
+            onClick={() => {
+              if (window.location.hash === "#products") {
+                document.getElementById("products")?.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
+          >
+            Collections
+          </FooterLink>
           <FooterLink to="/cart">Cart</FooterLink>
           <FooterLink to="/about">About</FooterLink>
         </div>

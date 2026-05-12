@@ -5,7 +5,7 @@ import { useCart } from "@features/cart/hooks/ui/useCart";
 import useAuthStore from "@app/store/authStore";
 
 export const useProductActions = (product) => {
-  const user = useAuthStore((state) => state.user);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const { isItemInCart } = useCart();
   const { mutate: addToCartMutation } = useAddToCartMutation();
   const [activeSize, setActiveSize] = useState("");
@@ -20,7 +20,7 @@ export const useProductActions = (product) => {
   const outOfStock = product?.stock <= 0;
 
   const handleAddToCart = () => {
-    if (!user) return;
+    if (!isAuthenticated) return;
     if (!isAdded && !outOfStock) {
       addToCartMutation(
         { productId: product.id || product._id, variant: { size: activeSize } },
@@ -33,7 +33,7 @@ export const useProductActions = (product) => {
   };
 
   return {
-    user,
+    isAuthenticated,
     isAdded,
     outOfStock,
     activeSize,

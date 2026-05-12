@@ -5,13 +5,10 @@ import { useProductActions } from "../../../../hooks/ui/useProductActions";
 import { COLOR_MAP } from "../../../../constants/productColors";
 import * as S from "./ProductActions.styles";
 
-
-
 const ProductActions = ({ product, colors = [] }) => {
-
   const navigate = useNavigate();
   const {
-    user,
+    isAuthenticated,
     isAdded,
     outOfStock,
     activeSize,
@@ -98,15 +95,20 @@ const ProductActions = ({ product, colors = [] }) => {
       </div>
 
       {/* Actions */}
-      {!user ? (
+      {!isAuthenticated ? (
         <Button
-          disabled
+          onClick={() => navigate("/auth/login")}
           style={{
             width: "100%",
             padding: "1rem",
             display: "flex",
             gap: "0.5rem",
             justifyContent: "center",
+            background: "var(--bg-secondary)",
+            color: "var(--text-primary)",
+            border: "1px solid var(--border-color)",
+            transition: "all 0.2s ease",
+            cursor: "pointer",
           }}
         >
           <Lock size={18} /> Login to Add to Bag

@@ -24,7 +24,9 @@ export const SwatchItem = styled.div`
   cursor: pointer;
 
   &:hover .color-circle {
-    box-shadow: 0 0 0 2px #fff, 0 0 0 3px #ccc;
+    box-shadow:
+      0 0 0 2px #fff,
+      0 0 0 3px #ccc;
   }
 `;
 
@@ -60,7 +62,8 @@ export const SizeRow = styled.div`
 export const SizePill = styled.div`
   padding: 0.25rem 0;
   color: var(--text-primary);
-  border-bottom: 2px solid ${(props) => (props.active ? "var(--color-black, #000)" : "transparent")};
+  border-bottom: 2px solid
+    ${(props) => (props.active ? "var(--color-black, #000)" : "transparent")};
   cursor: pointer;
   font-family: var(--font-sans);
   font-size: 1rem;
@@ -68,7 +71,8 @@ export const SizePill = styled.div`
   transition: all 0.1s ease;
 
   &:hover {
-    border-bottom: 2px solid ${(props) => (props.active ? "var(--color-black, #000)" : "#ccc")};
+    border-bottom: 2px solid
+      ${(props) => (props.active ? "var(--color-black, #000)" : "#ccc")};
   }
 `;
 

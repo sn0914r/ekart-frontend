@@ -41,7 +41,7 @@ const CatalogSection = () => {
   };
 
   return (
-    <S.Catalog ref={containerRef}>
+    <S.Catalog id="products" ref={containerRef}>
       {error ? (
         <Error message={error.message} onRetry={refetch} />
       ) : (
