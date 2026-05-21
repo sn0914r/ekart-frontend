@@ -2,171 +2,326 @@ import styled from "@emotion/styled";
 
 export const PageWrapper = styled.div`
   padding: 4rem 0;
-  min-height: 80vh;
-  background-color: #fafafa;
+  min-height: 90vh;
+  background-color: var(--bg-primary);
+  opacity: 0;
+  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
 `;
 
-export const ContentContainer = styled.div`
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 1rem;
-`;
-
-export const PageTitle = styled.h1`
-  font-family: var(--font-serif);
-  font-size: 2.5rem;
-  margin: 0 0 2rem 0;
+export const BackLink = styled.button`
+  background: none;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: -0.02em;
+  letter-spacing: var(--letter-spacing-loose, 0.1em);
   color: var(--text-primary);
+  cursor: pointer;
+  padding: 0.5rem 0;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--color-black);
+    transition: width 0.3s ease;
+  }
+
+  &:hover {
+    transform: translateX(-4px);
+    &::after {
+      width: 100%;
+    }
+  }
+`;
+
+export const HeroSection = styled.div`
+  text-align: center;
+  margin-bottom: 4rem;
+  border-bottom: var(--border-fine);
+  padding-bottom: 3.5rem;
+`;
+
+export const SuperTitle = styled.span`
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-loose, 0.1em);
+  color: var(--text-primary);
+  opacity: 0.5;
+  display: block;
+  margin-bottom: 0.5rem;
+`;
+
+export const MainTitle = styled.h1`
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1.1;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+`;
+
+export const Tagline = styled.div`
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  opacity: 0.75;
+  max-width: 660px;
+  margin: 0 auto;
+  line-height: 1.7;
+
+  p {
+    margin-bottom: 1rem;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 `;
 
 export const Section = styled.section`
-  margin-bottom: 3rem;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
+  margin-bottom: 5rem;
 `;
 
 export const SectionTitle = styled.h2`
   font-family: var(--font-serif);
-  font-size: 1.5rem;
-  margin: 0 0 1rem 0;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
+  font-size: 2rem;
   color: var(--text-primary);
-`;
-
-export const Description = styled.p`
-  font-size: 1rem;
-  line-height: 1.8;
-  color: var(--text-secondary);
-  margin-bottom: 1.5rem;
-`;
-
-export const FeatureList = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 0 0 1.5rem 0;
-`;
-
-export const FeatureItem = styled.li`
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-  padding: 0.5rem 0;
-  padding-left: 1.5rem;
+  margin-bottom: 2.5rem;
   position: relative;
+`;
 
-  &:before {
-    content: "•";
-    position: absolute;
-    left: 0;
-    font-weight: bold;
-    color: var(--text-primary);
+export const HighlightGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+`;
+
+export const HighlightCard = styled.div`
+  background-color: var(--color-subtle-bg);
+  border: var(--border-fine);
+  padding: 2.5rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px var(--color-shadow-soft);
+    border-color: var(--color-black);
   }
 `;
 
-export const TechStack = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  margin-bottom: 2rem;
-  align-items: start;
-`;
-
-export const TechCategory = styled.div`
-  background-color: #fafafa;
-  padding: 1.5rem;
-  border-left: 3px solid #000000;
-`;
-
-export const TechTitle = styled.h3`
-  font-family: var(--font-serif);
-  font-size: 1.1rem;
-  margin: 0 0 1rem 0;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+export const IconWrapper = styled.div`
   color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background-color: var(--bg-primary);
+  border: var(--border-fine);
 `;
 
-export const TechList = styled.ul`
+export const CardTitle = styled.h3`
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+`;
+
+export const HighlightList = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 `;
 
-export const TechItem = styled.li`
-  font-size: 0.85rem;
+export const HighlightItem = styled.li`
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.5;
   color: var(--text-secondary);
-  padding: 0.25rem 0;
-`;
+  padding-left: 1.25rem;
+  position: relative;
 
-export const LinkSection = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
+  &::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--color-muted);
   }
 `;
 
-export const DropdownButton = styled.button`
-  background: none;
-  border: none;
-  color: var(--text-primary);
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-decoration: underline;
-  cursor: pointer;
-  padding: 0.5rem 0;
-  margin-top: 0.5rem;
-  transition: color 0.2s ease;
+export const SpecsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+`;
+
+export const SpecsCard = styled.div`
+  border: var(--border-fine);
+  border-top: var(--border-dark);
+  padding: 2rem;
+  background-color: var(--bg-primary);
+  transition: all 0.3s ease;
 
   &:hover {
-    color: #333333;
+    box-shadow: 0 5px 15px var(--color-shadow-soft);
   }
 `;
 
-export const CollapsibleContent = styled.div`
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid #e0e0e0;
-  animation: slideDown 0.3s ease-out;
-  overflow: hidden;
+export const SpecsCardHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-divider);
+  padding-bottom: 0.75rem;
+`;
 
-  @keyframes slideDown {
-    from {
-      opacity: 0;
-      max-height: 0;
-      padding-top: 0;
-      margin-top: 0;
-    }
-    to {
-      opacity: 1;
-      max-height: 500px;
-      padding-top: 1rem;
-      margin-top: 1rem;
-    }
+export const SpecsCardTitle = styled.h4`
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  margin: 0;
+`;
+
+export const SpecsList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+`;
+
+export const SpecsItem = styled.li`
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  &::before {
+    content: "•";
+    color: var(--color-muted);
   }
 `;
 
-export const BackLink = styled.a`
+export const RepoGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+`;
+
+export const RepoCard = styled.div`
+  background-color: var(--bg-primary);
+  border: var(--border-fine);
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 280px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &:hover {
+    background-color: var(--color-subtle-bg);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px var(--color-shadow-soft);
+  }
+`;
+
+export const RepoHeader = styled.div`
+  margin-bottom: 1.5rem;
+`;
+
+export const RepoMeta = styled.span`
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-loose, 0.1em);
+  color: var(--text-primary);
+  opacity: 0.5;
+  display: block;
+  margin-bottom: 0.5rem;
+`;
+
+export const RepoName = styled.h3`
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin: 0 0 1rem 0;
+`;
+
+export const RepoDesc = styled.p`
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin: 0;
+`;
+
+export const RepoFooter = styled.div`
+  margin-top: 1.5rem;
+`;
+
+export const InlineIcon = styled.span`
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-secondary, #666666);
-  cursor: pointer;
-  text-decoration: none;
-  transition: color 0.2s ease;
-  margin-bottom: 1.5rem;
+  margin-left: 0.375rem;
+`;
 
-  &:hover {
-    color: #000000;
+export const VisionBlock = styled.div`
+  background-color: var(--color-subtle-bg);
+  border: var(--border-fine);
+  padding: 2.25rem 3rem;
+  text-align: center;
+`;
+
+export const VisionList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: left;
+`;
+
+export const VisionItem = styled.li`
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  line-height: 1.35;
+  color: var(--text-primary);
+  position: relative;
+  padding-left: 1.75rem;
+
+  &::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--text-primary);
+    opacity: 0.5;
   }
 `;
