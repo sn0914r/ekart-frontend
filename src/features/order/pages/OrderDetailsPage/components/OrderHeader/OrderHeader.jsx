@@ -11,7 +11,7 @@ const OrderHeader = ({
   return (
     <S.HeaderCard>
       <S.OrderTitleGroup>
-        <S.OrderTitle>Order #{order._id}</S.OrderTitle>
+        <S.OrderTitle>Order #{order.orderId || order._id}</S.OrderTitle>
         <S.OrderSubtitle>
           Placed on {formatDate ? formatDate(order.createdAt) : order.createdAt}
         </S.OrderSubtitle>

@@ -1,4 +1,4 @@
-import { useGetOrdersQuery } from "../../hooks/api/useGetOrdersQuery";
+import { useGetOrdersQuery } from "../api/useGetOrdersQuery";
 
 export const useOrdersListPage = () => {
   const { data, isLoading, error, isError } = useGetOrdersQuery();

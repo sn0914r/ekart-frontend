@@ -3,7 +3,7 @@ import { ArrowLeft } from "lucide-react";
 
 import Loader from "@shared/components/Loader/Loader";
 import UpdateShippingModal from "./components/UpdateShippingModal/UpdateShippingModal";
-import { useOrderDetailsPage } from "./OrderDetailsPage.hooks";
+import { useOrderDetailsPage } from "../../hooks/ui/OrderDetailsPage.hooks";
 
 // Sub-components
 import OrderHeader from "./components/OrderHeader/OrderHeader";

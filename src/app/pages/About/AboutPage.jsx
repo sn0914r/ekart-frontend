@@ -131,7 +131,7 @@ const AboutPage = () => {
               <S.MainTitle>About eKart</S.MainTitle>
               <S.Tagline>
                 <p>
-                  eKart is a modern ecommerce platform focused on secure payment architecture,
+                  eKart is a ecommerce platform focused on secure payment architecture,
                   JWT-based session management, inventory-aware cart systems, and scalable
                   frontend/backend separation.
                 </p>

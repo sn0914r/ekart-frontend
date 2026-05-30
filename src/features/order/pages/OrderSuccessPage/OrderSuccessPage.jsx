@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 import Button from "@shared/components/Button/Button";
-import { useOrderSuccessPage } from "./OrderSuccessPage.hooks";
+import { useOrderSuccessPage } from "../../hooks/ui/OrderSuccessPage.hooks";
 
 import {
   SuccessWrapper,

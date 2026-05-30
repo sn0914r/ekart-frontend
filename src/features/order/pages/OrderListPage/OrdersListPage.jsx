@@ -4,7 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import Loader from "@shared/components/Loader/Loader";
 
 import OrderListItem from "./components/OrderListItem";
-import { useOrdersListPage } from "./OrdersListPage.hooks";
+import { useOrdersListPage } from "../../hooks/ui/OrdersListPage.hooks";
 
 import { PageWrapper, PageTitle, EmptyState } from "./OrdersListPage.styles";
 
@@ -63,7 +63,8 @@ const OrdersPage = () => {
           {orders.map((order) => (
             <div className="col-12 col-md-6 col-lg-4" key={order._id}>
               <OrderListItem
-                orderId={order._id}
+                orderSearchId={order._id}
+                orderId={order.orderId || order._id}
                 createdAt={order.createdAt}
                 orderStatus={order.orderStatus}
                 paymentStatus={order.paymentStatus}

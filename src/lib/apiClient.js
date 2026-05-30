@@ -143,6 +143,7 @@ const apiClient = async (endpoint, options = {}) => {
     return data;
   } catch (error) {
     if (error.name === "TypeError") logger.error("Network Error", error);
+    console.log(error)
     throw error;
   }
 };

@@ -15,6 +15,7 @@ import {
 } from "./OrderListItem.styles";
 
 const OrderListItem = ({
+  orderSearchId,
   createdAt,
   orderStatus,
   paymentStatus,
@@ -32,16 +33,10 @@ const OrderListItem = ({
     });
   };
 
-  // Truncate long order IDs (MongoDB ObjectIds are 24 chars)
-  const truncateOrderId = (id) => {
-    if (!id) return "";
-    return id.length > 8 ? `...${id.slice(-8)}` : id;
-  };
-
   return (
-    <OrderCard onClick={() => navigate(`/orders/${orderId}`)}>
+    <OrderCard onClick={() => navigate(`/orders/${orderSearchId}`)}>
       <OrderHeader>
-        <OrderId>Order #{truncateOrderId(orderId)}</OrderId>
+        <OrderId>Order #{orderId}</OrderId>
         <OrderDate>{formatDate(createdAt)}</OrderDate>
       </OrderHeader>
 
