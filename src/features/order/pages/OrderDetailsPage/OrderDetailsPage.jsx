@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 
 import Loader from "@shared/components/Loader/Loader";
-import UpdateShippingModal from "./components/UpdateShippingModal/UpdateShippingModal";
 import { useOrderDetailsPage } from "../../hooks/ui/OrderDetailsPage.hooks";
 
 // Sub-components
@@ -13,8 +12,10 @@ import DeliveryInfo from "./components/DeliveryInfo/DeliveryInfo";
 import OrderSummary from "./components/OrderSummary/OrderSummary";
 import PaymentDetails from "./components/PaymentDetails";
 import CancelOrderModal from "./components/CancelOrderModal";
+import OrderTimeline from "./components/OrderTimeline/OrderTimeline";
 
 import * as S from "./OrderDetailsPage.styles";
+import NotFound from "../../../../app/pages/NotFound/NotFoundPage";
 
 const OrderDetailsPage = () => {
   const {
@@ -23,8 +24,6 @@ const OrderDetailsPage = () => {
     isLoading,
     error,
     isError,
-    isShippingModalOpen,
-    setIsShippingModalOpen,
     isCancelModalOpen,
     setIsCancelModalOpen,
     formatDate,
@@ -43,37 +42,20 @@ const OrderDetailsPage = () => {
           style={{ minHeight: "40vh" }}
         >
           <Loader />
-          <span className="text-muted small">Loading ...</span>
         </div>
       </S.PageWrapper>
     );
   }
 
-  if (isError) {
+  if (isError || !order) {
     return (
-      <S.PageWrapper>
-        <div className="container">
-          <div className="alert alert-danger" role="alert">
-            Error loading order details: {error.message}
-          </div>
-          <Link to="/orders" className="btn btn-outline-primary mt-3">
-            Return to Orders
-          </Link>
-        </div>
-      </S.PageWrapper>
-    );
-  }
-
-  if (!order) {
-    return (
-      <S.PageWrapper>
-        <div className="container text-center py-5">
-          <h2 className="mb-3 text-secondary">Order Not Found</h2>
-          <Link to="/orders" className="btn btn-primary px-4 py-2">
-            Return to Orders
-          </Link>
-        </div>
-      </S.PageWrapper>
+      <NotFound
+        errorCode="404"
+        title="Order Not Found."
+        message="This order does not exist or may have been removed."
+        buttonLink="/orders"
+        buttonText="Back to Orders"
+      />
     );
   }
 
@@ -94,19 +76,16 @@ const OrderDetailsPage = () => {
           isUpdatingOrder={isUpdatingOrder}
         />
 
-        <OrderStatusOverview order={order} />
+        <OrderStatusOverview order={order} formatDate={formatDate} />
 
         <div className="row">
-          <div className="col-12 col-lg-7">
+          <div className="col-12 col-lg-6">
             <OrderItems orderSnapshot={order.orderSnapshot} />
-            <DeliveryInfo
-              shippingAddress={order.shippingAddress}
-              isPending={isPending}
-              setIsShippingModalOpen={setIsShippingModalOpen}
-            />
+            <DeliveryInfo shippingAddress={order.shippingAddress} />
           </div>
 
-          <div className="col-12 col-lg-5">
+          <div className="col-12 col-lg-6">
+            <OrderTimeline timeline={order.timeline} formatDate={formatDate} />
             <OrderSummary
               subTotal={order.subTotal}
               taxAmount={taxAmount}
@@ -117,18 +96,14 @@ const OrderDetailsPage = () => {
         </div>
       </div>
 
-      <UpdateShippingModal
-        isOpen={isShippingModalOpen}
-        onClose={() => setIsShippingModalOpen(false)}
-        orderId={id}
-        defaultAddress={order.shippingAddress}
-      />
-
       <CancelOrderModal
         isOpen={isCancelModalOpen}
         onClose={() => setIsCancelModalOpen(false)}
         isUpdatingOrder={isUpdatingOrder}
         executeCancel={executeCancel}
+        order={order}
+        itemCount={order.orderSnapshot?.length || 0}
+        totalAmount={(order.subTotal || 0) + taxAmount + shippingFee}
       />
     </S.PageWrapper>
   );

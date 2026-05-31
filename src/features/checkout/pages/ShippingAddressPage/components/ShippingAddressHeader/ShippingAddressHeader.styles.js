@@ -5,28 +5,33 @@ export const HeaderContainer = styled.div`
 `;
 
 export const BackLink = styled.button`
+  display: inline-flex;
+  align-items: center;
   background: none;
   border: none;
-  color: var(--text-secondary);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.75rem;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  font-weight: 600;
+  color: var(--text-secondary);
   cursor: pointer;
   padding: 0;
   margin-bottom: 1.5rem;
   transition: color 0.2s ease;
 
   &:hover {
-    color: var(--text-primary);
+    color: #000000;
   }
 `;
 
 export const FormTitle = styled.h1`
   font-family: var(--font-serif);
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: var(--text-primary);
+  margin-bottom: 0.5rem;
+
+  @media (min-width: 768px) {
+    font-size: 2rem;
+  }
 `;

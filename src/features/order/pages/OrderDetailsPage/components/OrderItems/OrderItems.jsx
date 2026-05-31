@@ -5,8 +5,8 @@ import * as S from "./OrderItems.styles";
 
 const OrderItems = ({ orderSnapshot }) => {
   return (
-    <C.ContentCard>
-      <C.SectionTitle>
+    <C.ContentCard style={{ padding: "1.25rem 1.5rem" }}>
+      <C.SectionTitle style={{ marginBottom: "1rem", paddingBottom: "0.75rem", fontSize: "1.25rem" }}>
         <C.TitleGroup>
           <C.TitleIcon>
             <Package size={24} />
@@ -22,8 +22,8 @@ const OrderItems = ({ orderSnapshot }) => {
             <S.ItemDetails>
               <S.ItemName>{item.name}</S.ItemName>
               <S.ItemMeta>Qty: {item.quantity}</S.ItemMeta>
+              <S.ItemPrice>Rs {item.lineTotal?.toLocaleString()}</S.ItemPrice>
             </S.ItemDetails>
-            <S.ItemPrice>Rs {item.lineTotal?.toLocaleString()}</S.ItemPrice>
           </S.ItemRowCard>
         ))}
       </S.ItemsListWrapper>

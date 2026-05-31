@@ -19,13 +19,23 @@ export const OrderTitleGroup = styled.div`
 
 export const OrderTitle = styled.h1`
   font-family: var(--font-serif);
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-bottom: 0.5rem;
-  color: var(--text-primary);
+  color: var(--text-secondary);
+  font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  word-break: break-all;
+  word-break: break-word;
   margin: 0;
+
+  @media (min-width: 768px) {
+    font-size: 2rem;
+  }
+`;
+
+export const OrderIdHighlight = styled.span`
+  color: var(--text-primary);
+  font-weight: 600;
 `;
 
 export const OrderSubtitle = styled.p`

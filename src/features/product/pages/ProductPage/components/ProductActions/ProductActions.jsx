@@ -21,7 +21,7 @@ const ProductActions = ({ product, colors = [] }) => {
   return (
     <S.ActionsContainer>
       {/* Colors */}
-      {colors && colors.length > 0 && (
+      {colors && colors.length > 1 && (
         <div className="mb-4">
           <h6
             className="mb-3"
@@ -126,9 +126,27 @@ const ProductActions = ({ product, colors = [] }) => {
         >
           <Check size={18} /> Added to Bag
         </Button>
+      ) : outOfStock ? (
+        <Button
+          disabled
+          style={{
+            width: "100%",
+            padding: "1rem",
+            display: "flex",
+            gap: "0.5rem",
+            justifyContent: "center",
+            background: "var(--color-subtle-bg, #f5f5f5)",
+            color: "var(--text-secondary, #666)",
+            border: "1px solid var(--border-color, #e5e5e5)",
+            fontSize: "1rem",
+            letterSpacing: "0.05em",
+            cursor: "not-allowed",
+          }}
+        >
+          OUT OF STOCK
+        </Button>
       ) : (
         <Button
-          disabled={outOfStock}
           onClick={handleAddToCart}
           style={{
             width: "100%",

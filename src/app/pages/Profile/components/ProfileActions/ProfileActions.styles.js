@@ -35,18 +35,24 @@ export const LogoutBtn = styled.button`
   background-color: #ff4d4d;
   color: #fff;
   border: none;
-  padding: 1.5rem;
+  border-radius: 4px;
+  padding: 1.2rem;
   font-size: 0.8rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  margin-top: 3rem;
+  margin-top: 2rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
   transition: all 0.3s ease;
+
+  @media (min-width: 768px) {
+    margin-top: 3rem;
+    padding: 1.5rem;
+  }
 
   &:hover {
     background-color: #e04343;

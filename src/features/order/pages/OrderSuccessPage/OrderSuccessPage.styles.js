@@ -100,6 +100,21 @@ export const SuccessMessage = styled.p`
   line-height: 1.6;
 `;
 
+export const EmailConfirmation = styled.div`
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-subtle-border);
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+
+  strong {
+    display: block;
+    margin-top: 0.25rem;
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+`;
+
 export const OrderDetails = styled.div`
   background-color: var(--color-subtle-bg);
   padding: 1rem;
@@ -115,13 +130,21 @@ export const OrderDetails = styled.div`
 
 export const DetailRow = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
   padding: 0.75rem 0;
   border-bottom: 1px solid var(--color-subtle-border);
 
   &:last-child {
     border-bottom: none;
+  }
+
+  @media (min-width: 576px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
   }
 `;
 
@@ -139,6 +162,10 @@ export const DetailValue = styled.span`
   color: var(--text-primary);
   font-weight: 500;
   word-break: break-all;
+
+  @media (min-width: 576px) {
+    text-align: right;
+  }
 `;
 
 export const ActionButtons = styled.div`
@@ -147,4 +174,15 @@ export const ActionButtons = styled.div`
   gap: 1rem;
   margin-top: 2rem;
   animation: ${fadeInUp} 0.6s ease-out 0.6s both;
+
+  a {
+    display: block;
+    text-decoration: none;
+    width: 100%;
+  }
+
+  button {
+    width: 100%;
+    white-space: nowrap;
+  }
 `;

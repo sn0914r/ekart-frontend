@@ -3,9 +3,9 @@ import { useCart } from "../hooks/ui/useCart";
 import CartHeader from "../components/CartHeader/CartHeader";
 import CartItemList from "../components/CartItemList/CartItemList";
 import CartSummary from "../components/CartSummary/CartSummary";
-import CartLoading from "../components/CartLoading/CartLoading";
 import CartEmpty from "../components/CartEmpty/CartEmpty";
 import * as S from "./CartPage.styles";
+import Loader from "@shared/components/Loader/Loader";
 
 const CartPage = () => {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const CartPage = () => {
   if (isLoading) {
     return (
       <S.PageWrapper>
-        <CartLoading />
+        <Loader/>
       </S.PageWrapper>
     );
   }
@@ -47,13 +47,11 @@ const CartPage = () => {
           </div>
 
           <div className="col-12 col-lg-4">
-            <div className="sticky-top" style={{ top: "2rem", zIndex: 1 }}>
-              <CartSummary
-                subtotal={subtotal}
-                shipping={shipping}
-                handleCheckout={handleCheckout}
-              />
-            </div>
+            <CartSummary
+              subtotal={subtotal}
+              shipping={shipping}
+              handleCheckout={handleCheckout}
+            />
           </div>
         </div>
       </div>

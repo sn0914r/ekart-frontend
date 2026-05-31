@@ -10,6 +10,7 @@ import {
   AnimatedIcon,
   SuccessTitle,
   SuccessMessage,
+  EmailConfirmation,
   OrderDetails,
   DetailRow,
   DetailLabel,
@@ -18,7 +19,12 @@ import {
 } from "./OrderSuccessPage.styles";
 
 const OrderSuccessPage = () => {
-  const { orderId, razorpayPaymentId } = useOrderSuccessPage();
+  const {
+    orderId = null,
+    razorpayPaymentId = null,
+    totalAmount = null,
+    email = null,
+  } = useOrderSuccessPage();
 
   if (!orderId || !razorpayPaymentId) {
     return null;
@@ -51,6 +57,12 @@ const OrderSuccessPage = () => {
                 Thank you for your purchase. Your order has been confirmed and
                 will be processed shortly.
               </SuccessMessage>
+              {email && (
+                <EmailConfirmation>
+                  A confirmation email has been sent to
+                  <strong>{email}</strong>
+                </EmailConfirmation>
+              )}
 
               <OrderDetails>
                 <DetailRow>
@@ -59,20 +71,21 @@ const OrderSuccessPage = () => {
                 </DetailRow>
                 <DetailRow>
                   <DetailLabel>Payment ID</DetailLabel>
-                  <DetailValue>
-                    {razorpayPaymentId}
-                  </DetailValue>
+                  <DetailValue>{razorpayPaymentId}</DetailValue>
+                </DetailRow>
+                <DetailRow>
+                  <DetailLabel>Total Amount</DetailLabel>
+                  <DetailValue>Rs {totalAmount?.toLocaleString()}</DetailValue>
                 </DetailRow>
               </OrderDetails>
 
               <ActionButtons>
-                <Link to="/orders" style={{ textDecoration: "none" }}>
-                  <Button style={{ width: "100%" }}>View Orders</Button>
+                <Link to="/orders">
+                  <Button>View Orders</Button>
                 </Link>
-                <Link to="/" style={{ textDecoration: "none" }}>
+                <Link to="/">
                   <Button
                     style={{
-                      width: "100%",
                       background: "var(--color-subtle-bg)",
                       color: "var(--color-black)",
                     }}

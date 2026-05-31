@@ -11,7 +11,7 @@ export const StyledButton = styled.button`
   text-transform: uppercase;
   letter-spacing: 0.25em;
   cursor: pointer;
-  margin-top: 1.5rem;
+  margin-top: 0.5rem;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;

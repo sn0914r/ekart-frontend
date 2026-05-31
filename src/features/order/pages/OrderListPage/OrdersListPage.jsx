@@ -3,10 +3,15 @@ import { ArrowLeft } from "lucide-react";
 
 import Loader from "@shared/components/Loader/Loader";
 
-import OrderListItem from "./components/OrderListItem";
+import OrderCard from "../../components/OrderCard/OrderCard";
 import { useOrdersListPage } from "../../hooks/ui/OrdersListPage.hooks";
 
-import { PageWrapper, PageTitle, EmptyState } from "./OrdersListPage.styles";
+import {
+  PageWrapper,
+  PageTitle,
+  EmptyState,
+  BackLinkWrapper,
+} from "./OrdersListPage.styles";
 
 const OrdersPage = () => {
   const { orders, isLoading, error, isError } = useOrdersListPage();
@@ -50,26 +55,16 @@ const OrdersPage = () => {
   return (
     <PageWrapper>
       <div className="container">
-        <div className="d-flex align-items-center mb-4">
-          <Link
-            to="/profile"
-            className="text-decoration-none text-muted d-flex align-items-center gap-2 small text-uppercase"
-          >
+        <BackLinkWrapper>
+          <Link to="/profile">
             <ArrowLeft size={16} /> Back to Profile
           </Link>
-        </div>
+        </BackLinkWrapper>
         <PageTitle>My Orders</PageTitle>
         <div className="row g-4">
           {orders.map((order) => (
             <div className="col-12 col-md-6 col-lg-4" key={order._id}>
-              <OrderListItem
-                orderSearchId={order._id}
-                orderId={order.orderId || order._id}
-                createdAt={order.createdAt}
-                orderStatus={order.orderStatus}
-                paymentStatus={order.paymentStatus}
-                subTotal={order.subTotal}
-              />
+              <OrderCard order={order} />
             </div>
           ))}
         </div>

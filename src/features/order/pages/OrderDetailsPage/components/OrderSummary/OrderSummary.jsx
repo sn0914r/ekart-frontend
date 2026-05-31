@@ -22,18 +22,16 @@ const OrderSummary = ({ subTotal, taxAmount, shippingFee }) => {
         </S.SummaryValue>
       </S.SummaryRow>
       <S.SummaryRow>
-        <S.SummaryLabel>Tax</S.SummaryLabel>
-        <S.SummaryValue>Rs {taxAmount}</S.SummaryValue>
-      </S.SummaryRow>
-      <S.SummaryRow>
         <S.SummaryLabel>Shipping</S.SummaryLabel>
-        <S.SummaryValue>Rs {shippingFee}</S.SummaryValue>
+        <S.SummaryValue style={{ color: shippingFee === 0 ? "var(--color-success)" : "inherit" }}>
+          {shippingFee === 0 ? "Free" : `Rs ${shippingFee}`}
+        </S.SummaryValue>
       </S.SummaryRow>
       <S.SummaryRow isTotal>
         <S.SummaryLabel isTotal>Total</S.SummaryLabel>
         <S.SummaryValue isTotal>
           Rs{" "}
-          {(subTotal + taxAmount + shippingFee)?.toLocaleString()}
+          {(subTotal + shippingFee)?.toLocaleString()}
         </S.SummaryValue>
       </S.SummaryRow>
     </C.ContentCard>

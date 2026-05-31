@@ -7,7 +7,7 @@ const ShippingAddressHeader = () => {
   return (
     <S.HeaderContainer>
       <S.BackLink onClick={() => navigate(-1)}>
-        <ArrowLeft size={14} /> Back
+        <ArrowLeft size={16} /> Back
       </S.BackLink>
       <S.FormTitle>Add Shipping Address</S.FormTitle>
     </S.HeaderContainer>

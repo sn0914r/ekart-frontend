@@ -1,10 +1,11 @@
-import * as S from "./ProductNotFound.styles";
+import NotFound from "../../../../../../app/pages/NotFound/NotFoundPage";
 
 const ProductNotFound = () => (
-  <S.NotFoundContainer className="container">
-    <h3>Product Not Found</h3>
-    <p>The item you are looking for does not exist or has been removed.</p>
-  </S.NotFoundContainer>
+  <NotFound 
+    errorCode="404"
+    title="Product Not Found."
+    message="The item you are looking for does not exist or has been removed."
+  />
 );
 
 export default ProductNotFound;

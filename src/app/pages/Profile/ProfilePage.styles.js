@@ -14,7 +14,13 @@ export const ContentArea = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8rem 2rem;
+  padding: 2rem 0;
+  margin-top: auto;
+  margin-bottom: auto;
+
+  @media (min-width: 768px) {
+    padding: 8rem 2rem;
+  }
 `;
 
 export const ProfileCard = styled.div`
@@ -27,9 +33,6 @@ export const ProfileCard = styled.div`
 
 export const BackButton = styled(Link)`
   display: inline-flex;
-  position: absolute;
-  top: 3rem;
-  left: 2rem;
   align-items: center;
   gap: 0.5rem;
   color: var(--text-secondary);
@@ -39,7 +42,6 @@ export const BackButton = styled(Link)`
   letter-spacing: 0.1em;
   font-weight: 600;
   transition: color 0.2s ease;
-  margin-bottom: 2rem;
 
   &:hover {
     color: var(--text-primary);

@@ -10,6 +10,12 @@ const getStatusColor = (status) => {
         text: "#B45309",
         border: "#FED7AA",
       };
+    case "confirmed":
+      return {
+        bg: "#F1F5F9",
+        text: "#1E3A8A",
+        border: "#E2E8F0",
+      };
     case "processing":
       return {
         bg: "#DBEAFE",
@@ -57,8 +63,8 @@ const getStatusColor = (status) => {
 
 export const Badge = styled.span`
   display: inline-block;
-  padding: 0.25rem 0.75rem;
-  font-size: 0.75rem;
+  padding: ${(props) => props.size === "small" ? "0.15rem 0.5rem" : "0.25rem 0.75rem"};
+  font-size: ${(props) => props.size === "small" ? "0.65rem" : "0.75rem"};
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;

@@ -29,15 +29,19 @@ export default function Profile() {
 
   return (
     <S.ProfileWrapper>
-      <S.ContentArea>
-        <S.BackButton to={ROUTES.HOME}>
-          <ArrowLeft size={16} /> Back to Home
-        </S.BackButton>
-        <S.ProfileCard>
-          <UserInfo user={user} />
-          <ProfileActions onLogout={handleLogout} />
-        </S.ProfileCard>
-      </S.ContentArea>
+      <div className="container" style={{ display: "flex", flexDirection: "column", flex: 1, paddingTop: "2rem", paddingBottom: "2rem" }}>
+        <div className="mb-4">
+          <S.BackButton to={ROUTES.HOME}>
+            <ArrowLeft size={16} /> Continue Shopping
+          </S.BackButton>
+        </div>
+        <S.ContentArea>
+          <S.ProfileCard>
+            <UserInfo user={user} />
+            <ProfileActions onLogout={handleLogout} />
+          </S.ProfileCard>
+        </S.ContentArea>
+      </div>
     </S.ProfileWrapper>
   );
 }

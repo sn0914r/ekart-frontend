@@ -47,5 +47,5 @@ export const DescriptionBox = styled.div`
   font-size: 0.85rem;
   line-height: 1.7;
   color: #666666;
-  padding-top: 1rem;
+  padding-top: 2rem;
 `;

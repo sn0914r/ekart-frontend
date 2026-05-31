@@ -1,8 +1,12 @@
 import styled from "@emotion/styled";
 
 export const PageWrapper = styled.div`
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-  min-height: 70vh;
+  padding: 4rem 0;
+  min-height: 80vh;
+  background-color: var(--bg-primary);
+
+  @media (max-width: 991px) {
+    padding: 2rem 0;
+  }
 `;
 

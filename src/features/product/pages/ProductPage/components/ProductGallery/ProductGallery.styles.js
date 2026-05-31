@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export const GalleryContainer = styled.div`
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
   gap: 1.5rem;
   width: 100%;
   align-items: flex-start;
@@ -37,13 +37,13 @@ export const ThumbnailList = styled.div`
   flex-direction: column;
   gap: 1rem;
   width: 80px;
-  
+
   @media (max-width: 991px) {
     flex-direction: row;
     width: 100%;
     overflow-x: auto;
     padding-bottom: 0.5rem;
-    
+
     /* Hide scrollbar for clean look */
     &::-webkit-scrollbar {
       display: none;
@@ -59,7 +59,8 @@ export const Thumbnail = styled.img`
   object-fit: cover;
   border-radius: 4px;
   cursor: pointer;
-  border: 1px solid ${(props) => (props.active ? "var(--color-black, #000)" : "transparent")};
+  border: 2px solid ${(props) => (props.active ? "var(--color-black, #000)" : "transparent")};
+  box-shadow: ${(props) => (props.active ? "0 4px 8px rgba(0, 0, 0, 0.15)" : "none")};
   opacity: ${(props) => (props.active ? 1 : 0.6)};
   transition: all 0.2s ease;
 

@@ -1,9 +1,19 @@
-import React from 'react';
-import { CreditCard } from "lucide-react";
+import React, { useState } from 'react';
+import { CreditCard, Copy, Check } from "lucide-react";
 import * as S from "./Common.styles";
 
 const PaymentDetails = ({ paymentDetails }) => {
+  const [isCopied, setIsCopied] = useState(false);
+
   if (!paymentDetails) return null;
+
+  const handleCopy = () => {
+    if (paymentDetails.razorpayPaymentId) {
+      navigator.clipboard.writeText(paymentDetails.razorpayPaymentId);
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2000);
+    }
+  };
 
   return (
     <S.ContentCard>
@@ -16,22 +26,37 @@ const PaymentDetails = ({ paymentDetails }) => {
         </S.TitleGroup>
       </S.SectionTitle>
 
+      <S.InfoBlockRow>
+        <S.InfoTextGroup>
+          <S.InfoLabel>Payment Method</S.InfoLabel>
+          <S.InfoValue>Razorpay</S.InfoValue>
+        </S.InfoTextGroup>
+      </S.InfoBlockRow>
+
       {paymentDetails.razorpayPaymentId && (
         <S.InfoBlockRow>
           <S.InfoTextGroup>
-            <S.InfoLabel>Razorpay Reference</S.InfoLabel>
-            <S.InfoValue className="font-monospace small text-muted">
+            <S.InfoLabel>Transaction ID</S.InfoLabel>
+            <S.InfoValue className="font-monospace small text-muted" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               {paymentDetails.razorpayPaymentId}
-            </S.InfoValue>
-          </S.InfoTextGroup>
-        </S.InfoBlockRow>
-      )}
-      {paymentDetails.razorpayOrderId && (
-        <S.InfoBlockRow>
-          <S.InfoTextGroup>
-            <S.InfoLabel>Order ID</S.InfoLabel>
-            <S.InfoValue className="font-monospace small text-muted">
-              {paymentDetails.razorpayOrderId}
+              <button 
+                onClick={handleCopy}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: '0.25rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: isCopied ? 'var(--color-success)' : 'var(--text-secondary)',
+                  borderRadius: '4px',
+                  transition: 'all 0.2s ease',
+                }}
+                title="Copy Transaction ID"
+              >
+                {isCopied ? <Check size={14} /> : <Copy size={14} />}
+              </button>
             </S.InfoValue>
           </S.InfoTextGroup>
         </S.InfoBlockRow>

@@ -10,7 +10,7 @@ export const ContentCard = styled.div`
 
 export const SectionTitle = styled.h2`
   font-family: var(--font-serif);
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   margin-bottom: 1.5rem;
   color: var(--text-primary);
   text-transform: uppercase;
@@ -22,6 +22,10 @@ export const SectionTitle = styled.h2`
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1rem;
+
+  @media (min-width: 768px) {
+    font-size: 1.5rem;
+  }
 `;
 
 export const TitleGroup = styled.div`
@@ -57,7 +61,7 @@ export const InfoIconWrapper = styled.div`
 export const InfoTextGroup = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.15rem;
 `;
 
 export const InfoLabel = styled.div`

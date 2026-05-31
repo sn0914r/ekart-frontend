@@ -21,6 +21,7 @@ export const ImageWrapper = styled.div`
     height: 100%;
     object-fit: cover;
     object-position: center;
+    filter: brightness(0.8);
   }
 
   &::after {

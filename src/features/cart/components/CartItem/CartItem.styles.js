@@ -61,6 +61,20 @@ export const ItemName = styled.h3`
   }
 `;
 
+export const VariantContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+`;
+
+export const VariantText = styled.span`
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-transform: capitalize;
+`;
+
 export const ItemPrice = styled.div`
   font-family: var(--font-sans);
   font-weight: 600;
@@ -91,10 +105,16 @@ export const QtyBtn = styled.button`
   justify-content: center;
   cursor: pointer;
   color: var(--text-primary);
-  transition: background 0.2s;
+  transition: all 0.2s ease;
 
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: var(--color-shadow-soft);
+  }
+
+  &:disabled {
+    color: var(--color-muted);
+    cursor: not-allowed;
+    opacity: 0.5;
   }
 `;
 
@@ -108,12 +128,18 @@ export const QtyValue = styled.span`
 export const RemoveBtn = styled.button`
   background: none;
   border: none;
-  color: var(--color-muted);
+  color: var(--text-secondary);
   cursor: pointer;
-  transition: color 0.2s;
+  transition: all 0.2s ease;
   padding: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
-    color: var(--color-error);
+    color: var(--color-error, #ef4444);
+    background-color: rgba(239, 68, 68, 0.1);
+    transform: scale(1.05);
   }
 `;

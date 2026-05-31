@@ -20,7 +20,6 @@ import { useCart } from "@features/cart/hooks/ui/useCart";
 // Navigation Links Configuration
 const NAV_LINKS = [
   { name: "Collections", path: "/" },
-  { name: "About", path: "/about" },
   { name: "Bag", path: "/cart" },
   { name: "Wishlist", path: "/wishlist" },
 ];
@@ -77,9 +76,6 @@ const Navbar = () => {
                 }}
               >
                 Collections
-              </NavbarAnchor>
-              <NavbarAnchor to="/about" isScrolled={isScrolledFlag}>
-                About
               </NavbarAnchor>
             </div>
 

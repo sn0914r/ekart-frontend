@@ -3,7 +3,7 @@ import * as S from "./OrderSummaryCard.styles";
 
 const OrderSummaryCard = () => {
   const { calculateTotal, totalCartItemsCount } = useCart();
-  const SHIPPING_FEE = 100;
+  const SHIPPING_FEE = 0;
 
   const subtotal = calculateTotal();
   const totalAmount = subtotal + SHIPPING_FEE;
@@ -25,7 +25,9 @@ const OrderSummaryCard = () => {
 
       <S.SummaryRow>
         <span>Shipping</span>
-        <span>Rs {SHIPPING_FEE.toLocaleString()}</span>
+        <span style={{ color: SHIPPING_FEE === 0 ? "var(--color-success)" : "inherit" }}>
+          {SHIPPING_FEE === 0 ? "Free" : `Rs ${SHIPPING_FEE.toLocaleString()}`}
+        </span>
       </S.SummaryRow>
 
       <S.SummaryRow total>

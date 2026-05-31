@@ -3,13 +3,19 @@ import { Link } from "react-router-dom";
 
 export const FooterContainer = styled.div`
   display: flex;
-  flex-direction: ${(props) => (props.variant === "vertical" ? "column" : "row")};
-  justify-content: ${(props) =>
-    props.variant === "vertical" ? "center" : "space-between"};
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: ${(props) => (props.variant === "vertical" ? "1rem" : "0")};
+  gap: 1.5rem;
   margin-top: 3rem;
   width: 100%;
+
+  @media (min-width: 768px) {
+    flex-direction: ${(props) => (props.variant === "vertical" ? "column" : "row")};
+    justify-content: ${(props) =>
+      props.variant === "vertical" ? "center" : "space-between"};
+    gap: ${(props) => (props.variant === "vertical" ? "1rem" : "0")};
+  }
 `;
 
 export const StyledLink = styled(Link)`

@@ -5,7 +5,8 @@ export const Summary = styled.div`
   padding: 3rem;
   height: fit-content;
   position: sticky;
-  top: 10rem;
+  top: 2rem;
+  z-index: 10;
 
   @media (max-width: 768px) {
     padding: 2rem;

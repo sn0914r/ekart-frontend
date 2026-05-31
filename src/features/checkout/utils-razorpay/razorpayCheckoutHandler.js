@@ -16,7 +16,10 @@ export const razorpayCheckoutHandler = (apiResponse, handlers) => {
     {
       onError: (err) =>
         toast.error(err.message || "Payment Verification Error"),
-      onSuccess: ({ data: state }) => navigate("/orders/success", { state }),
+      onSuccess: ({ data: state }) => {
+        console.log("Data from agvdha", state);
+        navigate("/orders/success", { state });
+      },
       onSettled: () => mutateCart(),
     },
   );

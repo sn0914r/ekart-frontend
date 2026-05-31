@@ -4,6 +4,10 @@ export const PageWrapper = styled.div`
   padding: 4rem 0;
   min-height: 80vh;
   background-color: var(--bg-primary, #ffffff);
+
+  @media (max-width: 991px) {
+    padding: 2rem 0;
+  }
 `;
 
 export const InfoColumn = styled.div`

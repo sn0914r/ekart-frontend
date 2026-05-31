@@ -10,7 +10,6 @@ export const useOrderDetailsPage = () => {
   const updateOrderMutation = useUpdateOrderMutation();
 
   // INFO: SHIPPING MODEL
-  const [isShippingModalOpen, setIsShippingModalOpen] = useState(false);
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
 
   const order = data?.data;
@@ -52,8 +51,6 @@ export const useOrderDetailsPage = () => {
     isLoading,
     error,
     isError,
-    isShippingModalOpen,
-    setIsShippingModalOpen,
     isCancelModalOpen,
     setIsCancelModalOpen,
     formatDate,

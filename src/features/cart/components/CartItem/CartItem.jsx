@@ -15,31 +15,35 @@ const CartItem = ({ item, increaseQty, decreaseQty, removeFromCart }) => {
       </S.ItemImage>
       <S.ItemInfo>
         <S.ItemHeader>
-          <div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
             <S.ItemName>{item.name}</S.ItemName>
-            {item.size && (
-              <span
-                style={{
-                  fontSize: "0.8rem",
-                  color: "var(--text-secondary)",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.05em",
-                }}
-              >
-                Size: {item.size}
-              </span>
+            {(item.size || item.color) && (
+              <S.VariantContainer>
+                {item.size && <S.VariantText>Size: {item.size}</S.VariantText>}
+                {item.color && (
+                  <S.VariantText>Color: {item.color}</S.VariantText>
+                )}
+              </S.VariantContainer>
             )}
+            <S.ItemPrice style={{ marginTop: "1rem" }}>
+              ₨ {item.price?.toLocaleString()}
+            </S.ItemPrice>
           </div>
-          <S.ItemPrice>₨ {item.price?.toLocaleString()}</S.ItemPrice>
         </S.ItemHeader>
 
         <S.Controls>
           <S.QtyBox>
-            <S.QtyBtn onClick={() => decreaseQty(item.productId)}>
+            <S.QtyBtn
+              onClick={() => decreaseQty(item.productId)}
+              disabled={item.quantity <= 1}
+            >
               <Minus size={14} />
             </S.QtyBtn>
             <S.QtyValue>{item.quantity}</S.QtyValue>
-            <S.QtyBtn onClick={() => increaseQty(item.productId)}>
+            <S.QtyBtn
+              onClick={() => increaseQty(item.productId)}
+              disabled={item.quantity >= (item.stock || 99)}
+            >
               <Plus size={14} />
             </S.QtyBtn>
           </S.QtyBox>
@@ -47,7 +51,7 @@ const CartItem = ({ item, increaseQty, decreaseQty, removeFromCart }) => {
             onClick={() => removeFromCart(item.productId)}
             aria-label="Remove item"
           >
-            <Trash2 size={18} strokeWidth={1.5} />
+            <Trash2 size={20} strokeWidth={1.5} />
           </S.RemoveBtn>
         </S.Controls>
       </S.ItemInfo>

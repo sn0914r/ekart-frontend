@@ -4,6 +4,31 @@ export const PageWrapper = styled.div`
   padding: 4rem 0;
   min-height: 80vh;
   background-color: var(--bg-primary);
+
+  @media (max-width: 991px) {
+    padding: 2rem 0;
+  }
+`;
+
+export const BackLinkWrapper = styled.div`
+  margin-bottom: 1rem;
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #000000;
+    }
+  }
 `;
 
 export const PageTitle = styled.h1`

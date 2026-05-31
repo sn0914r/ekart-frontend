@@ -51,28 +51,30 @@ export const ColorLabel = styled.span`
 
 export const SizeRow = styled.div`
   display: flex;
-  gap: 1.5rem;
+  gap: 0.75rem;
   flex-wrap: wrap;
 
   @media (max-width: 576px) {
-    gap: 1rem;
+    gap: 0.5rem;
   }
 `;
 
 export const SizePill = styled.div`
-  padding: 0.25rem 0;
-  color: var(--text-primary);
-  border-bottom: 2px solid
-    ${(props) => (props.active ? "var(--color-black, #000)" : "transparent")};
+  padding: 0.5rem 1rem;
+  min-width: 3.5rem;
+  text-align: center;
+  color: ${(props) => (props.active ? "var(--bg-white, #fff)" : "var(--text-primary)")};
+  background-color: ${(props) => (props.active ? "var(--color-black, #000)" : "transparent")};
+  border: 1px solid ${(props) => (props.active ? "var(--color-black, #000)" : "var(--color-subtle-border, #e0e0e0)")};
+  border-radius: 4px;
   cursor: pointer;
   font-family: var(--font-sans);
-  font-size: 1rem;
-  font-weight: ${(props) => (props.active ? "600" : "400")};
-  transition: all 0.1s ease;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
 
   &:hover {
-    border-bottom: 2px solid
-      ${(props) => (props.active ? "var(--color-black, #000)" : "#ccc")};
+    border-color: var(--color-black, #000);
   }
 `;
 

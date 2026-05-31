@@ -19,6 +19,7 @@ const Modal = ({
   children,
   footer,
   maxWidth,
+  hideCloseButton,
 }) => {
   // Prevent body scrolling when modal is open
   useEffect(() => {
@@ -29,7 +30,7 @@ const Modal = ({
     }
     return () => {
       document.body.style.overflow = "unset";
-    }
+    };
   }, [isOpen]);
 
   // Handle escape key
@@ -37,7 +38,7 @@ const Modal = ({
     const handleEscape = (e) => {
       if (e.key === "Escape") onClose();
     };
-    
+
     if (isOpen) {
       document.addEventListener("keydown", handleEscape);
     }
@@ -58,20 +59,16 @@ const Modal = ({
         <ModalContainer maxWidth={maxWidth}>
           <ModalHeader>
             <ModalTitle>{title}</ModalTitle>
-            <CloseButton onClick={onClose} aria-label="Close modal">
-              <X size={24} />
-            </CloseButton>
+            {!hideCloseButton && (
+              <CloseButton onClick={onClose} aria-label="Close modal">
+                <X size={24} />
+              </CloseButton>
+            )}
           </ModalHeader>
-          
-          <ModalBody>
-            {children}
-          </ModalBody>
-          
-          {footer && (
-            <ModalFooter>
-              {footer}
-            </ModalFooter>
-          )}
+
+          <ModalBody>{children}</ModalBody>
+
+          {footer && <ModalFooter>{footer}</ModalFooter>}
         </ModalContainer>
       </ModalOverlay>
     </Portal>

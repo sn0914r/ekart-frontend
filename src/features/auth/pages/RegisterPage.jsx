@@ -8,8 +8,8 @@ export default function RegisterPage() {
   return (
     <>
       <AuthHeader
-        title="Join eKart."
-        subtitle="Create an account to unlock exclusive benefits."
+        title="Create Account."
+        subtitle="Join eKart and discover your next favorite style."
       />
 
       <RegisterForm />

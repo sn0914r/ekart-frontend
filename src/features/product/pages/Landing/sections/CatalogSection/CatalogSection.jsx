@@ -42,11 +42,11 @@ const CatalogSection = () => {
 
   return (
     <S.Catalog id="products" ref={containerRef}>
+      <CatalogHeader />
       {error ? (
         <Error message={error.message} onRetry={refetch} />
       ) : (
         <div className="container">
-          <CatalogHeader />
           {/* Filters UI */}
           <Filter updateFilters={updateFilters} filters={filters} />
 
@@ -63,7 +63,6 @@ const CatalogSection = () => {
             />
           )}
 
- 
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}

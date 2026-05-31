@@ -7,6 +7,8 @@ export const useOrderSuccessPage = () => {
   
   const orderId = state?.orderId;
   const razorpayPaymentId = state?.razorpayPaymentId;
+  const totalAmount = state?.totalAmount;
+  const email = state?.email;
 
   useEffect(() => {
     if (!orderId || !razorpayPaymentId) {
@@ -14,5 +16,5 @@ export const useOrderSuccessPage = () => {
     }
   }, [orderId, razorpayPaymentId, navigate]);
 
-  return { orderId, razorpayPaymentId };
+  return { orderId, razorpayPaymentId, totalAmount, email };
 };

@@ -12,23 +12,32 @@ const WishlistPage = () => {
 
   if (!isAuthenticated) {
     return (
-      <S.PageWrapper className="container">
-        <WishlistAuthPrompt />
+      <S.PageWrapper>
+        <div className="container">
+          <WishlistAuthPrompt />
+        </div>
       </S.PageWrapper>
     );
   }
 
   if (isLoading) return <Loader />;
 
-  return (
-    <S.PageWrapper className="container">
-      <WishlistHeader />
+  if (!wishlist || wishlist.length === 0) {
+    return (
+      <S.PageWrapper>
+        <div className="container">
+          <WishlistEmptyState />
+        </div>
+      </S.PageWrapper>
+    );
+  }
 
-      {!wishlist || wishlist.length === 0 ? (
-        <WishlistEmptyState />
-      ) : (
+  return (
+    <S.PageWrapper>
+      <div className="container">
+        <WishlistHeader itemCount={wishlist.length} />
         <WishlistGrid items={wishlist} onRemove={removeItem} />
-      )}
+      </div>
     </S.PageWrapper>
   );
 };

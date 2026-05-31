@@ -33,11 +33,11 @@ const ProductPage = () => {
         <ProductPageHeader />
 
         <div className="row g-4 gy-5">
-          <div className="col-12 col-lg-7">
+          <div className="col-12 col-lg-6">
             <ProductGallery images={product.images || []} />
           </div>
 
-          <div className="col-12 col-lg-5">
+          <div className="col-12 col-lg-6 ps-lg-5">
             <S.InfoColumn>
               <ProductInfo product={product} />
               <ProductActions product={product} colors={colors} />

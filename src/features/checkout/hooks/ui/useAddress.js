@@ -11,7 +11,7 @@ export const useAddress = () => {
     const oldAddresses = getAddresses();
     return localStorage.setItem(
       KEY,
-      JSON.stringify([newAddress, oldAddresses]),
+      JSON.stringify([newAddress, ...oldAddresses]),
     );
   };
 

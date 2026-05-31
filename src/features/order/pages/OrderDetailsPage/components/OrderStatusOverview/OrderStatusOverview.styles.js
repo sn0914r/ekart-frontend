@@ -28,3 +28,10 @@ export const StatCardLabel = styled.div`
   align-items: center;
   gap: 0.5rem;
 `;
+
+export const StatCardDescription = styled.div`
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  opacity: 0.8;
+  margin-top: 0.25rem;
+`;

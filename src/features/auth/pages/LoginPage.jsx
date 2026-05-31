@@ -9,7 +9,7 @@ export default function LoginPage() {
     <>
       <AuthHeader
         title="Welcome Back."
-        subtitle="Access your selections and history."
+        subtitle="Continue your shopping journey."
       />
 
       <LoginForm />

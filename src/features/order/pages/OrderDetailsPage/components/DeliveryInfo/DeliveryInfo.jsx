@@ -1,9 +1,8 @@
 import React from 'react';
-import { MapPin, Edit2, User, Phone } from "lucide-react";
+import { MapPin, User, Phone } from "lucide-react";
 import * as C from "../Common.styles";
-import * as S from "./DeliveryInfo.styles";
 
-const DeliveryInfo = ({ shippingAddress, isPending, setIsShippingModalOpen }) => {
+const DeliveryInfo = ({ shippingAddress }) => {
   if (!shippingAddress) return null;
 
   return (
@@ -15,14 +14,6 @@ const DeliveryInfo = ({ shippingAddress, isPending, setIsShippingModalOpen }) =>
           </C.TitleIcon>
           Delivery Information
         </C.TitleGroup>
-        {isPending && (
-          <S.EditActionButton
-            onClick={() => setIsShippingModalOpen(true)}
-          >
-            <Edit2 size={14} /> 
-            <span className="d-none d-sm-inline">Edit Address</span>
-          </S.EditActionButton>
-        )}
       </C.SectionTitle>
 
       <C.InfoBlockRow>

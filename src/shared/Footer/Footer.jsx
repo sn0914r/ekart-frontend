@@ -25,7 +25,7 @@ const Footer = () => {
             Collections
           </FooterLink>
           <FooterLink to="/cart">Cart</FooterLink>
-          <FooterLink to="/about">About</FooterLink>
+          <FooterLink to="/wishlist">Wishlist</FooterLink>
         </div>
 
         <Github>

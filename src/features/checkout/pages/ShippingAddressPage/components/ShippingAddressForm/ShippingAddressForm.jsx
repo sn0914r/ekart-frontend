@@ -27,7 +27,7 @@ export const ShippingAddressForm = () => {
       />
 
       <AuthInput
-        label="Address Line"
+        label="Address"
         placeholder="House no, Building, Street"
         icon={MapPin}
         error={errors.address}

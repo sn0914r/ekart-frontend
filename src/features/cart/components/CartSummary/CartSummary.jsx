@@ -12,7 +12,7 @@ const CartSummary = ({ subtotal, shipping, isProcessing, handleCheckout }) => {
       </S.SummaryRow>
       <S.SummaryRow>
         <span>Shipping</span>
-        <span>Rs {shipping.toLocaleString()}</span>
+        <span>{shipping === 0 ? "Free" : `Rs ${shipping.toLocaleString()}`}</span>
       </S.SummaryRow>
       <S.SummaryRow total totalValue={total}>
         <span>Total</span>
