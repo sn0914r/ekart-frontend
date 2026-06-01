@@ -6,6 +6,25 @@ export const useClearWishlistMutation = () => {
 
   return useMutation({
     mutationFn: clearWishlist,
-    onSuccess: () => qc.invalidateQueries({ queryKey: ["wishlist"] }),
+    onMutate: async () => {
+      await qc.cancelQueries({ queryKey: ["wishlist"] });
+      const previousWishlist = qc.getQueryData(["wishlist"]);
+
+      qc.setQueryData(["wishlist"], (old) => {
+        if (!old || !old.data) return old;
+        return {
+          ...old,
+          data: [],
+        };
+      });
+
+      return { previousWishlist };
+    },
+    onError: (err, variables, context) => {
+      if (context?.previousWishlist) {
+        qc.setQueryData(["wishlist"], context.previousWishlist);
+      }
+    },
+    onSettled: () => qc.invalidateQueries({ queryKey: ["wishlist"] }),
   });
 };

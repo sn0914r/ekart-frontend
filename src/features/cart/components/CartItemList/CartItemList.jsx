@@ -16,7 +16,6 @@ const CartItemList = ({ items }) => {
   const handleDecrease = (productId) => decreaseQty(productId);
   const handleRemove = (productId) => {
     removeItem(productId, {
-      onSuccess: () => toast.info("Item removed from cart"),
       onError: (err) => toast.error(err.message || "Failed to remove item"),
     });
   };
