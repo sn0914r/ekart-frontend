@@ -16,13 +16,11 @@ const processQueue = (error, token = null) => {
   failedQueue = [];
 };
 
-
-
 // ----------------------------------- PRIVATE HELPERS -----------------------------------
 
 function prepareConfig(accessToken, options) {
   const isFormData = options.body instanceof FormData;
-  
+
   const headers = {
     ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
     ...(!isFormData && { "Content-Type": "application/json" }),
@@ -48,7 +46,11 @@ async function parseJSON(response) {
 }
 
 function isTokenExpired(response, data) {
-  return response.status === 401 && data?.errorCode === "INVALID_TOKEN";
+  return (
+    response.status === 401 &&
+    (data?.errorCode === "INVALID_TOKEN" ||
+      (data?.errorCode === "UNAUTHORIZED_ERROR" && data?.message === "Session expired"))
+  );
 }
 
 function isErrorResponse(response, data) {
@@ -72,9 +74,9 @@ async function handleRefreshFlow(endpoint, options) {
   // If already refreshing, wait in line
   if (isRefreshing) {
     return new Promise((resolve, reject) => {
-      failedQueue.push({ 
-        resolve: () => resolve(apiClient(endpoint, options)), 
-        reject 
+      failedQueue.push({
+        resolve: () => resolve(apiClient(endpoint, options)),
+        reject,
       });
     });
   }
@@ -93,7 +95,7 @@ async function handleRefreshFlow(endpoint, options) {
     if (resp.ok && data.accessToken) {
       logger.info("Session refreshed successfully");
       setAuth(data.accessToken);
-      
+
       isRefreshing = false;
       processQueue(null, data.accessToken);
 
@@ -106,21 +108,21 @@ async function handleRefreshFlow(endpoint, options) {
     isRefreshing = false;
     processQueue(err);
     clearAuth();
-    
+
     if (window.location.pathname !== "/auth/login") {
-      window.location.href = "/auth/login";
+      const currentUrl = encodeURIComponent(window.location.pathname + window.location.search);
+      window.location.href = `/auth/login?expired=true&redirectTo=${currentUrl}`;
     }
     throw err;
   }
 }
-
 
 // ----------------------------------- MAIN CLIENT -----------------------------------
 
 const apiClient = async (endpoint, options = {}) => {
   const { accessToken } = useAuthStore.getState();
   const url = `${BASE_URL}${endpoint}`;
-  
+
   // 1. Prepare Request Configuration
   const config = prepareConfig(accessToken, options);
 
@@ -136,14 +138,24 @@ const apiClient = async (endpoint, options = {}) => {
 
     // 4. Intercept: Application Errors
     if (isErrorResponse(response, data)) {
-      throw normalizeError(response, data);
+      const error = normalizeError(response, data);
+
+      if (error.code === "UNAUTHORIZED_ERROR") {
+        useAuthStore.getState().clearAuth();
+        if (window.location.pathname !== "/auth/login") {
+          const currentUrl = encodeURIComponent(window.location.pathname + window.location.search);
+          window.location.href = `/auth/login?expired=true&redirectTo=${currentUrl}`;
+        }
+      }
+
+      throw error;
     }
 
     logger.info(`[Success] ${endpoint}`, data);
     return data;
   } catch (error) {
     if (error.name === "TypeError") logger.error("Network Error", error);
-    console.log(error)
+    console.log(error.code);
     throw error;
   }
 };

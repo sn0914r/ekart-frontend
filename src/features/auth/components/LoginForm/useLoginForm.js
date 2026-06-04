@@ -30,7 +30,8 @@ export default function useLoginForm() {
         password: data.password,
       });
       toast.success("Logged in successfully");
-      navigate("/");
+      const redirectTo = searchParams.get("redirectTo") || "/";
+      navigate(redirectTo);
     } catch (error) {
       if (error.validationErrors?.length) {
         error.validationErrors.forEach(({ field, message }) => {
@@ -55,7 +56,8 @@ export default function useLoginForm() {
             password: passwordParam,
           });
           toast.success(`Automatically authenticated as ${emailParam}`);
-          navigate("/");
+          const redirectTo = searchParams.get("redirectTo") || "/";
+          navigate(redirectTo);
         } catch (error) {
           toast.error(error.message || "Failed to auto-login");
         }

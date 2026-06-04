@@ -3,13 +3,12 @@ import { useGetProductsQuery } from "../../../../hooks/api/useGetProductsQuery";
 import { useProductFilters } from "../../../../hooks/ui/useProductFilters";
 import { useProductWishlist } from "../../../../hooks/ui/useProductWishlist";
 import Loader from "@shared/components/Loader/Loader";
-import Error from "@shared/components/Error/Error";
 import CatalogHeader from "../../components/CatalogHeader/CatalogHeader";
 import ProductList from "../../components/ProductList/ProductList";
 import Filter from "../../components/Filters/Filter";
 import Pagination from "../../components/Pagination/Pagination";
 import * as S from "./CatalogSection.styles";
-import { logger } from "@utils/logger";
+import ErrorMessage from "@shared/components/ErrorMessage";
 
 const CatalogSection = () => {
   const containerRef = useRef(null);
@@ -44,7 +43,13 @@ const CatalogSection = () => {
     <S.Catalog id="products" ref={containerRef}>
       <CatalogHeader />
       {error ? (
-        <Error message={error.message} onRetry={refetch} />
+        <ErrorMessage
+          error={error}
+          heading="Products Unavailable"
+          onRetry={refetch}
+        >
+          We couldn’t load the products. Please try again.
+        </ErrorMessage>
       ) : (
         <div className="container">
           {/* Filters UI */}

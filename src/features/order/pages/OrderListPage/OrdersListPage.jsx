@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import Loader from "@shared/components/Loader/Loader";
 
 import OrderCard from "../../components/OrderCard/OrderCard";
+import ErrorMessage from "@shared/components/ErrorMessage";
 import { useOrdersListPage } from "../../hooks/ui/OrdersListPage.hooks";
 
 import {
@@ -30,9 +31,7 @@ const OrdersPage = () => {
     return (
       <PageWrapper>
         <div className="container">
-          <div className="alert alert-danger" role="alert">
-            Error loading orders: {error.message}
-          </div>
+          <ErrorMessage error={error} />
         </div>
       </PageWrapper>
     );

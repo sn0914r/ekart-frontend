@@ -3,8 +3,21 @@ import LoginForm from "../components/LoginForm/LoginForm";
 import AuthFooter from "../components/AuthFooter/AuthFooter";
 import { ArrowLeft } from "lucide-react";
 import { ROUTES } from "@constants/routes";
+import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+import { toast } from "sonner";
 
 export default function LoginPage() {
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    if (searchParams.get("expired") === "true") {
+      toast.error("Your session has expired. Please log in again.", {
+        duration: 7000,
+      });
+    }
+  }, [searchParams]);
+
   return (
     <>
       <AuthHeader
