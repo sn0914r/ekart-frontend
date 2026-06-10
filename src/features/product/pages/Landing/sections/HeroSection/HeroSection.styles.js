@@ -3,7 +3,7 @@ import heroImg from "@assets/hero-img.jpeg";
 
 export const Hero = styled.section`
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   position: relative;
   display: flex;
   align-items: center;
@@ -14,8 +14,6 @@ export const Hero = styled.section`
   background-position: center;
   overflow: hidden;
   text-align: center;
-  margin-left: calc(-50vw + 50%);
-  margin-right: calc(-50vw + 50%);
 
   &:after {
     content: "";

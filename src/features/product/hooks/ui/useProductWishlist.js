@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { toast } from "sonner";
+import { toast } from "@lib/toast";
 import useAuthStore from "@app/store/authStore";
 import { useWishlist } from "@features/wishlist/hooks/ui/useWishlist";
 import { useAddToWishlist } from "@features/wishlist/hooks/api/useAddToWishlistMutation";

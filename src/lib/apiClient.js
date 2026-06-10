@@ -146,6 +146,10 @@ const apiClient = async (endpoint, options = {}) => {
           const currentUrl = encodeURIComponent(window.location.pathname + window.location.search);
           window.location.href = `/auth/login?expired=true&redirectTo=${currentUrl}`;
         }
+      } else if (error.code === "FORBIDDEN_ERROR") {
+        if (window.location.pathname !== "/forbidden") {
+          window.location.href = "/forbidden";
+        }
       }
 
       throw error;

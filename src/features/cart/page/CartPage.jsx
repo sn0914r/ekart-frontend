@@ -6,15 +6,29 @@ import CartSummary from "../components/CartSummary/CartSummary";
 import CartEmpty from "../components/CartEmpty/CartEmpty";
 import * as S from "./CartPage.styles";
 import Loader from "@shared/components/Loader/Loader";
+import AuthPrompt from "@shared/components/AuthPrompt";
 
 const CartPage = () => {
   const navigate = useNavigate();
-  const { cartItems, isLoading, calculateTotal } = useCart();
+  const { cartItems, isLoading, calculateTotal, isAuthenticated } = useCart();
+
+  if (!isAuthenticated) {
+    return (
+      <S.PageWrapper>
+        <div className="container">
+          <AuthPrompt
+            title="Please Login"
+            message="You need to be logged in to view your cart."
+          />
+        </div>
+      </S.PageWrapper>
+    );
+  }
 
   if (isLoading) {
     return (
       <S.PageWrapper>
-        <Loader/>
+        <Loader />
       </S.PageWrapper>
     );
   }
@@ -39,7 +53,7 @@ const CartPage = () => {
       <div className="container">
         <CartHeader />
 
-        <S.PageTitle>Shopping Bag ({cartItems.length})</S.PageTitle>
+        <S.PageTitle>Shopping Cart ({cartItems.length})</S.PageTitle>
 
         <div className="row g-5">
           <div className="col-12 col-lg-8">

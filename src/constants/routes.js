@@ -3,6 +3,7 @@ export const ROUTES = {
   CART: "/cart",
   ABOUT: "/about",
   PROFILE: "/profile",
+  FORBIDDEN: "/forbidden",
   WISHLIST: {
     ROOT: "/wishlist/*",
     BASE: "/wishlist",

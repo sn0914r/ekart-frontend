@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
-import { toast } from "sonner";
+import { toast } from "@lib/toast";
 
 import registerSchema from "./registerSchema";
 import { useRegisterMutation } from "../../hooks/api/useRegisterMutation";

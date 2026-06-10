@@ -1,4 +1,4 @@
-import { toast } from "sonner";
+import { toast } from "@lib/toast";
 
 export const razorpayCheckoutHandler = (apiResponse, handlers) => {
   const { navigate, mutatePayment, mutateCart } = handlers;

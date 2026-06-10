@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { toast } from "sonner";
+import { toast } from "@lib/toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import loginUserSchema from "./loginSchema";
 import { useLoginMutation } from "../../hooks/api/useLoginMutation";

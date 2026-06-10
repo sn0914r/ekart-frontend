@@ -95,3 +95,38 @@ export const StockBadge = styled.span`
     background-color: ${(props) => (props.outOfStock ? "#b91c1c" : "#15803d")};
   }
 `;
+
+export const ActionBtn = styled.button`
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  letter-spacing: 0.05em;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  background: ${(props) =>
+    props.variant === "secondary"
+      ? "var(--bg-secondary, #f5f5f5)"
+      : "var(--color-black, #000)"};
+  color: ${(props) =>
+    props.variant === "secondary"
+      ? "var(--text-primary, #000)"
+      : "var(--bg-white, #fff)"};
+
+  &:hover {
+    opacity: 0.85;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+`;

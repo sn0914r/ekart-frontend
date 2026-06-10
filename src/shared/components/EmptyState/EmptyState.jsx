@@ -2,7 +2,7 @@ import * as S from "./EmptyState.styles";
 
 const EmptyState = ({
   watermark = "EMPTY",
-  title = "Your Bag is Empty",
+  title = "Your Cart is Empty",
   description = "Looks like you haven't added any items yet.",
   actionText = "Start Shopping",
   actionLink = "/",

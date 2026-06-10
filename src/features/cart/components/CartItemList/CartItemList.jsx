@@ -1,4 +1,4 @@
-import { toast } from "sonner";
+import { toast } from "@lib/toast";
 import CartItem from "../CartItem/CartItem";
 
 import { useIncrementQuantityMutation } from "../../hooks/api/useIncrementQuantityMutation";

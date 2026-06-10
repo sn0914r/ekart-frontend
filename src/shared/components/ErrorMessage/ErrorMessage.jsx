@@ -1,24 +1,24 @@
 import { useNavigate } from "react-router-dom";
 import * as S from "./ErrorMessage.styles";
 
-const ErrorMessage = ({ error, onRetry, heading, children }) => {
+const ErrorMessage = ({ error, onRetry, heading, children, actionLabel: customActionLabel, onAction: customOnAction }) => {
   const navigate = useNavigate();
 
   let title = "Server error";
   let message = error?.message || "Something went wrong. Please try again later.";
-  let actionLabel = onRetry ? "Retry" : null;
-  let onAction = onRetry;
+  let actionLabel = customActionLabel || (onRetry ? "Retry" : null);
+  let onAction = customOnAction || onRetry;
 
   if (error?.code === "UNAUTHORIZED_ERROR") {
     title = "Session Expired";
     message = "Your session has expired. Please sign in again.";
-    actionLabel = "Go to Login";
-    onAction = () => navigate("/auth/login");
+    actionLabel = customActionLabel || "Go to Login";
+    onAction = customOnAction || (() => navigate("/auth/login"));
   } else if (error?.code === "NETWORK_ERROR" || error?.message === "Failed to fetch") {
     title = "Server Error";
     message = "Something went wrong while loading this page.";
-    actionLabel = "Retry";
-    onAction = onRetry || (() => window.location.reload());
+    actionLabel = customActionLabel || "Retry";
+    onAction = customOnAction || onRetry || (() => window.location.reload());
   }
 
   return (

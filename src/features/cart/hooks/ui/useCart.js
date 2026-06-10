@@ -1,3 +1,4 @@
+import useAuthStore from "@app/store/authStore";
 import { useCartQuery } from "../api/useCartQuery";
 
 export const useCart = () => {
@@ -13,11 +14,14 @@ export const useCart = () => {
   const totalCartItemsCount = () =>
     cartItems.reduce((total, item) => total + item.quantity, 0);
 
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
   return {
     cartItems,
     isLoading,
     calculateTotal,
     isItemInCart,
     totalCartItemsCount,
+    isAuthenticated,
   };
 };

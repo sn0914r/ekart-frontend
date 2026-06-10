@@ -5,7 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import { ROUTES } from "@constants/routes";
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { toast } from "sonner";
+import { toast } from "@lib/toast";
 
 export default function LoginPage() {
   const [searchParams] = useSearchParams();

@@ -12,6 +12,7 @@ import WishlistRoutes from "@features/wishlist/WishlistRoutes";
 import Profile from "./pages/Profile/ProfilePage";
 import AboutPage from "./pages/About/AboutPage";
 import NotFound from "./pages/NotFound/NotFoundPage";
+import ForbiddenPage from "./pages/ForbiddenPage";
 
 export default function Router() {
   return (
@@ -26,6 +27,7 @@ export default function Router() {
 
       <Route path={ROUTES.PROFILE} element={<Profile />} />
       <Route path={ROUTES.ABOUT} element={<AboutPage />} />
+      <Route path={ROUTES.FORBIDDEN} element={<ForbiddenPage />} />
 
       <Route path="*" element={<NotFound />} />
     </Routes>

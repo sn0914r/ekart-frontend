@@ -20,7 +20,7 @@ import { useCart } from "@features/cart/hooks/ui/useCart";
 // Navigation Links Configuration
 const NAV_LINKS = [
   { name: "Collections", path: "/" },
-  { name: "Bag", path: "/cart" },
+  { name: "Cart", path: "/cart" },
   { name: "Wishlist", path: "/wishlist" },
 ];
 
@@ -117,7 +117,7 @@ const Navbar = () => {
                     </span>
                   )}
                 </div>
-                <span>Bag</span>
+                <span>Cart</span>
               </ActionBtn>
 
               {!user ? (

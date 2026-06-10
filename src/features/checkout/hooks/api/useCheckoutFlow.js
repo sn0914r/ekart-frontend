@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useCreatePaymentMutation } from "./useCreatePaymentMutation";
 import { useState } from "react";
-import { toast } from "sonner";
+import { toast } from "@lib/toast";
 import { openRazorpayCheckout } from "../../utils-razorpay/openRazorpayCheckout";
 import { useCartQuery } from "@features/cart/hooks/api/useCartQuery";
 import { useCreateOrderMutation } from "../../../order/hooks/api/useCreateOrderMutation";

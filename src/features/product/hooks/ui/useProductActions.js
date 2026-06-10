@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { toast } from "sonner";
+import { toast } from "@lib/toast";
 import { useAddToCartMutation } from "@features/cart/hooks/api/useAddToCartMutation";
 import { useCart } from "@features/cart/hooks/ui/useCart";
 import useAuthStore from "@app/store/authStore";
@@ -7,7 +7,7 @@ import useAuthStore from "@app/store/authStore";
 export const useProductActions = (product) => {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const { isItemInCart } = useCart();
-  const { mutate: addToCartMutation } = useAddToCartMutation();
+  const { mutate: addToCartMutation, isPending: isAddingToCart } = useAddToCartMutation();
   const [activeSize, setActiveSize] = useState("");
 
   useEffect(() => {
@@ -39,5 +39,6 @@ export const useProductActions = (product) => {
     activeSize,
     setActiveSize,
     handleAddToCart,
+    isAddingToCart,
   };
 };

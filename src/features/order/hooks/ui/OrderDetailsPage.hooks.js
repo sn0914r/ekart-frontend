@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { toast } from "sonner";
+import { toast } from "@lib/toast";
 import { useGetOrderQuery } from "../../hooks/api/useGetOrderQuery";
 import { useUpdateOrderMutation } from "../../hooks/api/useUpdateOrderMutation";
 

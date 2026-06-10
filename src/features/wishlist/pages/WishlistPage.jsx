@@ -3,7 +3,7 @@ import Loader from "@shared/components/Loader/Loader";
 
 import WishlistHeader from "../components/WishlistHeader";
 import WishlistEmptyState from "../components/WishlistEmptyState";
-import WishlistAuthPrompt from "../components/WishlistAuthPrompt";
+import AuthPrompt from "@shared/components/AuthPrompt";
 import WishlistGrid from "../components/WishlistGrid";
 import * as S from "./WishlistPage.styles";
 
@@ -14,7 +14,10 @@ const WishlistPage = () => {
     return (
       <S.PageWrapper>
         <div className="container">
-          <WishlistAuthPrompt />
+          <AuthPrompt 
+            title="Please Login" 
+            message="You need to be logged in to view your wishlist." 
+          />
         </div>
       </S.PageWrapper>
     );

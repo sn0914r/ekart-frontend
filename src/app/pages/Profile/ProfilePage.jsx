@@ -21,7 +21,9 @@ export default function Profile() {
     return (
       <S.ProfileWrapper>
         <S.ContentArea>
-          <GuestProfile />
+          <div className="container">
+            <GuestProfile />
+          </div>
         </S.ContentArea>
       </S.ProfileWrapper>
     );
@@ -29,7 +31,16 @@ export default function Profile() {
 
   return (
     <S.ProfileWrapper>
-      <div className="container" style={{ display: "flex", flexDirection: "column", flex: 1, paddingTop: "2rem", paddingBottom: "2rem" }}>
+      <div
+        className="container"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          flex: 1,
+          paddingTop: "2rem",
+          paddingBottom: "2rem",
+        }}
+      >
         <div className="mb-4">
           <S.BackButton to={ROUTES.HOME}>
             <ArrowLeft size={16} /> Continue Shopping

@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Lock, ShoppingBag, Check } from "lucide-react";
 import Button from "@shared/components/Button/Button";
 import { useProductActions } from "../../../../hooks/ui/useProductActions";
@@ -14,6 +14,7 @@ const ProductActions = ({ product, colors = [] }) => {
     activeSize,
     setActiveSize,
     handleAddToCart,
+    isAddingToCart,
   } = useProductActions(product);
 
   if (!product) return null;
@@ -111,21 +112,12 @@ const ProductActions = ({ product, colors = [] }) => {
             cursor: "pointer",
           }}
         >
-          <Lock size={18} /> Login to Add to Bag
+          <Lock size={18} /> Login to Add to Cart
         </Button>
       ) : isAdded ? (
-        <Button
-          disabled
-          style={{
-            width: "100%",
-            padding: "1rem",
-            display: "flex",
-            gap: "0.5rem",
-            justifyContent: "center",
-          }}
-        >
-          <Check size={18} /> Added to Bag
-        </Button>
+        <S.ActionBtn variant="secondary" as={Link} to="/cart">
+          <Check size={18} /> Added to Cart
+        </S.ActionBtn>
       ) : outOfStock ? (
         <Button
           disabled
@@ -146,22 +138,9 @@ const ProductActions = ({ product, colors = [] }) => {
           OUT OF STOCK
         </Button>
       ) : (
-        <Button
-          onClick={handleAddToCart}
-          style={{
-            width: "100%",
-            padding: "1rem",
-            display: "flex",
-            gap: "0.5rem",
-            justifyContent: "center",
-            background: "var(--color-black, #000)",
-            color: "var(--bg-white, #fff)",
-            fontSize: "1rem",
-            letterSpacing: "0.05em",
-          }}
-        >
-          ADD TO BAG <ShoppingBag size={18} />
-        </Button>
+        <S.ActionBtn onClick={handleAddToCart} disabled={isAddingToCart}>
+          ADD TO CART <ShoppingBag size={18} />
+        </S.ActionBtn>
       )}
     </S.ActionsContainer>
   );
