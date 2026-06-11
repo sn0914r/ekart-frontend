@@ -11,5 +11,6 @@ export const toast = {
   info: createToast("info"),
   warning: createToast("warning"),
   message: createToast("message"),
+  loading: sonnerToast.loading,
   dismiss: sonnerToast.dismiss,
 };
