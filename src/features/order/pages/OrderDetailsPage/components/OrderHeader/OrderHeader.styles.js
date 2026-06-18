@@ -44,6 +44,47 @@ export const OrderSubtitle = styled.p`
   margin: 0;
 `;
 
+export const ActionGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    width: auto;
+  }
+`;
+
+export const PrimaryButton = styled.button`
+  width: 100%;
+  padding: 1rem;
+  background: var(--color-black);
+  color: var(--bg-white);
+  border: none;
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 4px;
+
+  &:hover:not(:disabled) {
+    background: var(--color-black-hover);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+`;
+
 export const DangerButton = styled.button`
   width: 100%;
   padding: 1rem;

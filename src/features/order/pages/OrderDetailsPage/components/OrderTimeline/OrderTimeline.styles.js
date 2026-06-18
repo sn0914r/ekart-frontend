@@ -34,15 +34,35 @@ export const IconContainer = styled.div`
   height: 24px;
   border-radius: 50%;
   background-color: ${(props) =>
-    props.completed ? "var(--color-success-bg)" : "var(--bg-primary)"};
+    props.error || props.cancelled
+      ? "var(--bg-white)"
+      : props.completed
+        ? "var(--color-success-bg)"
+        : "var(--bg-primary)"};
   border: 2px solid
     ${(props) =>
-      props.completed ? "var(--color-success)" : props.active ? "var(--text-primary)" : "var(--color-border)"};
+      props.error
+        ? "var(--color-error)"
+        : props.cancelled
+          ? "var(--color-muted)"
+          : props.completed
+            ? "var(--color-success)"
+            : props.active
+              ? "var(--text-primary)"
+              : "var(--color-border)"};
   display: flex;
   align-items: center;
   justify-content: center;
   color: ${(props) =>
-    props.completed ? "var(--color-success)" : props.active ? "var(--text-primary)" : "var(--text-muted)"};
+    props.error
+      ? "var(--color-error)"
+      : props.cancelled
+        ? "var(--text-secondary)"
+        : props.completed
+          ? "var(--color-success)"
+          : props.active
+            ? "var(--text-primary)"
+            : "var(--text-muted)"};
   z-index: 1;
 
   svg {
@@ -55,14 +75,23 @@ export const ItemContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  opacity: ${(props) => (props.completed || props.active ? 1 : 0.4)};
+  opacity: ${(props) =>
+    props.completed || props.active || props.error || props.cancelled ? 1 : 0.4};
 `;
 
 export const ItemLabel = styled.span`
   font-family: var(--font-sans);
   font-size: 0.9rem;
-  font-weight: ${(props) => (props.completed || props.active ? "600" : "500")};
-  color: ${(props) => (props.active ? "var(--text-primary)" : "inherit")};
+  font-weight: ${(props) =>
+    props.completed || props.active || props.error || props.cancelled ? "600" : "500"};
+  color: ${(props) =>
+    props.error
+      ? "var(--color-error)"
+      : props.cancelled
+        ? "var(--text-secondary)"
+        : props.active
+          ? "var(--text-primary)"
+          : "inherit"};
 `;
 
 export const ItemDate = styled.span`

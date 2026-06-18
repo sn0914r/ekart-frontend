@@ -21,3 +21,36 @@ export const paymentSuccess = async ({
     },
   });
 };
+
+export const paymentFailure = async ({
+  orderId,
+  razorpayOrderId,
+  razorpayPaymentId,
+  failureCode,
+  failureReason,
+  failureDescription,
+}) => {
+  return await api("/payments/failure", {
+    method: "POST",
+    body: {
+      orderId,
+      razorpayOrderId,
+      razorpayPaymentId,
+      failureCode,
+      failureReason,
+      failureDescription,
+    },
+  });
+};
+
+//  orderId,
+
+//     razorpayOrderId: response.error.metadata.order_id,
+
+//     razorpayPaymentId: response.error.metadata.payment_id,
+
+//     failureCode: response.error.code,
+
+//     failureReason: response.error.reason,
+
+//     failureDescription: response.error.description,

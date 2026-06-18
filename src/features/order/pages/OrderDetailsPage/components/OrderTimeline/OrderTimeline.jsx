@@ -1,4 +1,4 @@
-import { Clock, Check, Circle, CircleDot } from "lucide-react";
+import { Clock, Check, Circle, CircleDot, XCircle, MinusCircle } from "lucide-react";
 import * as C from "../Common.styles";
 import * as S from "./OrderTimeline.styles";
 import { transformTimeline } from "../../../../utils/transformTimeline";
@@ -23,13 +23,40 @@ const OrderTimeline = ({ timeline, formatDate }) => {
         {transformedTimeline.map((item, index) => {
           return (
             <S.TimelineItem key={index}>
-              <S.IconContainer completed={item.isCompleted} active={item.isActive}>
-                {item.isCompleted ? <Check /> : item.isActive ? <CircleDot /> : <Circle />}
+              <S.IconContainer
+                completed={item.isCompleted}
+                active={item.isActive}
+                error={item.isFailed}
+                cancelled={item.isCancelled}
+              >
+                {item.isFailed ? (
+                  <XCircle />
+                ) : item.isCancelled ? (
+                  <MinusCircle />
+                ) : item.isCompleted ? (
+                  <Check />
+                ) : item.isActive ? (
+                  <CircleDot />
+                ) : (
+                  <Circle />
+                )}
               </S.IconContainer>
-              <S.ItemContent completed={item.isCompleted} active={item.isActive}>
-                <S.ItemLabel completed={item.isCompleted} active={item.isActive}>{item.label}</S.ItemLabel>
+              <S.ItemContent
+                completed={item.isCompleted}
+                active={item.isActive}
+                error={item.isFailed}
+                cancelled={item.isCancelled}
+              >
+                <S.ItemLabel
+                  completed={item.isCompleted}
+                  active={item.isActive}
+                  error={item.isFailed}
+                  cancelled={item.isCancelled}
+                >
+                  {item.label}
+                </S.ItemLabel>
                 <S.ItemDate>
-                  {item.isCompleted
+                  {item.isCompleted || item.isFailed || item.isCancelled
                     ? formatDate
                       ? formatDate(item.at)
                       : item.at

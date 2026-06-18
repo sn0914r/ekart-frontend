@@ -3,11 +3,13 @@ import { useParams } from "react-router-dom";
 import { toast } from "@lib/toast";
 import { useGetOrderQuery } from "../../hooks/api/useGetOrderQuery";
 import { useUpdateOrderMutation } from "../../hooks/api/useUpdateOrderMutation";
+import { useCheckoutFlow } from "../../../checkout/hooks/api/useCheckoutFlow";
 
 export const useOrderDetailsPage = () => {
   const { id } = useParams();
   const { data, isLoading, error, isError } = useGetOrderQuery(id);
   const updateOrderMutation = useUpdateOrderMutation();
+  const { openCheckout, isProcessing: isCheckoutProcessing } = useCheckoutFlow();
 
   // INFO: SHIPPING MODEL
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
@@ -42,8 +44,19 @@ export const useOrderDetailsPage = () => {
   };
 
   const isPending = order?.shippingStatus === "PENDING";
-  const taxAmount = 0; // Adjust if backend starts returning tax
-  const shippingFee = 0; // Adjust if backend starts returning shipping config
+  const taxAmount = 0; // INFO: Adjust if backend starts returning tax
+  const shippingFee = 0; // INFO: Adjust if backend starts returning shipping config
+
+  const handleRetryPayment = () => {
+    if (!order) return;
+    const totalAmount = (order.subTotal || 0) + taxAmount + shippingFee;
+    
+    openCheckout({
+      amount: Math.round(totalAmount * 100),
+      razorpayOrderId: order.paymentDetails?.razorpayOrderId,
+      orderId: order._id,
+    });
+  };
 
   return {
     id,
@@ -59,5 +72,7 @@ export const useOrderDetailsPage = () => {
     taxAmount,
     shippingFee,
     isUpdatingOrder: updateOrderMutation.isPending,
+    handleRetryPayment,
+    isCheckoutProcessing,
   };
 };

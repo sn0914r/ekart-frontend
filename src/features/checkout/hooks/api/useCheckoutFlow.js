@@ -8,6 +8,7 @@ import { useCreateOrderMutation } from "../../../order/hooks/api/useCreateOrderM
 import { usePaymentSuccessMutation } from "./usePaymentSuccessMutation";
 import { useClearCartMutation } from "@features/cart/hooks/api/useClearCartMutation";
 import { logger } from "@utils/logger";
+import { usePaymentFailureMutation } from "./usePaymentFailureMutation";
 
 export const useCheckoutFlow = () => {
   const navigate = useNavigate();
@@ -17,6 +18,29 @@ export const useCheckoutFlow = () => {
   const { mutate: createPayment } = useCreatePaymentMutation();
   const { mutate: mutatePayment } = usePaymentSuccessMutation();
   const { mutate: mutateCart } = useClearCartMutation();
+  const { mutate: paymentFailureMutation } = usePaymentFailureMutation();
+
+  const handlePaymentFailure = async (payload) => {
+    setIsProcessing(true);
+
+    paymentFailureMutation(payload, {
+      onSuccess: () => {
+        toast.error(`Payment Failed ${payload.failureDescription}`);
+      },
+      onSettled: () => {
+        setIsProcessing(false);
+      },
+    });
+  };
+
+  const openCheckout = ({ amount, razorpayOrderId, orderId }) => {
+    openRazorpayCheckout(amount, orderId, razorpayOrderId, {
+      navigate,
+      mutatePayment,
+      mutateCart,
+      failurePaymentHandler: handlePaymentFailure,
+    });
+  };
 
   const handleStartPayment = async (selectedAddress) => {
     if (!selectedAddress) {
@@ -48,11 +72,7 @@ export const useCheckoutFlow = () => {
             onSuccess: ({ data }) => {
               toast.dismiss(toastId);
               const { amount, razorpayOrderId } = data;
-              openRazorpayCheckout(amount, razorpayOrderId, {
-                navigate,
-                mutatePayment,
-                mutateCart,
-              });
+              openCheckout({ amount, razorpayOrderId, orderId });
             },
           });
         },
@@ -64,5 +84,5 @@ export const useCheckoutFlow = () => {
     );
   };
 
-  return { isProcessing, handleStartPayment };
+  return { isProcessing, handleStartPayment, openCheckout };
 };

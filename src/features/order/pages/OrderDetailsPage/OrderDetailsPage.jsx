@@ -32,6 +32,8 @@ const OrderDetailsPage = () => {
     taxAmount,
     shippingFee,
     isUpdatingOrder,
+    handleRetryPayment,
+    isCheckoutProcessing,
   } = useOrderDetailsPage();
 
   if (isLoading) {
@@ -74,6 +76,8 @@ const OrderDetailsPage = () => {
           isPending={isPending}
           setIsCancelModalOpen={setIsCancelModalOpen}
           isUpdatingOrder={isUpdatingOrder}
+          handleRetryPayment={handleRetryPayment}
+          isCheckoutProcessing={isCheckoutProcessing}
         />
 
         <OrderStatusOverview order={order} formatDate={formatDate} />
