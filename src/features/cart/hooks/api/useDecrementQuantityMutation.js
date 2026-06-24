@@ -12,12 +12,12 @@ export const useDecrementQuantityMutation = () => {
       const previousCart = qc.getQueryData(["cart"]);
 
       qc.setQueryData(["cart"], (old) => {
-        if (!old || !old.cart) return old;
+        if (!old || !old.data) return old;
         return {
           ...old,
-          cart: {
-            ...old.cart,
-            items: old.cart.items.map((item) =>
+          data: {
+            ...old.data,
+            items: old.data.items.map((item) =>
               item.productId === pid
                 ? { ...item, quantity: Math.max(1, item.quantity - 1) }
                 : item
@@ -33,6 +33,6 @@ export const useDecrementQuantityMutation = () => {
         qc.setQueryData(["cart"], context.previousCart);
       }
     },
-    onSettled: () => qc.invalidateQueries({ queryKey: ["cart"] }),
+    onSuccess: (responseBody) => qc.setQueryData(["cart"], responseBody),
   });
 };

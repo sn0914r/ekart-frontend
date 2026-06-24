@@ -12,12 +12,12 @@ export const useRemoveFromCartMutation = () => {
       const previousCart = qc.getQueryData(["cart"]);
 
       qc.setQueryData(["cart"], (old) => {
-        if (!old || !old.cart) return old;
+        if (!old || !old.data) return old;
         return {
           ...old,
-          cart: {
-            ...old.cart,
-            items: old.cart.items.filter((item) => item.productId !== pid),
+          data: {
+            ...old.data,
+            items: old.data.items.filter((item) => item.productId !== pid),
           },
         };
       });
@@ -29,6 +29,6 @@ export const useRemoveFromCartMutation = () => {
         qc.setQueryData(["cart"], context.previousCart);
       }
     },
-    onSettled: () => qc.invalidateQueries({ queryKey: ["cart"] }),
+    onSuccess: (responseBody) => qc.setQueryData(["cart"], responseBody),
   });
 };

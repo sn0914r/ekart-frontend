@@ -6,6 +6,6 @@ export const useAddToCartMutation = () => {
 
   return useMutation({
     mutationFn: (d) => addToCart(d),
-    onSettled: () => qc.invalidateQueries({ queryKey: ["cart"] }),
+    onSuccess: (responseBody) => qc.setQueryData(["cart"], responseBody),
   });
 };

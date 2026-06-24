@@ -8,8 +8,9 @@ export const useLoginMutation = () => {
 
   return useMutation({
     mutationFn: (payload) => login(payload),
-    onSuccess: (data) => {
-      if (data?.accessToken) setAuth(data.accessToken);
+    onSuccess: ({ data }) => {
+      const accessToken = data?.accessToken;
+      if (accessToken) setAuth(accessToken);
       qc.invalidateQueries(["orders", "products", "cart", "wishlist"]);
     },
   });

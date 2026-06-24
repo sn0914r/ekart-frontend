@@ -2,8 +2,8 @@ import useAuthStore from "@app/store/authStore";
 import { useCartQuery } from "../api/useCartQuery";
 
 export const useCart = () => {
-  const { data, isLoading } = useCartQuery();
-  const cartItems = data?.cart?.items ?? [];
+  const { data: serverResponse, isLoading } = useCartQuery();
+  const cartItems = serverResponse?.data?.items ?? [];
 
   const calculateTotal = () =>
     cartItems.reduce((total, item) => total + item.price * item.quantity, 0);

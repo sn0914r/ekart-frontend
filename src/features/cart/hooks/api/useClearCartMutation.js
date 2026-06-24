@@ -11,11 +11,11 @@ export const useClearCartMutation = () => {
       const previousCart = qc.getQueryData(["cart"]);
 
       qc.setQueryData(["cart"], (old) => {
-        if (!old || !old.cart) return old;
+        if (!old || !old.data) return old;
         return {
           ...old,
-          cart: {
-            ...old.cart,
+          data: {
+            ...old.data,
             items: [],
           },
         };
@@ -28,6 +28,6 @@ export const useClearCartMutation = () => {
         qc.setQueryData(["cart"], context.previousCart);
       }
     },
-    onSettled: () => qc.invalidateQueries({ queryKey: ["cart"] }),
+    onSuccess: (responseBody) => qc.setQueryData(["cart"], responseBody),
   });
 };

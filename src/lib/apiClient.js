@@ -90,14 +90,15 @@ async function handleRefreshFlow(endpoint, options) {
       credentials: "include",
     });
 
-    const data = await resp.json();
+    const responseBody = await resp.json();
+    const newAccessToken = responseBody?.data?.accessToken;
 
-    if (resp.ok && data.accessToken) {
+    if (resp.ok && newAccessToken) {
       logger.info("Session refreshed successfully");
-      setAuth(data.accessToken);
+      setAuth(newAccessToken);
 
       isRefreshing = false;
-      processQueue(null, data.accessToken);
+      processQueue(null, newAccessToken);
 
       return apiClient(endpoint, options);
     } else {
@@ -129,16 +130,16 @@ const apiClient = async (endpoint, options = {}) => {
   try {
     // 2. Execute Request
     const response = await fetch(url, config);
-    const data = await parseJSON(response);
+    const responseBody = await parseJSON(response);
 
     // 3. Intercept: Token Expired (401)
-    if (isTokenExpired(response, data)) {
+    if (isTokenExpired(response, responseBody)) {
       return handleRefreshFlow(endpoint, options);
     }
 
     // 4. Intercept: Application Errors
-    if (isErrorResponse(response, data)) {
-      const error = normalizeError(response, data);
+    if (isErrorResponse(response, responseBody)) {
+      const error = normalizeError(response, responseBody);
 
       if (error.code === "UNAUTHORIZED_ERROR") {
         useAuthStore.getState().clearAuth();
@@ -155,8 +156,8 @@ const apiClient = async (endpoint, options = {}) => {
       throw error;
     }
 
-    logger.info(`[Success] ${endpoint}`, data);
-    return data;
+    logger.info(`[Success] ${endpoint}`, responseBody);
+    return responseBody;
   } catch (error) {
     if (error.name === "TypeError") logger.error("Network Error", error);
     console.log(error.code);
