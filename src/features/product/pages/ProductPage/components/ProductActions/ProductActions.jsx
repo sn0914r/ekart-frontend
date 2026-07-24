@@ -1,6 +1,5 @@
 import { useNavigate, Link } from "react-router-dom";
 import { Lock, ShoppingBag, Check } from "lucide-react";
-import Button from "@shared/components/Button/Button";
 import { useProductActions } from "../../../../hooks/ui/useProductActions";
 import { COLOR_MAP } from "../../../../constants/productColors";
 import * as S from "./ProductActions.styles";
@@ -97,23 +96,9 @@ const ProductActions = ({ product, colors = [] }) => {
 
       {/* Actions */}
       {!isAuthenticated ? (
-        <Button
-          onClick={() => navigate("/auth/login")}
-          style={{
-            width: "100%",
-            padding: "1rem",
-            display: "flex",
-            gap: "0.5rem",
-            justifyContent: "center",
-            background: "var(--bg-secondary)",
-            color: "var(--text-primary)",
-            border: "1px solid var(--border-color)",
-            transition: "all 0.2s ease",
-            cursor: "pointer",
-          }}
-        >
-          <Lock size={18} /> Login to Add to Cart
-        </Button>
+        <S.LoginBtn onClick={() => navigate("/auth/login")}>
+          <Lock size={16} /> Login to Add to Cart
+        </S.LoginBtn>
       ) : isAdded ? (
         <S.ActionBtn variant="secondary" as={Link} to="/cart">
           <Check size={18} /> Added to Cart

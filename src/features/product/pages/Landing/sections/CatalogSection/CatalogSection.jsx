@@ -6,7 +6,7 @@ import Loader from "@shared/components/Loader/Loader";
 import CatalogHeader from "../../components/CatalogHeader/CatalogHeader";
 import ProductList from "../../components/ProductList/ProductList";
 import Filter from "../../components/Filters/Filter";
-import Pagination from "../../components/Pagination/Pagination";
+import Pagination from "@shared/components/Pagination/Pagination";
 import * as S from "./CatalogSection.styles";
 import ErrorMessage from "@shared/components/ErrorMessage";
 

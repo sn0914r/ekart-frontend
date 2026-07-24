@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 
 import Loader from "@shared/components/Loader/Loader";
+import Pagination from "@shared/components/Pagination/Pagination";
 
 import OrderCard from "../../components/OrderCard/OrderCard";
 import ErrorMessage from "@shared/components/ErrorMessage";
@@ -12,10 +13,12 @@ import {
   PageTitle,
   EmptyState,
   BackLinkWrapper,
+  PaginationSection,
+  PaginationSummary,
 } from "./OrdersListPage.styles";
 
 const OrdersPage = () => {
-  const { orders, isLoading, error, isError } = useOrdersListPage();
+  const { orders, pagination, page, setPage, limit, isLoading, error, isError } = useOrdersListPage();
 
   if (isLoading) {
     return (
@@ -51,6 +54,17 @@ const OrdersPage = () => {
     );
   }
 
+  let start = 0;
+  let end = 0;
+  let totalOrders = 0;
+
+  if (pagination) {
+    const { limit, totalOrders: total } = pagination;
+    totalOrders = total;
+    start = (page - 1) * limit + 1;
+    end = Math.min(page * limit, totalOrders);
+  }
+
   return (
     <PageWrapper>
       <div className="container">
@@ -67,6 +81,20 @@ const OrdersPage = () => {
             </div>
           ))}
         </div>
+        {pagination && pagination.totalPages > 0 && (
+          <PaginationSection>
+            <PaginationSummary>
+              <span>Showing {start}–{end} of {totalOrders} orders</span>
+            </PaginationSummary>
+            {pagination.totalPages > 1 && (
+              <Pagination
+                currentPage={page}
+                totalPages={pagination.totalPages}
+                onPageChange={setPage}
+              />
+            )}
+          </PaginationSection>
+        )}
       </div>
     </PageWrapper>
   );

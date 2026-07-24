@@ -69,3 +69,27 @@ export const EmptyState = styled.div`
     font-weight: 600;
   }
 `;
+
+export const PaginationSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5rem;
+  width: 100%;
+`;
+
+export const PaginationSummary = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+
+  span {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+`;
+
+

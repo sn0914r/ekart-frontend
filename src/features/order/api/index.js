@@ -4,8 +4,8 @@ export const getOrder = async (id) => {
   return await api(`/orders/${id}`);
 };
 
-export const getOrders = async () => {
-  return await api("/orders");
+export const getOrders = async (page = 1, limit = 10) => {
+  return await api(`/orders?page=${page}&limit=${limit}`);
 };
 
 export const createOrder = async ({ items, shippingAddress }) => {
