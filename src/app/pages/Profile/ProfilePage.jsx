@@ -19,12 +19,22 @@ export default function Profile() {
 
   if (!user) {
     return (
-      <S.ProfileWrapper>
-        <S.ContentArea>
-          <div className="container">
-            <GuestProfile />
-          </div>
-        </S.ContentArea>
+      <S.ProfileWrapper style={{ position: 'relative' }}>
+        <div 
+          className="container" 
+          style={{ 
+            position: 'absolute', 
+            top: '4rem', 
+            left: 0, 
+            right: 0, 
+            zIndex: 10 
+          }}
+        >
+          <S.BackButton to={ROUTES.HOME}>
+            <ArrowLeft size={16} /> Continue Shopping
+          </S.BackButton>
+        </div>
+        <GuestProfile />
       </S.ProfileWrapper>
     );
   }
@@ -37,11 +47,11 @@ export default function Profile() {
           display: "flex",
           flexDirection: "column",
           flex: 1,
-          paddingTop: "2rem",
-          paddingBottom: "2rem",
+          paddingTop: "4rem",
+          paddingBottom: "4rem",
         }}
       >
-        <div className="mb-4">
+        <div style={{ marginBottom: '1rem' }}>
           <S.BackButton to={ROUTES.HOME}>
             <ArrowLeft size={16} /> Continue Shopping
           </S.BackButton>

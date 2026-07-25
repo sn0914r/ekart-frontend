@@ -15,8 +15,8 @@ export default function RegisterPage() {
       <RegisterForm />
 
       <AuthFooter variant="vertical">
-        <AuthFooter.Link to={ROUTES.HOME}>
-          <ArrowLeft size={16} /> Back to shop
+        <AuthFooter.Link to={ROUTES.PROFILE}>
+          <ArrowLeft size={16} /> Back to Profile
         </AuthFooter.Link>
         <AuthFooter.Link to={ROUTES.AUTH.LOGIN}>
           Already have an account? Login

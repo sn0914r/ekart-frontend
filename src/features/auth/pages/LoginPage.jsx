@@ -28,8 +28,8 @@ export default function LoginPage() {
       <LoginForm />
 
       <AuthFooter>
-        <AuthFooter.Link to={ROUTES.HOME}>
-          <ArrowLeft size={16} /> Back to shop
+        <AuthFooter.Link to={ROUTES.PROFILE}>
+          <ArrowLeft size={16} /> Back to Profile
         </AuthFooter.Link>
         <AuthFooter.Link to={ROUTES.AUTH.SIGNUP}>
           No access? Join Now

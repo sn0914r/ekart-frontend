@@ -66,12 +66,14 @@ const Navbar = () => {
           <div className="d-flex align-items-center gap-5">
             {/* Desktop Menu */}
             <div className="d-none d-lg-flex gap-5">
-              <NavbarAnchor 
-                to="/#products" 
+              <NavbarAnchor
+                to="/#products"
                 isScrolled={isScrolledFlag}
                 onClick={() => {
                   if (window.location.hash === "#products") {
-                    document.getElementById("products")?.scrollIntoView({ behavior: "smooth" });
+                    document
+                      .getElementById("products")
+                      ?.scrollIntoView({ behavior: "smooth" });
                   }
                 }}
               >
@@ -94,7 +96,7 @@ const Navbar = () => {
               <ActionBtn isScrolled={isScrolledFlag} as={Link} to="/cart">
                 <div style={{ position: "relative", display: "flex" }}>
                   <ShoppingBag size={18} strokeWidth={1.5} />
-                   {cartCount > 0 && (
+                  {cartCount > 0 && (
                     <span
                       style={{
                         position: "absolute",
@@ -102,7 +104,9 @@ const Navbar = () => {
                         right: "-8px",
                         fontSize: "9px",
                         fontWeight: "700",
-                        backgroundColor: isScrolled ? "var(--text-primary)" : "#ffffff",
+                        backgroundColor: isScrolled
+                          ? "var(--text-primary)"
+                          : "#ffffff",
                         color: isScrolled ? "#ffffff" : "var(--text-primary)",
                         borderRadius: "50%",
                         width: "16px",
@@ -120,21 +124,10 @@ const Navbar = () => {
                 <span>Cart</span>
               </ActionBtn>
 
-              {!user ? (
-                <ActionBtn
-                  isScrolled={isScrolledFlag}
-                  as={Link}
-                  to="/auth/login"
-                >
-                  <User size={18} strokeWidth={1.5} />
-                  <span>Login</span>
-                </ActionBtn>
-              ) : (
-                <ActionBtn isScrolled={isScrolledFlag} as={Link} to="/profile">
-                  <User size={18} strokeWidth={1.5} />
-                  <span>Profile</span>
-                </ActionBtn>
-              )}
+              <ActionBtn isScrolled={isScrolledFlag} as={Link} to="/profile">
+                <User size={18} strokeWidth={1.5} />
+                <span>Profile</span>
+              </ActionBtn>
             </div>
 
             {/* Mobile Actions (Icons only) */}

@@ -1,17 +1,79 @@
 import styled from "@emotion/styled";
 
-export const FormCard = styled.div`
-  max-width: 600px;
-  margin: 4rem auto;
-  background: white;
-  padding: 3rem;
-  border-radius: 4px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+export const FullHeightContainer = styled.div`
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+`;
 
-  @media (max-width: 768px) {
-    margin: 0;
-    padding: 2rem 1.5rem;
-    min-height: 100vh;
-    border-radius: 0;
+export const RowWrapper = styled.div`
+  min-height: 100vh;
+`;
+
+export const BackButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: none;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--text-primary);
+  }
+`;
+
+export const FormSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background-color: var(--bg-primary, #ffffff);
+  min-height: 100vh;
+
+  @media (max-width: 991px) {
+    padding: 4rem 1.5rem;
+  }
+`;
+
+export const FormContent = styled.div`
+  width: 100%;
+  max-width: 450px;
+  animation: fadeIn 0.8s ease-out;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+`;
+
+export const ImageWrapper = styled.div`
+  flex: 1;
+  width: 100%;
+  position: relative;
+  min-height: 400px;
+  background-color: var(--bg-secondary, #f5f5f5);
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 `;

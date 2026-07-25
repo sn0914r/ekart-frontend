@@ -44,20 +44,9 @@ const NavSidebar = ({ isOpen, onClose, navLinks, user }) => {
       ))}
 
       {/* Authentication Links */}
-      {user ? (
-        <SidebarLink to="/profile" onClick={onClose}>
-          Profile
-        </SidebarLink>
-      ) : (
-        <>
-          <SidebarLink to="/auth/login" onClick={onClose}>
-            Login
-          </SidebarLink>
-          <SidebarLink to="/auth/signup" onClick={onClose}>
-            Signup
-          </SidebarLink>
-        </>
-      )}
+      <SidebarLink to="/profile" onClick={onClose}>
+        {user ? "Profile" : "Login"}
+      </SidebarLink>
     </Sidebar>
   );
 };

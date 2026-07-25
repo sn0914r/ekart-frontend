@@ -131,26 +131,3 @@ export const ActionBtn = styled.button`
   }
 `;
 
-export const LoginBtn = styled.button`
-  width: 100%;
-  padding: 1rem;
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.75rem;
-  font-weight: 700;
-  font-family: var(--font-sans);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-
-  background-color: var(--color-black, #000);
-  color: var(--bg-white, #fff);
-
-  &:hover {
-    background-color: var(--color-black-hover, #222);
-  }
-`;

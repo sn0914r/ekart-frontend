@@ -96,32 +96,15 @@ const ProductActions = ({ product, colors = [] }) => {
 
       {/* Actions */}
       {!isAuthenticated ? (
-        <S.LoginBtn onClick={() => navigate("/auth/login")}>
+        <S.ActionBtn onClick={() => navigate("/auth/login")}>
           <Lock size={16} /> Login to Add to Cart
-        </S.LoginBtn>
+        </S.ActionBtn>
       ) : isAdded ? (
-        <S.ActionBtn variant="secondary" as={Link} to="/cart">
-          <Check size={18} /> Added to Cart
+        <S.ActionBtn as={Link} to="/cart">
+          <Check size={18} /> ADDED • GO TO CART
         </S.ActionBtn>
       ) : outOfStock ? (
-        <Button
-          disabled
-          style={{
-            width: "100%",
-            padding: "1rem",
-            display: "flex",
-            gap: "0.5rem",
-            justifyContent: "center",
-            background: "var(--color-subtle-bg, #f5f5f5)",
-            color: "var(--text-secondary, #666)",
-            border: "1px solid var(--border-color, #e5e5e5)",
-            fontSize: "1rem",
-            letterSpacing: "0.05em",
-            cursor: "not-allowed",
-          }}
-        >
-          OUT OF STOCK
-        </Button>
+        <S.ActionBtn disabled>OUT OF STOCK</S.ActionBtn>
       ) : (
         <S.ActionBtn onClick={handleAddToCart} disabled={isAddingToCart}>
           ADD TO CART <ShoppingBag size={18} />

@@ -1,16 +1,32 @@
 import { ROUTES } from "@constants/routes";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, User } from "lucide-react";
+import { Link } from "react-router-dom";
 import * as S from "./GuestProfile.styles";
+import ProfileLayout from "../../layout/ProfileLayout";
+import profileLayoutImage from "@assets/profile-layout.png";
 
 const GuestProfile = () => {
   return (
-    <S.ProfileCard>
-      <S.UserName>Guest User</S.UserName>
-      <S.UserEmail>Please Login to view your profile</S.UserEmail>
-      <S.ProfileLink to={ROUTES.AUTH.LOGIN}>
-        Login <ArrowRight size={16} />
-      </S.ProfileLink>
-    </S.ProfileCard>
+    <ProfileLayout imageSrc={profileLayoutImage} imageAlt="Fashion collection">
+      <S.IconWrapper>
+        <User size={40} strokeWidth={1} />
+      </S.IconWrapper>
+
+      <S.Title>Welcome</S.Title>
+      <S.Description>
+        Log in or create an account to track your orders and save your wishlist.
+      </S.Description>
+
+      <S.ActionGroup>
+        <S.ActionBtn as={Link} to={ROUTES.AUTH.LOGIN}>
+          LOGIN TO YOUR ACCOUNT <ArrowRight size={16} />
+        </S.ActionBtn>
+
+        <S.ActionBtn variant="secondary" as={Link} to={ROUTES.AUTH.SIGNUP}>
+          CREATE NEW ACCOUNT <ArrowRight size={16} />
+        </S.ActionBtn>
+      </S.ActionGroup>
+    </ProfileLayout>
   );
 };
 
