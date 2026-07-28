@@ -8,7 +8,6 @@ const OrderHeader = ({
   isPending,
   formatDate,
   handleRetryPayment,
-  isCheckoutProcessing,
 }) => {
   const canRetryPayment =
     (order.paymentStatus === "PENDING" || order.paymentStatus === "FAILED") &&
@@ -30,10 +29,9 @@ const OrderHeader = ({
             <S.PrimaryButton
               style={{ width: "auto", padding: "0.5rem 1rem", marginTop: 0 }}
               onClick={handleRetryPayment}
-              disabled={isCheckoutProcessing}
             >
               <CreditCard size={16} />
-              {isCheckoutProcessing ? "Processing..." : "Retry Payment"}
+              Retry Payment
             </S.PrimaryButton>
           )}
           {isPending && (

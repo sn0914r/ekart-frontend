@@ -8,8 +8,8 @@ const PaymentDetails = ({ paymentDetails }) => {
   if (!paymentDetails) return null;
 
   const handleCopy = () => {
-    if (paymentDetails.razorpayPaymentId) {
-      navigator.clipboard.writeText(paymentDetails.razorpayPaymentId);
+    if (paymentDetails.poePaymentId) {
+      navigator.clipboard.writeText(paymentDetails.poePaymentId);
       setIsCopied(true);
       setTimeout(() => setIsCopied(false), 2000);
     }
@@ -29,16 +29,19 @@ const PaymentDetails = ({ paymentDetails }) => {
       <S.InfoBlockRow>
         <S.InfoTextGroup>
           <S.InfoLabel>Payment Method</S.InfoLabel>
-          <S.InfoValue>Razorpay</S.InfoValue>
+          <S.InfoValue style={{ textTransform: 'capitalize' }}>
+            {paymentDetails.paymentMethod || 'N/A'}
+            {paymentDetails.gateway ? ` (${paymentDetails.gateway})` : ''}
+          </S.InfoValue>
         </S.InfoTextGroup>
       </S.InfoBlockRow>
 
-      {paymentDetails.razorpayPaymentId && (
+      {paymentDetails.poePaymentId && (
         <S.InfoBlockRow>
           <S.InfoTextGroup>
             <S.InfoLabel>Transaction ID</S.InfoLabel>
             <S.InfoValue className="font-monospace small text-muted" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              {paymentDetails.razorpayPaymentId}
+              {paymentDetails.poePaymentId}
               <button 
                 onClick={handleCopy}
                 style={{

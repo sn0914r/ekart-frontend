@@ -1,4 +1,4 @@
-import { useCheckoutFlow } from "../../hooks/api/useCheckoutFlow";
+import { useNavigate } from "react-router-dom";
 import { useCheckoutAddress } from "../../hooks/ui/useCheckoutAddress";
 
 import CheckoutHeader from "./components/CheckoutHeader";
@@ -7,7 +7,8 @@ import AddressSelection from "../ShippingAddressPage/components/AddressSelection
 import * as S from "./CheckoutPage.styles";
 
 const CheckoutPage = () => {
-  const { isProcessing, handleStartPayment } = useCheckoutFlow();
+  const navigate = useNavigate();
+  const isProcessing = false;
   const {
     addresses,
     selectedAddress,
@@ -34,7 +35,9 @@ const CheckoutPage = () => {
             <CheckoutSidebar
               isProcessing={isProcessing}
               canPlaceOrder={!!selectedAddress}
-              onPlaceOrder={() => handleStartPayment(selectedAddress)}
+              onClickOverride={() => {
+                navigate("/checkout/payment", { state: { selectedAddress } });
+              }}
             />
           </div>
         </div>

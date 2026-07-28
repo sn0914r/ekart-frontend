@@ -1,11 +1,16 @@
 import { useCart } from "@features/cart/hooks/ui/useCart";
 import * as S from "./OrderSummaryCard.styles";
 
-const OrderSummaryCard = () => {
+const OrderSummaryCard = ({ overrideTotalItems, overrideSubtotal }) => {
   const { calculateTotal, totalCartItemsCount } = useCart();
   const SHIPPING_FEE = 0;
 
-  const subtotal = calculateTotal();
+  const subtotal =
+    overrideSubtotal !== undefined ? overrideSubtotal : calculateTotal();
+  const itemsCount =
+    overrideTotalItems !== undefined
+      ? overrideTotalItems
+      : totalCartItemsCount();
   const totalAmount = subtotal + SHIPPING_FEE;
   return (
     <S.OrderSummaryCardWrapper>
@@ -15,7 +20,7 @@ const OrderSummaryCard = () => {
 
       <S.SummaryRow>
         <span>Total Items</span>
-        <span>{totalCartItemsCount().toLocaleString()}</span>
+        <span>{itemsCount.toLocaleString()}</span>
       </S.SummaryRow>
 
       <S.SummaryRow>
@@ -25,7 +30,11 @@ const OrderSummaryCard = () => {
 
       <S.SummaryRow>
         <span>Shipping</span>
-        <span style={{ color: SHIPPING_FEE === 0 ? "var(--color-success)" : "inherit" }}>
+        <span
+          style={{
+            color: SHIPPING_FEE === 0 ? "var(--color-success)" : "inherit",
+          }}
+        >
           {SHIPPING_FEE === 0 ? "Free" : `Rs ${SHIPPING_FEE.toLocaleString()}`}
         </span>
       </S.SummaryRow>

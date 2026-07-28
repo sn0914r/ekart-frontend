@@ -1,11 +1,20 @@
 import api from "@lib/apiClient";
+export const initiatePayment = async ({ orderId, method, returnUrl }) => {
+  return await api("/payments/initiate", {
+    method: "POST",
+    body: { orderId, method, returnUrl },
+  });
+};
 
+
+// LEGACY CODE
 export const createPayment = async ({ orderId }) => {
   return await api("/payments/create", {
     method: "POST",
     body: { orderId },
   });
 };
+
 
 export const paymentSuccess = async ({
   razorpayOrderId,
