@@ -11,6 +11,7 @@ export const EmptyState = styled.div`
   gap: 1.5rem;
   position: relative;
   min-height: 50vh;
+  min-height: 50dvh;
 `;
 
 export const BackLink = styled(Link)`

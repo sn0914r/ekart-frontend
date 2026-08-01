@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 export const PageWrapper = styled.div`
   padding: 4rem 0;
   min-height: 90vh;
+  min-height: 90dvh;
   background-color: var(--bg-primary);
   opacity: 0;
   animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;

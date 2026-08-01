@@ -117,7 +117,7 @@ const PaymentMethodsPage = () => {
       <div className="container">
         <CheckoutHeader />
 
-        <div className="row g-5">
+        <div className="row g-4 g-lg-5">
           <div className="col-12 col-lg-8">
             <S.Title>Select Payment Method</S.Title>
 

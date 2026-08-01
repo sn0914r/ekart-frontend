@@ -106,7 +106,6 @@ export const ActionBtn = styled.button`
   font-size: 1rem;
   font-weight: 600;
   font-family: var(--font-sans);
-  letter-spacing: 0.05em;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -115,14 +114,19 @@ export const ActionBtn = styled.button`
   background: ${(props) =>
     props.variant === "secondary"
       ? "var(--bg-secondary, #f5f5f5)"
+      : props.variant === "danger"
+      ? "#ff4d4d"
       : "var(--color-black, #000)"};
   color: ${(props) =>
     props.variant === "secondary"
       ? "var(--text-primary, #000)"
       : "var(--bg-white, #fff)"};
+  letter-spacing: ${(props) => (props.variant === "danger" ? "0.2em" : "0.05em")};
 
   &:hover {
-    opacity: 0.85;
+    background-color: ${(props) => (props.variant === "danger" ? "#e04343" : "")};
+    opacity: ${(props) => (props.variant === "danger" ? 1 : 0.85)};
+    transform: ${(props) => (props.variant === "danger" ? "translateY(-2px)" : "none")};
   }
 
   &:disabled {

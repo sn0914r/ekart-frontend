@@ -3,6 +3,7 @@ import heroImg from "@assets/hero-img.jpeg";
 
 export const Hero = styled.section`
   height: 100vh;
+  height: 100dvh;
   width: 100%;
   position: relative;
   display: flex;

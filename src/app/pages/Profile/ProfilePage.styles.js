@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 export const ProfileWrapper = styled.section`
   min-height: 100vh;
+  min-height: 100dvh;
   width: 100%;
   display: flex;
   flex-direction: column;

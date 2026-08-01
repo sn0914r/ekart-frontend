@@ -14,6 +14,8 @@ const ProductActions = ({ product, colors = [] }) => {
     setActiveSize,
     handleAddToCart,
     isAddingToCart,
+    handleRemoveFromCart,
+    isRemovingFromCart,
   } = useProductActions(product);
 
   if (!product) return null;
@@ -100,8 +102,12 @@ const ProductActions = ({ product, colors = [] }) => {
           <Lock size={16} /> Login to Add to Cart
         </S.ActionBtn>
       ) : isAdded ? (
-        <S.ActionBtn as={Link} to="/cart">
-          <Check size={18} /> ADDED • GO TO CART
+        <S.ActionBtn 
+          onClick={handleRemoveFromCart} 
+          disabled={isRemovingFromCart}
+          variant="danger"
+        >
+          REMOVE FROM CART
         </S.ActionBtn>
       ) : outOfStock ? (
         <S.ActionBtn disabled>OUT OF STOCK</S.ActionBtn>

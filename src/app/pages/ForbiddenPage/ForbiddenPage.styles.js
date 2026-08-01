@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 
 export const PageWrapper = styled.div`
   min-height: 80vh;
+  min-height: 80dvh;
   display: flex;
   flex-direction: column;
   align-items: center;

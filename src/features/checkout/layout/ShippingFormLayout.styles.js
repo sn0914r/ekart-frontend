@@ -2,16 +2,19 @@ import styled from "@emotion/styled";
 
 export const FullHeightContainer = styled.div`
   min-height: 100vh;
+  min-height: 100dvh;
   width: 100%;
   overflow: hidden;
 `;
 
 export const RowWrapper = styled.div`
   min-height: 100vh;
+  min-height: 100dvh;
 `;
 
 export const ImageWrapper = styled.div`
   height: 100vh;
+  height: 100dvh;
   width: 100%;
   position: relative;
   overflow: hidden;
@@ -36,6 +39,7 @@ export const ImageWrapper = styled.div`
 
 export const FormSection = styled.div`
   height: 100vh;
+  height: 100dvh;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -47,6 +51,7 @@ export const FormSection = styled.div`
   @media (max-width: 768px) {
     height: auto;
     min-height: 100vh;
+  min-height: 100dvh;
     padding: 4rem 1.5rem;
   }
 `;

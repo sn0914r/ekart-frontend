@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 export const EmptyStateWrapper = styled.div`
   min-height: 50vh;
+  min-height: 50dvh;
   width: 100%;
   display: flex;
   flex-direction: column;

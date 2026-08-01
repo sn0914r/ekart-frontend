@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
 import ShippingAddressHeader from "./components/ShippingAddressHeader";
 import ShippingAddressForm from "./components/ShippingAddressForm";
+import CheckoutHeader from "../CheckoutPage/components/CheckoutHeader/CheckoutHeader";
 import * as S from "./ShippingAddressPage.styles";
 import shippingLayoutImage from "@assets/shipping-label-layout.png";
 
@@ -10,23 +10,11 @@ const ShippingAddressPage = () => {
 
   return (
     <S.FullHeightContainer className="container-fluid p-0" style={{ position: 'relative' }}>
-      <div 
-        className="container" 
-        style={{ 
-          position: 'absolute', 
-          top: '4rem', 
-          left: 0, 
-          right: 0, 
-          zIndex: 10,
-          pointerEvents: 'none'
-        }}
-      >
-        <S.BackButton onClick={() => navigate(-1)} style={{ pointerEvents: 'auto' }}>
-          <ArrowLeft size={16} /> Back
-        </S.BackButton>
-      </div>
       <S.RowWrapper className="row g-0">
-        <div className="col-12 col-lg-6 order-2 order-lg-1">
+        <div className="col-12 col-lg-6 order-2 order-lg-1 position-relative">
+          <S.HeaderOverlay className="container">
+            <CheckoutHeader />
+          </S.HeaderOverlay>
           <S.FormSection>
             <S.FormContent>
               <ShippingAddressHeader />
@@ -35,7 +23,7 @@ const ShippingAddressPage = () => {
           </S.FormSection>
         </div>
         
-        <div className="col-12 col-lg-6 order-1 order-lg-2 d-flex flex-column">
+        <div className="col-12 col-lg-6 order-1 order-lg-2 d-none d-lg-flex flex-column">
           <S.ImageWrapper>
             <img src={shippingLayoutImage} alt="Premium shipping box with label" />
           </S.ImageWrapper>

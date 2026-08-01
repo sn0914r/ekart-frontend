@@ -6,6 +6,7 @@ export const ModalOverlay = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   background-color: var(--color-dark-overlay-heavy, rgba(0, 0, 0, 0.4));
   display: flex;
   justify-content: center;
@@ -24,6 +25,7 @@ export const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   max-height: 90vh;
+  max-height: 90dvh;
   box-shadow: 0 4px 6px var(--color-shadow-soft);
 `;
 

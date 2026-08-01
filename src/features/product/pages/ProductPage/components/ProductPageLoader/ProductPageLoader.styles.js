@@ -5,6 +5,7 @@ export const LoaderWrapper = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 60vh;
+  min-height: 60dvh;
   flex-direction: column;
   gap: 1rem;
 `;

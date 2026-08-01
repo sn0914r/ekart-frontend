@@ -4,7 +4,12 @@ import { keyframes } from "@emotion/react";
 export const PageWrapper = styled.div`
   padding: 4rem 0;
   min-height: 80vh;
+  min-height: 80dvh;
   background-color: var(--bg-primary);
+
+  @media (max-width: 991px) {
+    padding: 2rem 0;
+  }
 `;
 
 export const Title = styled.h1`
@@ -30,7 +35,7 @@ export const MethodCard = styled.div`
   }
 
   ${({ selected }) => selected && `
-    border: var(--border-dark);
+    box-shadow: inset 0 0 0 1px var(--color-black);
     background: var(--color-subtle-bg);
   `}
 `;

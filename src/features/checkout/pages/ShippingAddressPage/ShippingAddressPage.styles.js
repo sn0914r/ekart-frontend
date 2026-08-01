@@ -2,12 +2,14 @@ import styled from "@emotion/styled";
 
 export const FullHeightContainer = styled.div`
   min-height: 100vh;
+  min-height: 100dvh;
   width: 100%;
   overflow: hidden;
 `;
 
 export const RowWrapper = styled.div`
   min-height: 100vh;
+  min-height: 100dvh;
 `;
 
 export const BackButton = styled.button`
@@ -38,9 +40,22 @@ export const FormSection = styled.div`
   padding: 2rem;
   background-color: var(--bg-primary, #ffffff);
   min-height: 100vh;
+  min-height: 100dvh;
 
   @media (max-width: 991px) {
-    padding: 4rem 1.5rem;
+    padding: 5rem 1.5rem 4rem;
+  }
+`;
+
+export const HeaderOverlay = styled.div`
+  position: absolute;
+  top: 4rem;
+  left: 0;
+  right: 0;
+  z-index: 10;
+
+  @media (max-width: 991px) {
+    top: 2rem;
   }
 `;
 

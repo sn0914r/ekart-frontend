@@ -139,6 +139,7 @@ export const Sidebar = styled.div`
   left: 0;
   width: 100%;
   height: 100vh;
+  height: 100dvh;
   background-color: var(--bg-primary);
   z-index: 1050; // Above nav
   transform: ${(props) =>
