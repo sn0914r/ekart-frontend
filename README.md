@@ -6,17 +6,18 @@ Customer-facing ecommerce frontend for browsing products, managing carts, and pl
 
 ## Live Demo
 
-https://ekart-frontend.pages.dev/
+- **Frontend:** https://ekart-frontend.pages.dev/
+- **System Overview & Credentials:** https://ekart-system.pages.dev/ (Contains project info, GitHub links for all eKart services, and credential-loaded URLs for easy testing)
 
 ---
 
 ## Related Repositories
 
-| Repository        | URL                                          |
-| :---------------- | :------------------------------------------- |
-| eKart Admin Panel | https://github.com/sn0914r/ekart-admin-dashboard |
-| eKart Backend     | https://github.com/sn0914r/ekart-backend     |
-| eKart System      | https://github.com/sn0914r/eKart-system      |
+- [eKart Admin Panel](https://github.com/sn0914r/ekart-admin-dashboard)
+- [eKart Backend](https://github.com/sn0914r/ekart-backend)
+- [Payment Orchestration Engine](https://github.com/sn0914r/payment-orchestration-engine)
+- [Email Worker Service](https://github.com/sn0914r/email-worker-service)
+- [eKart System](https://github.com/sn0914r/eKart-system)
 
 ---
 
@@ -25,7 +26,7 @@ https://ekart-frontend.pages.dev/
 - Product browsing, search, filtering, and sorting
 - Product details with image gallery and variant selection
 - Cart and wishlist management
-- Checkout and Razorpay payment integration
+- Checkout with Razorpay and Cashfree payment integration
 - Shipping address management
 - User authentication and protected routes
 - Order history and tracking
@@ -35,63 +36,52 @@ https://ekart-frontend.pages.dev/
 
 ## Tech Stack
 
-### Frontend
-
-- React
-- Vite
-- React Router
-
-### State Management & Data Fetching
-
-- Zustand
-- TanStack Query
-
-### Forms & Validation
-
-- React Hook Form
-- Zod
-
-### UI & Styling
-
-- Emotion
-- Bootstrap
-- Lucide React
-- Sonner
+| Category                         | Technology                               |
+| -------------------------------- | ---------------------------------------- |
+| Frontend                         | React, Vite, React Router                |
+| State Management & Data Fetching | Zustand, TanStack Query                  |
+| Forms & Validation               | React Hook Form, Zod                     |
+| UI & Styling                     | Emotion, Bootstrap, Lucide React, Sonner |
 
 ---
 
 ## Folder Structure
-
-The frontend follows a feature-based architecture with separate modules for authentication, products, cart, checkout, and orders.
 
 ```txt
 src/
 ├── app/
 │   ├── pages/
 │   ├── store/
+│   ├── App.jsx
 │   ├── AppRouter.jsx
 │   ├── Providers.jsx
-│   └── Router.jsx
+│   ├── Router.jsx
+│   └── main.css
+│
+├── assets/
+│
+├── constants/
 │
 ├── features/
 │   ├── auth/
-│   ├── product/
 │   ├── cart/
-│   ├── wishlist/
 │   ├── checkout/
-│   └── order/
-│
-├── shared/
-│   ├── components/
-│   └── hooks/
+│   ├── order/
+│   ├── product/
+│   └── wishlist/
 │
 ├── lib/
 │   ├── apiClient.js
 │   └── reactQuery.js
 │
+├── shared/
+│   ├── Footer/
+│   ├── components/
+│   └── hooks/
+│
 ├── utils/
 │
-└── constants/
+└── main.jsx
 ```
 
 ---
@@ -102,7 +92,7 @@ Create a `.env` file in the root directory:
 
 ```env
 VITE_API_URL=
-VITE_RAZORPAY_KEY=
+VITE_NODE_ENV=
 ```
 
 ---
@@ -125,7 +115,7 @@ npm run dev
 
 ### Home Page
 
-![Home](./screenshots/home.webp)
+![Home](./screenshots/home.png)
 
 ### Product Details
 
@@ -134,10 +124,6 @@ npm run dev
 ### Shopping Cart
 
 ![Cart](./screenshots/cart.webp)
-
-### Checkout
-
-![Checkout](./screenshots/shipping-address.webp)
 
 ### Payment Gateway
 
