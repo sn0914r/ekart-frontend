@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "@constants/routes";
 import useLoginForm from "./useLoginForm";
 import AuthInput from "@shared/components/Field/Field";
 import AuthButton from "@shared/components/Button/Button";
@@ -5,6 +7,7 @@ import { Mail, Lock } from "lucide-react";
 import * as S from "./LoginForm.styles";
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const { register, errors, isSubmitting, onSubmit } = useLoginForm();
 
   return (
@@ -27,6 +30,13 @@ const LoginForm = () => {
         {...register("password")}
         autoComplete="current-password"
       />
+
+      <S.ForgotPasswordLink
+        type="button"
+        onClick={() => navigate(ROUTES.AUTH.FORGOT_PASSWORD)}
+      >
+        Forgot password?
+      </S.ForgotPasswordLink>
 
       {errors.root && (
         <S.ErrorMessage>

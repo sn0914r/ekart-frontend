@@ -26,3 +26,22 @@ export const logout = async () => {
     method: "POST",
   });
 };
+
+export const forgotPassword = async ({ email }) => {
+  return await api("/auth/forgot-password", {
+    method: "POST",
+    body: {
+      email,
+    },
+  });
+};
+
+export const resetPassword = async ({ token, newPassword }) => {
+  return await api(`/auth/reset-password?token=${encodeURIComponent(token)}`, {
+    method: "POST",
+    body: {
+      newPassword,
+    },
+  });
+};
+

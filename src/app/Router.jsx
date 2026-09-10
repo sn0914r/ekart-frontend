@@ -9,6 +9,10 @@ import AuthRoutes from "@features/auth/AuthRoutes";
 import ProductRoutes from "@features/product/ProductRoutes";
 import WishlistRoutes from "@features/wishlist/WishlistRoutes";
 
+import AuthLayout from "@features/auth/layout/AuthLayout";
+import ForgotPasswordPage from "@features/auth/pages/ForgotPasswordPage";
+import ResetPasswordPage from "@features/auth/pages/ResetPasswordPage";
+
 import Profile from "./pages/Profile/ProfilePage";
 import AboutPage from "./pages/About/AboutPage";
 import NotFound from "./pages/NotFound/NotFoundPage";
@@ -22,6 +26,10 @@ export default function Router() {
       <Route path={ROUTES.CHECKOUT.ROOT} element={<CheckoutRoutes />} />
       <Route path={ROUTES.ORDERS.ROOT} element={<OrderRoutes />} />
       <Route path={ROUTES.AUTH.ROOT} element={<AuthRoutes />} />
+      <Route element={<AuthLayout />}>
+        <Route path={ROUTES.AUTH.FORGOT_PASSWORD} element={<ForgotPasswordPage />} />
+        <Route path={ROUTES.AUTH.RESET_PASSWORD} element={<ResetPasswordPage />} />
+      </Route>
       <Route path={ROUTES.PRODUCT.ROOT} element={<ProductRoutes />} />
       <Route path={ROUTES.WISHLIST.ROOT} element={<WishlistRoutes />} />
 

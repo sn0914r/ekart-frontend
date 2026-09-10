@@ -13,6 +13,8 @@ export const ROUTES = {
     ROOT: "/auth/*",
     LOGIN: "/auth/login",
     SIGNUP: "/auth/signup",
+    FORGOT_PASSWORD: "/forgot-password",
+    RESET_PASSWORD: "/reset-password",
   },
 
   PRODUCT: {
